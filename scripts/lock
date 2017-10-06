@@ -1,0 +1,12 @@
+#!/bin/bash
+# ~/.config/scripts/lock
+# Script for locking the screen
+. "$HOME/.cache/wal/colors.sh"
+scrot "$HOME/.cache/lock/locked.png"
+notify-send -u low "i3" "Locking screen..." -t 3000
+convert "$HOME/.cache/lock/locked.png" -quality 10 -scale '10%' -scale '1000%' "$HOME/.cache/lock/locked.png"
+convert "$HOME/.cache/lock/locked.png" "$HOME/.config/scripts/lock50.png" -gravity center -geometry +0,+100 -composite -matte "$HOME/.cache/lock/locked.png"
+killall -q polybar
+i3lock --nofork -i "$HOME/.cache/lock/locked.png" --ignore-empty-password --no-unlock-indicator
+$HOME/.config/polybar/launch.sh
+notify-send -u low "i3" "Welcome back, Harrison :)" -t 3000

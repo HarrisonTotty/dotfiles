@@ -1,0 +1,11 @@
+#!/bin/bash
+# ~/.config/scripts/logoff-wrapper
+# Wrapper script for logging off of i3
+
+# Kill polybar
+killall -q polybar
+
+# Kill common stuff
+killall -q atom thunderbird firefox pidgin keepassx2 urxvtd
+
+# 

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+notify-send -u low "i3" "Starting work mode..."
+keepassx2 &
+pidgin &
+firefox &
+thunderbird &
+rocketchat &

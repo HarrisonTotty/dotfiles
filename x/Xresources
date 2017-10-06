@@ -1,0 +1,22 @@
+! ~/.config/x/.Xresources
+! My primary x resources file
+
+! Xft settings
+Xft.autohint: 0
+Xft.antialias: 1
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+Xft.dpi: 96
+Xcursor.theme: Default
+
+! urxvt settings
+URxvt.scrollbar: false
+URxvt.internalBorder: 15
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.perl-ext-common: default
+! URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+! URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+

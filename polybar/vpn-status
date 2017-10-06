@@ -1,0 +1,9 @@
+#!/bin/bash
+# ~/.config/polybar/network-status
+# Script for displaying vpn status as a polybar module
+
+if pgrep -x openvpn; then
+    echo "UP"
+else
+    echo "DOWN"
+fi

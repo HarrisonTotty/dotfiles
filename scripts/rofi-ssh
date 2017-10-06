@@ -1,0 +1,7 @@
+#!/bin/bash
+# ~/.config/scripts/rofi-ssh
+# Wrapper for rofi's ssh mode
+
+. "$HOME/.cache/wal/colors.sh"
+
+rofi -show ssh -ssh-command 'urxvtc +sb -title "SSH : {host}" -e /home/harrisont/.config/scripts/ssh-wrapper {host}' -font "${font:-Artwiz Lemon 7}" -bw 3 -color-window "$color0","$color3","$color0" -hide-scrollbar

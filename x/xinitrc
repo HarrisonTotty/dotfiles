@@ -1,0 +1,39 @@
+# ~/.config/x/.xinitrc
+# My primary X configuration file
+
+# Set up PRIME GPU offloading
+#xrandr --setprovideroffloadsink 1 0
+
+# Setup nvim as my editor
+export EDITOR='nvim'
+
+# ssh hates urxvt
+export TERM='rxvt'
+
+# Boring language stuff
+export LANG='en_US.UTF-8'
+export LC_CTYPE='en_US.UTF-8'
+
+# Setup dunst
+export DUNST_FONT='Artwiz Lemon 7'
+export DUNST_SIZE='300x30-40+40'
+killall -9 dunst
+dunst -fn "$DUNST_FONT" -geometry "$DUNST_SIZE" &
+
+# Additional x settings
+xset s off -dpms
+xset m 1/1
+xset -b
+#setxkbmap -option caps:escape
+
+# Merge in the Xresources
+xrdb -merge "$HOME/.Xresources"
+
+# Setup the urxvt daemon
+urxvtd -q -f &
+
+# Generate colorscheme without executing 'wal-set" (runs from the i3 config instead)
+wal -i "$(< "${HOME}/.cache/wal/wal")"
+
+# Start i3
+exec i3

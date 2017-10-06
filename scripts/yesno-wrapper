@@ -1,0 +1,12 @@
+#!/bin/bash
+# ~/.config/scripts/yesno-wrapper
+# The wrapper script to display yes/no to rofi
+
+if [[ -z "$@" ]]; then
+	echo Yes
+	echo No
+fi
+
+if [[ "$#" -eq 2 ]]; then
+	echo $1
+fi
