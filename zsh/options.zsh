@@ -23,5 +23,13 @@ autoload -Uz compinit
 compinit
 zstyle ':completion:*' menu select
 
+# Enable comments
+set -k
+
+# Setup zsh keybindings
+bindkey -e
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
+
 # Enable command-not-found hook
 [ -f /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh

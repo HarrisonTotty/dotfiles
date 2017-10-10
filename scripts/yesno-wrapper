@@ -7,6 +7,6 @@ if [[ -z "$@" ]]; then
 	echo No
 fi
 
-if [[ "$#" -eq 2 ]]; then
+if [ $# -gt 0 ]; then
 	echo $1
 fi

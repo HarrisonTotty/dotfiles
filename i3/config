@@ -38,11 +38,12 @@ set_from_resource $c14 i3wm.color14 #f0f0f0
 set_from_resource $c15 i3wm.color15 #f0f0f0
 
 # Set window colors
-client.focused           $bg $bg $fg $bg $bg
-client.focused_inactive  $bg $bg $fg $bg $bg
-client.unfocused         $bg $bg $fg $bg $bg
-client.urgent            $bg $bg $fg $bg $bg
-client.placeholder       $bg $bg $fg $bg $bg
+# CLASS                  BRDR  BCKGRD  TXT  NDCTR  CHLDBRDR
+client.focused           $c2   $c2     $fg  $c2    $c2
+client.focused_inactive  $bg   $bg     $fg  $bg    $bg
+client.unfocused         $bg   $bg     $fg  $bg    $bg
+client.urgent            $bg   $bg     $fg  $bg    $bg
+client.placeholder       $bg   $bg     $fg  $bg    $bg
 client.background        $bg
 
 # -------------------------------------------
@@ -72,8 +73,11 @@ bindsym $mod+grave exec "rofi -show run -font \\"${font:-Artwiz Lemon 7}\\" -bw 
 # Establish SSH connection (rofi)
 bindsym $mod+Shift+grave exec "rofi-ssh"
 
-# Take a screenshot
-bindsym $mod+Insert exec --no-startup-id "notify-send -u low \\"i3\\" \\"Taking screenshot...\\" && scrot --delay 3 --silent \\"${HOME}/Pictures/Screenshots/screenshot.%d-%m-%y.%H-%M.png\\" && notify-send -u low \\"i3\\" \\"Saved screenshot...\\""
+# Take a screenshot (fullscreen)
+bindsym $mod+Insert exec --no-startup-id "$HOME/.config/scripts/scrot-full"
+
+# Take a screenshot (selection)
+bindsym --release $mod+Shift+Insert exec --no-startup-id "$HOME/.config/scripts/scrot-select"
 
 # -------------------------------------------
 
@@ -136,7 +140,7 @@ bindsym $mod+p focus parent
 bindsym $mod+q kill
 
 # Restart window manager in-place
-bindsym $mod+Shift+r exec "rofi -font \\"${font:-Artwiz Lemon 7}\\" -bw 3 -color-window \\"$c0\\",\\"$bg\\",\\"$c0\\" -hide-scrollbar -e \\"[!] The window manager will now restart.\\" -width -44 && i3-msg restart"
+bindsym $mod+Shift+r exec --no-startup-id "$HOME/.config/scripts/i3-restart-wrapper"
 
 # Exit window manager
 bindsym $mod+Shift+Escape exec "i3-msg workspace 10 && rofi -font \\"${font:-Artwiz Lemon 7}\\" -bw 3 -color-window \\"$c0\\",\\"$bg\\",\\"$c0\\" -hide-scrollbar -e \\"[!] The window manager will now exit. Goodbye, Harrison :)\\" -width -62 && i3-msg exit"
@@ -190,20 +194,12 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # --------------- Appearance ----------------
 
-# Set up a "dummy" bar that polybar will render over (to prevent maximized windows from covering polybar)
-bar {
-    height 16
-    mode dock
-    position top
-    i3bar_command i3bar -t
-}
-
 # Set the default font and title format of all windows
 font pango:lemon 11
 for_window [class=".*"] title_format "<span font='Artwiz Lemon 7'> [ %title ]</span>"
 
 # Dynamically change wallpapers
-bindsym $mod+Shift+w exec --no-startup-id "wal -i $HOME/Pictures/Wallpapers/wal -o wal-set && notify-send -u low \\"i3\\" \\"Switched wallpapers...\\""
+bindsym $mod+Shift+w exec --no-startup-id "$HOME/.config/scripts/theme-random"
 
 # Set the window border size (in pixels)
 for_window [class="^.*"] border normal 3
@@ -220,6 +216,9 @@ gaps outer 0
 
 
 # ------------- Initialization --------------
+
+# Automagically set up monitor configuration
+exec --no-startup-id '$HOME/.config/scripts/setup-monitors'
 
 # Launch 'wal-set', which also launches polybar
 exec --no-startup-id 'wal-set'

@@ -26,10 +26,6 @@ main() {
 
     # Restart and re-theme polybar
     $HOME/.config/polybar/launch.sh
-    
-    # Use oomox to re-theme GTK
-    # No longer needed since switching to Flatabulous fork
-    #oomox-cli xresources
 }
 
 main >/dev/null 2>&1
