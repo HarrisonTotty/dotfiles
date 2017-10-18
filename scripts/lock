@@ -1,6 +1,7 @@
 #!/bin/bash
 # ~/.config/scripts/lock
 # Script for locking the screen
+
 . "$HOME/.cache/wal/colors.sh"
 scrot "$HOME/.cache/lock/locked.png"
 notify-send -u low "i3" "Locking screen..." -t 3000

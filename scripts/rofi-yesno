@@ -1,9 +1,8 @@
 #!/bin/bash
 # ~/.config/scripts/rofi-yesno
-# Utilizes rofi's script mode to display a yes/no question, returning the answer
+# Utilizes rofi's script mode to display a yes/no question
+# $2 is executed when "Yes" is selected, $3 when "No" is selected
 
 . "$HOME/.cache/wal/colors.sh"
 
-result=$(rofi -dmenu -show yesno -display-yesno "$1 " -modi "yesno:/home/harrisont/.config/scripts/yesno-wrapper" -font "${font:-Artwiz Lemon 7}" -bw 3 -color-window "$color0","$color3","$color0" -hide-scrollbar -lines 2)
-
-echo $result
+rofi -show yesno -display-yesno "$1 " -modi "yesno:/home/harrisont/.config/scripts/yesno-wrapper" -font "${font:-Artwiz Lemon 7}" -bw 3 -color-window "$color0","$color3","$color0" -hide-scrollbar -lines 2
