@@ -1,0 +1,11 @@
+#!/bin/bash
+# ~/.config/scripts/i3-restart-wrapper
+# Wrapper script for restarting i3 in-place
+
+. "$HOME/.cache/wal/colors.sh"
+
+rofi -font "${font:-Artwiz Lemon 7}" -bw 3 -color-window "$color0","$color3","$color0" -hide-scrollbar -e "[!] The window manager will now restart." -width -44
+killall -q polybar >/dev/null 2>&1
+i3-msg reload >/dev/null 2>&1
+$HOME/.config/polybar/launch.sh
+notify-send -u low "i3" "Successfully restarted window manager..."

@@ -1,0 +1,2 @@
+#!/bin/env bash
+wal -i $HOME/Pictures/Wallpapers/wal -o wal-set >/dev/null 2>&1 && notify-send -u low "i3" "Switched wallpaper & themes."
