@@ -84,7 +84,7 @@ padding-right = 1
 module-margin-right = 0
 module-margin-left = 2
 
-modules-right = cpu memory temp
+modules-right = cpu memory temp-cpu
 modules-center = date
 modules-left = i3
 
@@ -171,13 +171,34 @@ enable-scroll = true
 label = [ BKLT %percentage%% ]
 
 
-[module/temp]
+[module/temp-cpu]
 type = internal/temperature
 interval = 5
 thermal-zone = 0
+#hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp2_input
 warn-temperature = 80
 label = [ TEMP %temperature% ]
 label-warn = [ TEMP %temperature% ! ]
+
+
+# [module/temp-graphics]
+# type = internal/temperature
+# interval = 5
+# thermal-zone = 0
+# hwmon-path = /sys/devices/pci0000:00/0000:00:1c.4/0000:03:00.0/hwmon/hwmon1/temp1_input
+# warn-temperature = 80
+# label = [ GRPHCS TEMP %temperature% ]
+# label-warn = [ GRPHCS TEMP %temperature% ! ]
+#
+#
+# [module/temp-battery]
+# type = internal/temperature
+# interval = 5
+# thermal-zone = 0
+# hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp2_input
+# warn-temperature = 80
+# label = [ TEMP %temperature% ]
+# label-warn = [ TEMP %temperature% ! ]
 
 
 [module/disk-root]
@@ -263,11 +284,12 @@ label-background = ${colors.bg}
 
 
 [module/cpu]
-type = internal/cpu
-interval = 1
-
+type = custom/script
+exec = /home/harrisont/.config/polybar/cpu
+click-left = "urxvtc +sb -title 'System Monitor' -e 'htop'"
+interval = 0.5
 format = <label>
-label = [ CPU %percentage%% ]
+label = [ CPU %output%% ]
 
 
 [module/volume]

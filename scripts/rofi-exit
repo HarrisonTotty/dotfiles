@@ -4,4 +4,4 @@
 
 . "$HOME/.cache/wal/colors.sh"
 
-rofi -show exit -display-exit "[!] The window manager will now exit, are you sure you wish to continue? " -modi "exit:/home/harrisont/.config/scripts/rofi-exit-wrapper" -font "${font:-Artwiz Lemon 7}" -bw 3 -color-window "$color0","$color3","$color0" -hide-scrollbar -lines 2
+rofi -show exit -display-exit '[!] The window manager will now exit, are you sure you wish to continue? ' -modi 'exit:/home/harrisont/.config/scripts/rofi-exit-wrapper' -font "${font:-Artwiz Lemon 7}" -bw 3 -color-window "$color0","$color3","$color0" -hide-scrollbar -lines 2

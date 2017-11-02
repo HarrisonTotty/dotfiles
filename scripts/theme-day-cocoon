@@ -1,2 +1,2 @@
 #!/bin/env bash
-wal -i $HOME/Pictures/Wallpapers/wal/cocoon.png -o wal-set >/dev/null 2>&1 && xbacklight -set 100 && notify-send -u low "i3" "Switched wallpaper & themes."
+wal -i $HOME/pics/wallpapers/wal/cocoon.png -o wal-set >/dev/null 2>&1 && xbacklight -set 100 && notify-send -u low "i3" "Switched wallpaper & themes."

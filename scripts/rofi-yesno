@@ -5,4 +5,4 @@
 
 . "$HOME/.cache/wal/colors.sh"
 
-rofi -show yesno -display-yesno "$1 " -modi "yesno:/home/harrisont/.config/scripts/yesno-wrapper" -font "${font:-Artwiz Lemon 7}" -bw 3 -color-window "$color0","$color3","$color0" -hide-scrollbar -lines 2
+echo 'Yes\nNo' | rofi -dmenu -mesg $2 -only-match -font "${font:-Artwiz Lemon 7}" -bw 3 -color-window "$color0","$color3","$color0" -hide-scrollbar -l 2

@@ -1,7 +1,7 @@
 [global]
 
 # Disable markup
-allow_markup = no
+markup = no
 
 # Don't treat all incoming notifications as plain text
 plain_text = no
@@ -96,11 +96,8 @@ icon_position = off
 # Paths to default icons.
 icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
-
-[frame]
-
-# Set the width to 3
-width = 0
+# Disable the frame
+frame_width = 0
 
 
 [urgency_low]
