@@ -40,7 +40,7 @@ padding-right = 1
 module-margin-right = 0
 module-margin-left = 2
 
-modules-right = vpn-status network-status brightness volume battery
+modules-right = brightness volume battery
 modules-center = date
 modules-left = i3
 

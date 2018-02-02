@@ -1,0 +1,5 @@
+# ~/.config/rofi/config
+# Primary rofi configuration file.
+
+# Import colorscheme and some additional options from pywal
+rofi.theme: ~/.cache/wal/colors-rofi.rasi

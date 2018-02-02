@@ -2,7 +2,7 @@
 # ~/.config/scripts/lock
 # Script for locking the screen
 
-. "$HOME/.cache/wal/colors.sh"
+#. "$HOME/.cache/wal/colors.sh"
 scrot "$HOME/.cache/lock/locked.png"
 notify-send -u low "i3" "Locking screen..." -t 3000
 convert "$HOME/.cache/lock/locked.png" -quality 10 -scale '10%' -scale '1000%' "$HOME/.cache/lock/locked.png"
