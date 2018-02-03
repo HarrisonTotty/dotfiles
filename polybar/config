@@ -189,8 +189,8 @@ label-warn = [ TEMP %temperature% ! ]
 # warn-temperature = 80
 # label = [ GRPHCS TEMP %temperature% ]
 # label-warn = [ GRPHCS TEMP %temperature% ! ]
-#
-#
+
+
 # [module/temp-battery]
 # type = internal/temperature
 # interval = 5
@@ -272,7 +272,7 @@ label-background = ${colors.bg}
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 10
 
 date = %m/%d/%y
 time = %H:%M
@@ -288,12 +288,12 @@ type = custom/script
 exec = /home/harrisont/.config/polybar/cpu
 click-left = "urxvtc +sb -title 'System Monitor' -e 'htop'"
 interval = 0.5
-format = <label>
-label = [ CPU %output%% ]
+format = [ <label> ]
+label = "CPU %output%%"
 
 
 [module/volume]
-type = internal/volume
+type = internal/alsa
 
 master-soundcard = default
 speaker-soundcard = default
@@ -307,9 +307,9 @@ headphone-id =
 
 mapping = false
 
-format-volume = <label-volume>
-label-muted = [ VOL MUTED ]
-label-volume = [ VOL %percentage%% ]
+format-volume = [ <label-volume> ]
+label-muted = "VOL MUTED"
+label-volume = "VOL %percentage%%"
 
 
 [module/i3]

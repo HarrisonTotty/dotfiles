@@ -59,7 +59,7 @@ bindsym $mod+Return exec urxvtc +sb -title "Terminal"
 bindsym $mod+f exec pcmanfm
 
 # Text editor (GNU Emacs)
-bindsym $mod+t exec emacs
+bindsym $mod+e exec emacs
 
 # Mathematica
 bindsym $mod+m exec Mathematica -noSplashScreen

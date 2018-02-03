@@ -125,7 +125,7 @@
 }}
 
 #inputbar {{
-    spacing: 0;
+    spacing: 5;
     text-color: @normal-foreground;
     padding: 1px;
 }}
