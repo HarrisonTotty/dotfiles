@@ -7,7 +7,7 @@ source "${HOME}/.cache/wal/colors.sh"
 
 
 restart_dunst() {
-    killall dunst && \
+    killall -9 dunst && \
         dunst \
             -lb "$color3" \
             -nb "$color3" \

@@ -1,8 +1,8 @@
 # ~/.config/x/.xinitrc
 # My primary X configuration file
 
-# Setup nvim as my editor
-export EDITOR='nvim'
+# Setup emacs as my editor
+export EDITOR='emacs'
 
 # Boring language stuff
 export LANG='en_US.UTF-8'
@@ -11,8 +11,6 @@ export LC_CTYPE='en_US.UTF-8'
 # Setup dunst
 export DUNST_FONT='Artwiz Lemon 7'
 export DUNST_SIZE='300x30-40+40'
-killall -9 dunst
-dunst -fn "$DUNST_FONT" -geometry "$DUNST_SIZE" &
 
 # Additional x settings
 xset s off -dpms
@@ -25,11 +23,8 @@ xrdb -merge "$HOME/.Xresources"
 # Setup the urxvt daemon
 urxvtd -q -f &
 
-# Generate colorscheme without executing 'wal-set" (runs from the i3 config instead)
-wal -i "$(< "${HOME}/.cache/wal/wal")"
-
-# Setup monitors
-$HOME/.config/scripts/setup-monitors
+# Restore the previous colorscheme without setting the wallpaper
+wal -R -n
 
 # Start i3
 exec i3

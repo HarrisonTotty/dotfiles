@@ -61,12 +61,6 @@ bindsym $mod+f exec pcmanfm
 # Text editor (GNU Emacs)
 bindsym $mod+e exec emacs
 
-# Mathematica
-bindsym $mod+m exec Mathematica -noSplashScreen
-
-# Display configuration editor (arandr)
-bindsym $mod+F4 exec arandr
-
 # Generic program launcher (rofi)
 bindsym $mod+grave exec "$HOME/.config/scripts/rofi-run"
 
@@ -148,15 +142,6 @@ bindsym $mod+Shift+Escape exec --no-startup-id "$HOME/.config/scripts/rofi-exit"
 # Lock Screen
 bindsym $mod+Shift+l exec "$HOME/.config/scripts/lock"
 
-# Enable audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id "pulsemixer --change-volume +5"
-bindsym XF86AudioLowerVolume exec --no-startup-id "pulsemixer --change-volume -5"
-bindsym XF86AudioMute exec --no-startup-id "pulsemixer --toggle-mute"
-
-# Enable screen brightness controls
-#bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20
-#bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20
-
 # -------------------------------------------
 
 
@@ -233,8 +218,11 @@ gaps outer 0
 
 # ------------- Initialization --------------
 
-# Launch 'wal-set', which also launches polybar (and re-launch wal as well so that the background is centered properly)
-exec --no-startup-id 'wal-set'
+# Setup monitor configuration
+exec --no-startup-id "$HOME/.config/scripts/setup-monitors"
+
+# Re-launch pywal, this time allowing it to set the background, and execute wal-set afterwards
+exec --no-startup-id "wal -R -o $HOME/.config/scripts/wal-set"
 
 # Send a message, stating that we are set up
 exec --no-startup-id "$HOME/.config/scripts/i3-welcome"
