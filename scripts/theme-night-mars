@@ -1,2 +1,0 @@
-#!/bin/env bash
-wal -i $HOME/pics/wallpapers/mars.jpg -o wal-set >/dev/null 2>&1 && xbacklight -set 5 && notify-send -u low "i3" "Switched wallpaper & theme."
