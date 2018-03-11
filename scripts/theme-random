@@ -1,2 +1,6 @@
-#!/bin/env bash
-wal -i $HOME/pics/wallpapers/wal -o wal-set >/dev/null 2>&1 && notify-send -u low "i3" "Switched wallpaper & themes."
+#!/bin/bash
+# ~/.config/scripts/theme-random
+# Script to change wallpaper and colorscheme on the fly!
+
+wal -i "$HOME/pics/wallpapers/wal" -o "$HOME/.config/scripts/wal-set" >/dev/null 2>&1
+notify-send -u low "i3" "Switched wallpaper & themes." &
