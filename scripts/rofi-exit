@@ -2,10 +2,20 @@
 # ~/.config/scripts/rofi-exit
 # Utilizes rofi's script mode when exiting i3
 
-result=$(echo "Yes|No" | rofi -sep "|" -dmenu -font "${font:-Artwiz Lemon 7}" -bw 3 -hide-scrollbar -i -only-match -l 2 -p "Are you sure you want to exit i3?")
+options="Cancel|Logout|Restart|Shutdown"
+prompt="What would you like to do?"
 
-if [ $result == "Yes" ]; then
-    $HOME/.config/scripts/i3-shutdown-wrapper >/dev/null 2>&1
-else
+result=$(echo "$options" | rofi -sep "|" -dmenu -font "${font:-Artwiz Lemon 7}" -bw 3 -hide-scrollbar -i -only-match -l 4 -p "$prompt")
+
+if [ $result == "Cancel" ]; then
     exit 0
+elif [ $result == "Logout" ]; then
+    i3-msg exit
+elif [ $result == "Restart" ]; then
+    systemctl reboot
+elif [ $result == "Shutdown" ]; then
+    systemctl poweroff
+else
+    echo "Unknown option."
+    exit 1
 fi

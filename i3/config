@@ -136,7 +136,7 @@ bindsym $mod+q kill
 # Restart window manager in-place
 bindsym $mod+Shift+r exec --no-startup-id "$HOME/.config/scripts/i3-restart-wrapper"
 
-# Exit window manager
+# Exit window manager (and potentially shutdown)
 bindsym $mod+Shift+Escape exec --no-startup-id "$HOME/.config/scripts/rofi-exit"
 
 # Lock Screen
