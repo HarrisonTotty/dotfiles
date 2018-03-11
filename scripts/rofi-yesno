@@ -1,8 +1,0 @@
-#!/bin/bash
-# ~/.config/scripts/rofi-yesno
-# Utilizes rofi's script mode to display a yes/no question
-# $2 is executed when "Yes" is selected, $3 when "No" is selected
-
-. "$HOME/.cache/wal/colors.sh"
-
-echo 'Yes\nNo' | rofi -dmenu -mesg $2 -only-match -font "${font:-Artwiz Lemon 7}" -bw 3 -color-window "$color0","$color3","$color0" -hide-scrollbar -l 2
