@@ -218,14 +218,8 @@ gaps outer 0
 
 # ------------- Initialization --------------
 
-# Setup monitor configuration
-exec --no-startup-id "$HOME/.config/scripts/setup-monitors"
-
-# Re-launch pywal, this time allowing it to set the background, and execute wal-set afterwards
-exec --no-startup-id "wal -R -o $HOME/.config/scripts/wal-set"
-
-# Send a message, stating that we are set up
-exec --no-startup-id "$HOME/.config/scripts/i3-welcome"
+# Finish initialization via the initialization script
+exec --no-startup-id "$HOME/.config/scripts/i3-startup"
 
 # -------------------------------------------
 

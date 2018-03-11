@@ -1,5 +1,0 @@
-#!/bin/bash
-# ~/.config/scripts/i3-welcome
-
-sleep 3
-notify-send -u normal 'i3' 'Initialization complete. Hello, Harrison :)'
