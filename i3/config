@@ -140,7 +140,7 @@ bindsym $mod+Shift+r exec --no-startup-id "$HOME/.config/scripts/i3-restart-wrap
 bindsym $mod+Shift+Escape exec --no-startup-id "$HOME/.config/scripts/rofi-exit"
 
 # Lock Screen
-bindsym $mod+Shift+l exec "$HOME/.config/scripts/lock"
+bindsym $mod+Shift+l exec --no-startup-id "$HOME/.config/scripts/lock"
 
 # -------------------------------------------
 
@@ -228,3 +228,5 @@ exec --no-startup-id "wal -R -o $HOME/.config/scripts/wal-set"
 exec --no-startup-id "$HOME/.config/scripts/i3-welcome"
 
 # -------------------------------------------
+
+
