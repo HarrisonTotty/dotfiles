@@ -1,7 +1,7 @@
 ! ~/.config/x/.Xresources
 ! My primary x resources file
 
-! Xft settings
+! ----- Xft settings -----
 Xft.autohint: 0
 Xft.antialias: 1
 Xft.hinting: true
@@ -11,12 +11,26 @@ Xft.lcdfilter: lcddefault
 Xft.dpi: 96
 Xcursor.theme: Default
 
-! urxvt settings
+! ----- urxvt settings -----
+! Disable the scrollbar by default
 URxvt.scrollbar: false
+
+! Set the internal border
 URxvt.internalBorder: 15
+
+! Disable these to make Ctrl-Shift bindings work
 URxvt.iso14755: false
 URxvt.iso14755_52: false
-URxvt.perl-ext-common: default
-! URxvt.keysym.Shift-Control-C: perl:clipboard:copy
-! URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 
+! Declare perl extensions
+URxvt.perl-ext-common: resize-font
+
+! Set Ctrl-Shift-{+,-} to change font size
+URxvt.keysym.C-+: resize-font:bigger
+URxvt.keysym.C-_: resize-font:smaller
+
+! Set font
+URxvt*font: -*-lemon-medium-r-normal-*-10-*-75-75-m-50-iso8859-1
+URxvt*boldFont: -*-lemon-medium-r-normal-*-10-*-75-75-m-50-iso8859-1
+URxvt*italicFont: -*-lemon-medium-r-normal-*-10-*-75-75-m-50-iso8859-1
+URxvt*boldItalicFont: -*-lemon-medium-r-normal-*-10-*-75-75-m-50-iso8859-1
