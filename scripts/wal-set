@@ -26,6 +26,9 @@ main() {
 
     # Restart and re-theme polybar
     $HOME/.config/polybar/launch.sh
+
+    # Copy and instantiate Emacs theming
+    cp -f $HOME/.cache/wal/colors-emacs.el $HOME/.emacs.d/themes/wal.el
 }
 
 main >/dev/null 2>&1

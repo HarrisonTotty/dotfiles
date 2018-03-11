@@ -237,6 +237,6 @@ gaps outer 0
 exec --no-startup-id 'wal-set'
 
 # Send a message, stating that we are set up
-exec --no-startup-id i3-msg 'workspace 1; sleep 3 && exec --no-startup-id "notify-send -u normal \\"i3\\" \\"Initialization complete. Hello, Harrison :)\\""'
+exec --no-startup-id "$HOME/.config/scripts/i3-welcome"
 
 # -------------------------------------------
