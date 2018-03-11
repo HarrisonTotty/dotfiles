@@ -7,11 +7,11 @@
 
 # Automatically start the window manager at login
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-	exec startx > $HOME/.i3-last-run.log 2>&1
+    exec startx > $HOME/.i3-last-run.log 2>&1
 fi
 
 
 # Import the rest of the zsh configuration files
 for f in $HOME/.config/zsh/*.zsh; do
-	. $f
+    . $f
 done
