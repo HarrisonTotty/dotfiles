@@ -10,6 +10,9 @@
 # Allow README.md
 !/README.md
 
+# Allow other certain files
+!/user-dirs.dirs
+
 # Allow certain directories
 !/cursor/
 !/dunst/
