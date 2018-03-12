@@ -11,11 +11,13 @@
 !/README.md
 
 # Allow certain directories
+!/cursor/
 !/dunst/
 !/i3/
 !/polybar/
+!/rofi/
 !/scripts/
+!/wal/
 !/x/
 !/zsh/
-!/rofi/
-!/wal/
+

@@ -1,0 +1,9 @@
+# ~/.config/cursor/index.theme
+# This sets the default cursor theme to Paper
+# To enable:
+# ln -s ~/.config/cursor/index.theme ~/.icons/default/index.theme
+
+[Icon Theme]
+Name=Default
+Comment=Default Cursor Theme
+Inherits=Paper
