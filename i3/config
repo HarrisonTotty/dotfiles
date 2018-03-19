@@ -79,7 +79,7 @@ bindsym --release $mod+Shift+Insert exec --no-startup-id "$HOME/.config/scripts/
 
 # ---------- Controlling Programs -----------
 
-# Float all windows by default
+# Float all other windows by default
 for_window [class="^.*"] floating enable
 
 # Disable focus following via mouse

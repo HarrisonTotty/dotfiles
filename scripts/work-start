@@ -1,8 +1,21 @@
 #!/bin/bash
+# Starts my typical work programs
 
-notify-send -u low "i3" "Starting work mode..."
-keepassx2 &
-pidgin &
-firefox &
-thunderbird &
-rocketchat &
+notify-send -u normal "WORK" "Starting work mode..." &
+
+# Start pidgin on workspace 1
+$HOME/.config/scripts/i3-exec-tiling pidgin 1
+
+# Start rocketchat on workspace 2
+$HOME/.config/scripts/i3-exec-tiling rockatchat 2
+
+# Start keepassx on workspace 3
+$HOME/.config/scripts/i3-exec-tiling keepassx2 3
+
+# Start firefox on workspace 5
+$HOME/.config/scripts/i3-exec-tiling firefox 5
+
+# Start thunderbird on workspace 6
+$HOME/.config/scripts/i3-exec-tiling thunderbird 6
+
+notify-send -u normal "WORK" "Work mode startup complete." &
