@@ -4,7 +4,7 @@
 # Usage: i3-exec-tiling application workspace
 
 # Set the maximum number of seconds we are willing to wait
-maxwait=12
+maxwait=20
 currentwait=0
 
 # First. we launch the application

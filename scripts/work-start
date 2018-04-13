@@ -6,8 +6,8 @@ notify-send -u normal "WORK" "Starting work mode..." &
 # Start pidgin on workspace 1
 $HOME/.config/scripts/i3-exec-tiling pidgin 1
 
-# Start rocketchat on workspace 2
-$HOME/.config/scripts/i3-exec-tiling rockatchat 2
+# Start rocketchat on workspace 2 (disabled since rocketchat is poopy)
+#$HOME/.config/scripts/i3-exec-tiling rockatchat 2
 
 # Start keepassx on workspace 3
 $HOME/.config/scripts/i3-exec-tiling keepassx2 3

@@ -40,7 +40,7 @@ padding-right = 1
 module-margin-right = 0
 module-margin-left = 2
 
-modules-right = brightness volume battery
+modules-right = brightness volume-alsa battery
 modules-center = date
 modules-left = i3
 
@@ -189,22 +189,22 @@ font-2 = Artwiz Lemon-7:size=7
 font-3 = FontAwesome:size=10
 
 
-[module/network-status]
-type = custom/script
-exec = /home/harrisont/.config/polybar/network-status
-tail = false
-interval = 5
-click-left = /home/harrisont/.config/polybar/network-status-detailed
-label = [ NET %output% ]
+#[module/network-status]
+#type = custom/script
+#exec = /home/harrisont/.config/polybar/network-status
+#tail = false
+#interval = 5
+#click-left = /home/harrisont/.config/polybar/network-status-detailed
+#label = [ NET %output% ]
 
 
-[module/vpn-status]
-type = custom/script
-exec = /home/harrisont/.config/polybar/vpn-status
-tail = false
-interval = 5
-click-left = /home/harrisont/.config/polybar/vpn-status-detailed
-label = [ VPN %output% ]
+#[module/vpn-status]
+#type = custom/script
+#exec = /home/harrisont/.config/polybar/vpn-status
+#tail = false
+#interval = 5
+#click-left = /home/harrisont/.config/polybar/vpn-status-detailed
+#label = [ VPN %output% ]
 
 
 [module/brightness]
@@ -218,10 +218,9 @@ label = [ BKLT %percentage%% ]
 type = internal/temperature
 interval = 5
 thermal-zone = 0
-#hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp2_input
 warn-temperature = 80
-label = [ TEMP %temperature% ]
-label-warn = [ TEMP %temperature% ! ]
+label = [ TEMP %temperature-f% ]
+label-warn = [ TEMP %temperature-f% ! ]
 
 
 # [module/temp-graphics]
@@ -335,20 +334,20 @@ format = [ <label> ]
 label = "CPU %output%%"
 
 
-[module/volume-alsa]
-type = internal/alsa
-master-soundcard = default
-speaker-soundcard = default
-headphone-soundcard = default
-master-mixer = Master
-speaker-mixer =
-headpohone-mixer =
-headphone-id =
-mapping = false
-format-volume = [ <label-volume> ]
-format-muted = [ <label-muted> ]
-label-muted = "VOL MUTED"
-label-volume = "VOL %percentage%%"
+#[module/volume-alsa]
+#type = internal/alsa
+#master-soundcard = default
+#speaker-soundcard = default
+#headphone-soundcard = default
+#master-mixer = Master
+#speaker-mixer = IEC958
+#headpohone-mixer = Headphone
+#headphone-id =
+#mapping = false
+#format-volume = [ <label-volume> ]
+#format-muted = [ <label-muted> ]
+#label-muted = "VOL MUTED"
+#label-volume = "VOL %percentage%%"
 
 
 [module/volume]
