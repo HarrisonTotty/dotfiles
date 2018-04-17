@@ -1,0 +1,53 @@
+#!/bin/bash
+# ~/.config/scripts/wal-next
+# Script to get the "next" wallpaper for pywal in a folder.
+
+# Complain if the specified folder doesn't exist
+if [ ! -d "$1" ]; then
+    echo "The specified folder does not exist!"
+    exit 1
+fi
+
+# If the wal cache file exists:
+if [ -f "$HOME/.cache/wal/colors.sh" ]; then
+
+    # Source the cache file and determine the filename
+    source "$HOME/.cache/wal/colors.sh"
+    pw=$(echo "$wallpaper" | rev | cut -d '/' -f1 | rev)
+
+    # If the current wallpaper is in the same folder passed to the script:
+    if [ -f "$1/$pw" ]; then
+        
+        # Determine the next wallpaper in the same folder
+        nextfile=$(ls -1 "$1" | grep "$pw" -A 1 | tail -n 1)
+
+        # If the "next file" is not our current wallpaper:
+        if [ "$nextfile" != "$pw" ]; then
+
+            # Return the full path to the wallpaper
+            echo "$1/$nextfile"
+            exit 0
+
+        # Otherwise, if we are at the "bottom" of the folder
+        else
+
+            # Return the first wallpaper in the specified folder
+            echo "$1"/$(ls -1 "$1" | head -n 1)
+            exit 0
+        fi
+
+    # Otherwise, if the current wallpaper isn't in the folder passed to the script:
+    else
+
+        # Return the first wallpaper in the specified folder
+        echo "$1"/$(ls -1 "$1" | head -n 1)
+        exit 0
+    fi
+
+# Otherwise, if the wal cache file doesn't exit:
+else
+
+    # Return the first wallpaper in the specified folder
+    echo "$1"/$(ls -1 "$1" | head -n 1)
+    exit 0
+fi
