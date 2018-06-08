@@ -107,7 +107,7 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | gdisk /dev/${primary_disk} 2>&1 
   y # Destroy MBR partition
 EOF
 if [ $? -ne 0 ]; then
-    print_nosubsec_err "WARNING: Unable to wipe previous GPT/MBR tables."
+    echo "      $(tput setaf 3)WARNING: Unable to wipe previous GPT/MBR tables.$(tput sgr0)"
 fi
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | gdisk /dev/${primary_disk} 2>&1 >/dev/null
   n # Create a new partition (/boot)
