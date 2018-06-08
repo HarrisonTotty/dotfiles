@@ -34,8 +34,3 @@ URxvt*font: -*-lemon-medium-r-normal-*-10-*-75-75-m-50-iso8859-1
 URxvt*boldFont: -*-lemon-medium-r-normal-*-10-*-75-75-m-50-iso8859-1
 URxvt*italicFont: -*-lemon-medium-r-normal-*-10-*-75-75-m-50-iso8859-1
 URxvt*boldItalicFont: -*-lemon-medium-r-normal-*-10-*-75-75-m-50-iso8859-1
-
-!URxvt*font: -t-cherry-medium-*
-!URxvt*boldFont: -t-cherry-medium-*
-!URxvt*italicFont: -t-cherry-medium-*
-!URxvt*boldItalicFont: -t-cherry-medium-*
