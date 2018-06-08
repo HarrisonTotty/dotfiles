@@ -81,6 +81,9 @@ fi
 # ----- Filesystem Setup -----
 
 print_sec "Partitioning disks..."
+print_subsec "Cleaning mount points..."
+umount -R /mnt 2>/dev/null >/dev/null
+rm -rf /mnt
 print_subsec "Listing available disks..."
 available_disks=$(lsblk -a -l -o name -n | grep -v loop)
 archiso_disk=$(findmnt -f -n -o SOURCE --mountpoint /run/archiso/bootmnt | cut -d '/' -f 3)
@@ -156,9 +159,6 @@ if ! mkfs.ext4 /dev/${primary_disk}${partition_prefix}4 2>&1 >/dev/null; then
 fi
 
 print_sec "Mounting partitions..."
-print_subsec "Cleaning mount points..."
-umount -R /mnt 2>&1 >/dev/null
-rm -rf /mnt
 mkdir /mnt
 print_subsec "Mounting root partition..."
 if ! mount /dev/${primary_disk}${partition_prefix}2 /mnt; then
@@ -166,17 +166,20 @@ if ! mount /dev/${primary_disk}${partition_prefix}2 /mnt; then
     exit 1
 fi
 print_subsec "Mounting boot partition..."
-if ! mkdir /mnt/boot && mount /dev/${primary_disk}${partition_prefix}1 /mnt/boot; then
+mkdir /mnt/boot
+if ! mount /dev/${primary_disk}${partition_prefix}1 /mnt/boot; then
     print_nosubsec_err "Unable to mount partition - mounting process returned non-zero exit code."
     exit 1
 fi
 print_subsec "Mounting var partition..."
-if ! mkdir /mnt/var && mount /dev/${primary_disk}${partition_prefix}3 /mnt/var; then
+mkdir /mnt/var
+if ! mount /dev/${primary_disk}${partition_prefix}3 /mnt/var; then
     print_nosubsec_err "Unable to mount partition - mounting process returned non-zero exit code."
     exit 1
 fi
 print_subsec "Mounting home partition..."
-if ! mkdir /mnt/home && mount /dev/${primary_disk}${partition_prefix}4 /mnt/home; then
+mkdir /mnt/home
+if ! mount /dev/${primary_disk}${partition_prefix}4 /mnt/home; then
     print_nosubsec_err "Unable to mount partition - mounting process returned non-zero exit code."
     exit 1
 fi
