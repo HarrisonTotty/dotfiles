@@ -101,8 +101,15 @@ elif echo "$archiso_disk" | grep -q "$primary_disk"; then
     exit 1
 fi
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | gdisk /dev/${primary_disk} 2>&1 >/dev/null
-  o # Clear the in-memory partition table
-  y # Confirm
+  x # Enable expert mode
+  y # Destroy GPT partition
+  y # Destroy MBR partition
+EOF
+if [ $? -ne 0 ]; then
+    print_nosubsec_err "Unable to partition selected disk - unable to wipe previous GPT/MBR tables."
+    exit 1
+fi
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | gdisk /dev/${primary_disk} 2>&1 >/dev/null
   n # Create a new partition (/boot)
   1 # Designate it as partition number 1
     # Start at the beginning of the disk
