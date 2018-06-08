@@ -102,6 +102,7 @@ elif echo "$archiso_disk" | grep -q "$primary_disk"; then
 fi
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | gdisk /dev/${primary_disk} 2>&1 >/dev/null
   x # Enable expert mode
+  z # Wipe partition tables
   y # Destroy GPT partition
   y # Destroy MBR partition
 EOF
