@@ -55,10 +55,20 @@ if ! timedatectl set-ntp true 2>&1 >/dev/null; then
     exit 1
 fi
 
-print_sec "Generating pacman mirrorlist..."
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup 2>&1 >/dev/null
+print_sec "Generating pacman mirror list..."
+print_subsec "Backing-up previous mirror list..."
+if ! cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup 2>&1 >/dev/null; then
+    print_nosubsec_err "Unable to back-up previous mirror list."
+    exit 1
+fi
+print_subsec "Installing rankmirrors package..."
+if ! pacman -Sy pacman-contrib --noconfirm; then
+    print_nosubsec_err "Unable to install rankmirrors package."
+    exit 1
+fi
+print_subsec "Fetching and ranking fastest mirrors..."
 if ! curl -s "$mirrorlist_url" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - 2>/dev/null > /etc/pacman.d/mirrorlist; then
-    print_nosec_err "Unable to generate pacman mirrorlist - process returned non-zero exit code."
+    print_nosubsec_err "Unable to generate pacman mirrorlist - process returned non-zero exit code."
     exit 1
 fi
 
