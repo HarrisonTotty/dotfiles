@@ -82,8 +82,9 @@ fi
 
 print_sec "Partitioning disks..."
 print_subsec "Listing available disks..."
-available_disks=$(lsblk -a -l -S -o name -n)
-print_nosubsec "$available_disks"
+available_disks=$(lsblk -a -l -o name -n | grep -v loop)
+archiso_disk=$(findmnt -f -n -o SOURCE --mountpoint /run/archiso/bootmnt | cut -d '/' -f 3)
+echo ${available_disks}
 read -p "      $(tput setaf 4)Enter disk to partition:$(tput sgr0) " primary_disk
 print_subsec "Partitioning selected disk..."
 if ! echo "$available_disks" | grep -q "$primary_disk"; then
@@ -91,6 +92,9 @@ if ! echo "$available_disks" | grep -q "$primary_disk"; then
     exit 1
 elif df -h . | grep "/dev/" | cut -d ' ' -f 1 | grep -q "$primary_disk"; then
     print_nosubsec_err "Unable to partition selected disk - selected disk is currently in use."
+    exit 1
+elif echo "$archiso_disk" | grep -q "$primary_disk"; then
+    print_nosubsec_err "Unable to partition selected disk - selected disk is same as archiso installer image."
     exit 1
 fi
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | gdisk /dev/${primary_disk} 2>&1 >/dev/null
