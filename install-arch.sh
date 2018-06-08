@@ -1,6 +1,8 @@
 #!/bin/bash
 # Installer script for my Arch Linux setup
 
+trap "exit" INT
+
 # ------ Configuration ------
 
 efivars_dir="/sys/firmware/efi/efivars"
@@ -62,7 +64,7 @@ if ! cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup 2>&1 >/dev/null
     exit 1
 fi
 print_subsec "Installing rankmirrors package..."
-if ! pacman -Sy pacman-contrib --noconfirm; then
+if ! pacman -Sy pacman-contrib --noconfirm 2>&1 >/dev/null; then
     print_nosubsec_err "Unable to install rankmirrors package."
     exit 1
 fi
