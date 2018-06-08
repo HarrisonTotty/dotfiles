@@ -11,6 +11,8 @@ mirrorlist_url="https://www.archlinux.org/mirrorlist/?country=US&protocol=https&
 
 packages="base dunst emacs feh git i3-gaps i3lock intel-ucode neofetch rofi rxvt-unicode scrot xorg-server xorg-xinit zsh"
 
+kernel_parameters="verbose pcie_aspm=off"
+
 timezone="America/Chicago"
 
 # ---------------------------
@@ -310,7 +312,7 @@ if [ "$?" -ne 0 ]; then
     print_nosubsec_err "Unable to write primary bootloader entry - unable to write initial file."
     exit 1
 fi
-if ! echo "options  root=PARTUUID=$root_partuuid rw verbose" >> /mnt/boot/loader/entries/arch.conf; then
+if ! echo "options  root=PARTUUID=$root_partuuid rw $kernel_parameters" >> /mnt/boot/loader/entries/arch.conf; then
     print_nosubsec_err "Unable to write primary bootloader entry - unable to append options specification."
     exit 1
 fi
