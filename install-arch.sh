@@ -84,7 +84,7 @@ print_sec "Partitioning disks..."
 print_subsec "Listing available disks..."
 available_disks=$(lsblk -a -l -o name -n | grep -v loop)
 archiso_disk=$(findmnt -f -n -o SOURCE --mountpoint /run/archiso/bootmnt | cut -d '/' -f 3)
-print_nosubsec "$available_disks"
+echo "      ${available_disks}"
 read -p "      $(tput setaf 4)Enter disk to partition:$(tput sgr0) " primary_disk
 print_subsec "Partitioning selected disk..."
 if ! echo "$available_disks" | grep -q "$primary_disk"; then
@@ -250,7 +250,7 @@ fi
 
 print_sec "Setting-up bootloader..."
 print_subsec "Getting root PARTUUID..."
-root_partuuid=$(blkid -s PARTUUID -o value /dev/${primary_disk}2)
+root_partuuid=$(blkid -s PARTUUID -o value /dev/${primary_disk}${partition_prefix}2)
 if [ "$?" -ne 0 ]; then
     print_nosubsec_err "Unable to obtain PARTUUID of root partition."
     exit 1
