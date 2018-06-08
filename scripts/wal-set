@@ -13,4 +13,7 @@ dunst -lb "$color3" -nb "$color3" -cb "$color3" -lf "$color7" -bf "$color7" -cf 
 $HOME/.config/polybar/launch.sh
 
 # Copy and instantiate Emacs theming
+if [ -d $HOME/.emacs.d/themes ]; then
+  mkdir -p $HOME/.emacs.d/themes
+fi
 cp -f $HOME/.cache/wal/colors-emacs.el $HOME/.emacs.d/themes/wal.el
