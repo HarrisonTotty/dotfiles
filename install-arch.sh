@@ -9,7 +9,7 @@ efivars_dir="/sys/firmware/efi/efivars"
 
 mirrorlist_url="https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on"
 
-packages="base dunst emacs feh git i3-gaps i3lock intel-ucode neofetch rofi rxvt-unicode scrot xorg-server xorg-xinit zsh"
+packages="base dunst emacs feh git i3-gaps i3lock intel-ucode neofetch rofi rxvt-unicode scrot sudo xorg-server xorg-xinit zsh"
 
 kernel_parameters="verbose pcie_aspm=off"
 
@@ -248,9 +248,22 @@ if ! echo "127.0.1.1 $hostname.localdomain $hostname" >> /mnt/etc/hosts; then
     print_nosubsec_err "Unable to add hostname to hosts file."
     exit 1
 fi
-print_subsec "Setting root password..."
+print_subsec "Setting root user account password..."
 if ! arch-chroot /mnt passwd; then
-    print_nosubsec_err "Unable to set root password."
+    print_nosubsec_err "Unable to set root user account password."
+    exit 1
+fi
+print_subsec "Creating primary user account..."
+read -p "      $(tput setaf 4)Enter primary user account name:$(tput sgr0) " username
+useradd_command="useradd -m -g wheel -s /bin/zsh $username"
+if ! arch-chroot /mnt ${useradd_command}; then
+    print_nosubsec_err "Unable to create primary user account."
+    exit 1
+fi
+print_subsec "Setting primary user account password..."
+userpwd_command="passwd $username"
+if ! arch-chroot /mnt ${userpwd_command}; then
+    print_nosubsec_err "Unable to set primary user account password."
     exit 1
 fi
 
@@ -268,7 +281,7 @@ if [ "$?" -ne 0 ]; then
     exit 1
 fi
 print_subsec "Installing bootloader..."
-if ! arch-chroot /mnt bootctl --path=/boot install; then
+if ! arch-chroot /mnt bootctl --path=/boot install >/dev/null; then
     print_nosubsec_err "Unable to install bootloader - bootctl returned non-zero exit code."
     exit 1
 fi
