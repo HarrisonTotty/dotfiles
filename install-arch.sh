@@ -7,7 +7,7 @@ efivars_dir="/sys/firmware/efi/efivars"
 
 mirrorlist_url="https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on"
 
-packages="base dunst emacs feh i3-gaps i3lock intel-ucode neofetch rofi rxvt-unicode scrot xorg-server xorg-xinit zsh"
+packages="base dunst emacs feh git i3-gaps i3lock intel-ucode neofetch rofi rxvt-unicode scrot xorg-server xorg-xinit zsh"
 
 timezone="America/Chicago"
 
