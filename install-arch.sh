@@ -99,26 +99,23 @@ elif echo "$archiso_disk" | grep -q "$primary_disk"; then
 fi
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | gdisk /dev/${primary_disk} 2>&1 >/dev/null
   o # Clear the in-memory partition table
+  y # Confirm
   n # Create a new partition (/boot)
-  p # Designate it as a primary parition
   1 # Designate it as partition number 1
     # Start at the beginning of the disk
   +1G # Make the partition 1GB in size
   ef00 # Designate it as an EFI System partition
   n # Create a new partition (/)
-  p # Designate it as a primary parition
   2 # Designate it as partition number 2
     # Start after the previous partition
   +128G # Make the partition 128GB in size
   8304 # Designate it as a Linux x86-64 root partition
   n # Create a new partition (/var)
-  p # Designate it as a primary partition
   3 # Designate it as parition number 3
     # Start after the previous partition
   +32G # Make the partition 32GB in size
   8300 # Designate it as a Linux filesystem partition
   n # Create a new partition (/home)
-  p # Designate it as a primary partition
   4 # Designate it as partition number 4
     # Start after the previous partition
     # Fill up the rest of the disk
@@ -132,23 +129,28 @@ if [ $? -ne 0 ]; then
 fi
 
 print_sec "Formatting partitions..."
+if echo "$primary_disk" | grep -q "nvme"; then
+    partition_prefix="p"
+else
+    partition_prefix=""
+fi
 print_subsec "Formatting boot partition..."
-if ! mkfs.fat -F32 /dev/${primary_disk}1 2>&1 >/dev/null; then
+if ! mkfs.fat -F32 /dev/${primary_disk}${partition_prefix}1 2>&1 >/dev/null; then
     print_nosubsec_err "Unable to format partition - format process returned non-zero exit code."
     exit 1
 fi
 print_subsec "Formatting root partition..."
-if ! mkfs.ext4 /dev/${primary_disk}2 2>&1 >/dev/null; then
+if ! mkfs.ext4 /dev/${primary_disk}${partition_prefix}2 2>&1 >/dev/null; then
     print_nosubsec_err "Unable to format partition - format process returned non-zero exit code."
     exit 1
 fi
 print_subsec "Formatting var partition..."
-if ! mkfs.ext4 /dev/${primary_disk}3 2>&1 >/dev/null; then
+if ! mkfs.ext4 /dev/${primary_disk}${partition_prefix}3 2>&1 >/dev/null; then
     print_nosubsec_err "Unable to format partition - format process returned non-zero exit code."
     exit 1
 fi
 print_subsec "Formatting home partition..."
-if ! mkfs.ext4 /dev/${primary_disk}4 2>&1 >/dev/null; then
+if ! mkfs.ext4 /dev/${primary_disk}${partition_prefix}4 2>&1 >/dev/null; then
     print_nosubsec_err "Unable to format partition - format process returned non-zero exit code."
     exit 1
 fi
@@ -159,22 +161,22 @@ umount -R /mnt 2>&1 >/dev/null
 rm -rf /mnt
 mkdir /mnt
 print_subsec "Mounting root partition..."
-if ! mount /dev/${primary_disk}2 /mnt; then
+if ! mount /dev/${primary_disk}${partition_prefix}2 /mnt; then
     print_nosubsec_err "Unable to mount partition - mounting process returned non-zero exit code."
     exit 1
 fi
 print_subsec "Mounting boot partition..."
-if ! mkdir /mnt/boot && mount /dev/${primary_disk}1 /mnt/boot; then
+if ! mkdir /mnt/boot && mount /dev/${primary_disk}${partition_prefix}1 /mnt/boot; then
     print_nosubsec_err "Unable to mount partition - mounting process returned non-zero exit code."
     exit 1
 fi
 print_subsec "Mounting var partition..."
-if ! mkdir /mnt/var && mount /dev/${primary_disk}3 /mnt/var; then
+if ! mkdir /mnt/var && mount /dev/${primary_disk}${partition_prefix}3 /mnt/var; then
     print_nosubsec_err "Unable to mount partition - mounting process returned non-zero exit code."
     exit 1
 fi
 print_subsec "Mounting home partition..."
-if ! mkdir /mnt/home && mount /dev/${primary_disk}4 /mnt/home; then
+if ! mkdir /mnt/home && mount /dev/${primary_disk}${partition_prefix}4 /mnt/home; then
     print_nosubsec_err "Unable to mount partition - mounting process returned non-zero exit code."
     exit 1
 fi
