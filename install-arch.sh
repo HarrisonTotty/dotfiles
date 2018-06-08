@@ -84,7 +84,7 @@ print_sec "Partitioning disks..."
 print_subsec "Listing available disks..."
 available_disks=$(lsblk -a -l -o name -n | grep -v loop)
 archiso_disk=$(findmnt -f -n -o SOURCE --mountpoint /run/archiso/bootmnt | cut -d '/' -f 3)
-echo ${available_disks}
+print_nosubsec "$available_disks"
 read -p "      $(tput setaf 4)Enter disk to partition:$(tput sgr0) " primary_disk
 print_subsec "Partitioning selected disk..."
 if ! echo "$available_disks" | grep -q "$primary_disk"; then
