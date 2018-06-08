@@ -9,7 +9,7 @@ efivars_dir="/sys/firmware/efi/efivars"
 
 mirrorlist_url="https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on"
 
-packages="arandr base dunst emacs feh gcc git i3-gaps i3lock intel-ucode make neofetch openssh python-pywal rofi rxvt-unicode scrot sudo xclip xorg-server xorg-xinit xorg-xset zsh"
+packages="arandr base dunst emacs feh gcc git i3-gaps i3lock intel-ucode make neofetch openssh patch python-pywal rofi rxvt-unicode scrot sudo xclip xorg-server xorg-xinit xorg-xset zsh"
 
 kernel_parameters="verbose pcie_aspm=off"
 
