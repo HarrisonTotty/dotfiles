@@ -135,7 +135,7 @@ else
     partition_prefix=""
 fi
 print_subsec "Formatting boot partition..."
-if ! mkfs.fat -F32 /dev/${primary_disk}${partition_prefix}1 2>&1 >/dev/null; then
+if ! mkfs.vfat -F 32 /dev/${primary_disk}${partition_prefix}1 2>&1 >/dev/null; then
     print_nosubsec_err "Unable to format partition - format process returned non-zero exit code."
     exit 1
 fi
