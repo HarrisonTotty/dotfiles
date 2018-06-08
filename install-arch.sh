@@ -271,6 +271,7 @@ if ! arch-chroot /mnt bootctl --path=/boot install; then
     exit 1
 fi
 print_subsec "Configuring automatic bootloader updates..."
+touch /mnt/etc/pacman.d/hooks/systemd-boot.hook
 cat > /mnt/etc/pacman.d/hooks/systemd-boot.hook << EOF
 [Trigger]
 Type = Package
@@ -287,6 +288,7 @@ if [ "$?" -ne 0 ]; then
     exit 1
 fi
 print_subsec "Writing primary bootloader configuration..."
+touch /mnt/boot/loader/loader.conf
 cat > /mnt/boot/loader/loader.conf << EOF
 default arch
 timeout 1
@@ -297,6 +299,7 @@ if [ "$?" -ne 0 ]; then
     exit 1
 fi
 print_subsec "Writing primary bootloader entry..."
+touch /mnt/boot/loader/entries/arch.conf
 cat > /mnt/boot/loader/entries/arch.conf << EOF
 title    Arch Linux
 linux    /vmlinuz-linux
