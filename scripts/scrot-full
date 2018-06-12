@@ -5,6 +5,6 @@
 if [ ! -d "$HOME/pics/screenshots" ]; then
     mkdir -p "$HOME/pics/screenshots"
 fi
-notify-send -u low "i3" "Taking screenshot..."
+notify-send -u low "i3" "Taking screenshot..." &
 scrot --delay 3 --silent "$HOME/pics/screenshots/screenshot.%y-%m-%d.%H-%M.png"
-notify-send -u low "i3" "Saved screenshot."
+notify-send -u low "i3" "Saved screenshot." &
