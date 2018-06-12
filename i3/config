@@ -142,6 +142,9 @@ bindsym $mod+Shift+Escape exec --no-startup-id "$HOME/.config/scripts/rofi-exit"
 # Lock Screen
 bindsym $mod+Shift+l exec --no-startup-id "$HOME/.config/scripts/lock"
 
+# Switch Network Profiles
+bindsym $mod+Shift+F2 exec --no-startup-id "$HOME/.config/scripts/rofi-network"
+
 # -------------------------------------------
 
 
