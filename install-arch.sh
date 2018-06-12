@@ -9,6 +9,8 @@ efivars_dir="/sys/firmware/efi/efivars"
 
 mirrorlist_url="https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on"
 
+aur_packages="bdf-curie oomox paper-icon-theme-git polybar-git ttf-iosevka-ss02 urxvt-resize-font-git"
+
 core_packages="base intel-ucode sudo"
 
 xorg_packages="xorg-server xorg-xinit xorg-xlsfonts xorg-xset"
@@ -277,7 +279,7 @@ if ! arch-chroot /mnt ${userpwd_command}; then
     exit 1
 fi
 print_subsec "Building primary user account home subdirectories..."
-if ! mkdir -p "/mnt/home/$username/"{docs,downloads,media/music,media/videos,pics/screenshots,projects}; then
+if ! mkdir -p "/mnt/home/$username/"{.cache/lock,docs,downloads,media/music,media/videos,pics/screenshots,projects}; then
     print_nosubsec_err "Unable to build primary user account home subdirectories."
     exit 1
 fi
