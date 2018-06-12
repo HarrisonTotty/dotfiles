@@ -5,7 +5,7 @@
 options="Cancel|Logout|Restart|Shutdown"
 prompt="What would you like to do?"
 
-result=$(echo "$options" | rofi -sep "|" -dmenu -font "${font:-Artwiz Lemon 7}" -bw 3 -hide-scrollbar -i -only-match -l 4 -p "$prompt")
+result=$(echo "$options" | rofi -sep "|" -dmenu -font "$UI_FONT" -bw 3 -hide-scrollbar -i -only-match -l 4 -p "$prompt")
 
 if [ $result == "Cancel" ]; then
     exit 0

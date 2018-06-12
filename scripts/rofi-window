@@ -2,4 +2,4 @@
 # ~/.config/scripts/rofi-run
 # Wrapper for rofi's run mode
 
-rofi -show window -font "${font:-Artwiz Lemon 7}"
+rofi -show window -font "$UI_FONT"

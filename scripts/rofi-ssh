@@ -2,4 +2,4 @@
 # ~/.config/scripts/rofi-ssh
 # Wrapper for rofi's ssh mode
 
-rofi -show ssh -ssh-command 'urxvtc +sb -title "SSH : {host}" -e /home/harrisont/.config/scripts/ssh-wrapper {host}' -font "${font:-Artwiz Lemon 7}"
+rofi -show ssh -ssh-command 'urxvtc +sb -title "SSH : {host}" -e /home/harrisont/.config/scripts/ssh-wrapper {host}' -font "$UI_FONT"

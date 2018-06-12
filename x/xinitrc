@@ -4,12 +4,15 @@
 # Setup emacs as my editor
 export EDITOR='emacs'
 
+# Set various font variables for theming
+export UI_FONT='curie 12'
+
 # Boring language stuff
 export LANG='en_US.UTF-8'
 export LC_CTYPE='en_US.UTF-8'
 
 # Setup dunst
-export DUNST_FONT='Artwiz Lemon 7'
+export DUNST_FONT='pango:curie 12'
 export DUNST_SIZE='300x30-40+40'
 
 # Additional x settings

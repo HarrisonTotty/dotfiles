@@ -4,12 +4,16 @@
 ! ----- Xft settings -----
 Xft.autohint: 0
 Xft.antialias: 1
-Xft.hinting: true
-Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.hintstyle: hintfull
 Xft.rgba: rgb
 Xft.lcdfilter: lcddefault
 Xft.dpi: 96
 Xcursor.theme: Default
+
+! ----- Emacs settings -----
+! Set the default font
+emacs.font: Iosevka:pixelsize=16:weight=normal
 
 ! ----- urxvt settings -----
 ! Disable the scrollbar by default
@@ -30,7 +34,4 @@ URxvt.keysym.C-+: resize-font:bigger
 URxvt.keysym.C-_: resize-font:smaller
 
 ! Set font
-URxvt*font: -*-lemon-medium-r-normal-*-10-*-75-75-m-50-iso8859-1
-URxvt*boldFont: -*-lemon-medium-r-normal-*-10-*-75-75-m-50-iso8859-1
-URxvt*italicFont: -*-lemon-medium-r-normal-*-10-*-75-75-m-50-iso8859-1
-URxvt*boldItalicFont: -*-lemon-medium-r-normal-*-10-*-75-75-m-50-iso8859-1
+URxvt.font: xft:curie:size=12
