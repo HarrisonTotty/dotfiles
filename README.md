@@ -22,6 +22,6 @@ Window Manager: [i3-gaps](https://github.com/Airblader/i3)
 
 ### Screenshots
 
-![Busy (alternative)](https://i.imgur.com/BOnWXQL.png)
+![Busy (alternative)](https://i.imgur.com/K3C6toX.png)
 
 See [this Imgur album](https://imgur.com/a/EtABgx8) for more screenshots.
