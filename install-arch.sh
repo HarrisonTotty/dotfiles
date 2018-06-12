@@ -15,7 +15,7 @@ xorg_packages="xorg-server xorg-xinit xorg-xlsfonts xorg-xset"
 
 dev_packages="autoconf crystal gcc git make openssh patch python-setuptools shards"
 
-ui_packages="alsa-utils arandr dunst feh i3-gaps i3lock python-pywal rofi scrot"
+ui_packages="alsa-utils arandr dunst feh i3-gaps i3lock lxappearance python-pywal rofi scrot"
 
 app_packages="emacs neofetch rxvt-unicode xclip w3m zsh"
 
@@ -274,6 +274,11 @@ print_subsec "Setting primary user account password..."
 userpwd_command="passwd $username"
 if ! arch-chroot /mnt ${userpwd_command}; then
     print_nosubsec_err "Unable to set primary user account password."
+    exit 1
+fi
+print_subsec "Building primary user account home subdirectories..."
+if ! mkdir -p "/mnt/home/$username/"{docs,downloads,media/music,media/videos,pics/screenshots,projects}; then
+    print_nosubsec_err "Unable to build primary user account home subdirectories."
     exit 1
 fi
 
