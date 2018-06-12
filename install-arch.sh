@@ -9,7 +9,17 @@ efivars_dir="/sys/firmware/efi/efivars"
 
 mirrorlist_url="https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on"
 
-packages="arandr autoconf base dunst emacs feh gcc git i3-gaps i3lock intel-ucode make neofetch openssh patch python-pywal python-setuptools rofi rxvt-unicode scrot sudo xclip xorg-server xorg-xinit xorg-xlsfonts xorg-xset w3m zsh"
+core_packages="base intel-ucode sudo"
+
+xorg_packages="xorg-server xorg-xinit xorg-xlsfonts xorg-xset"
+
+dev_packages="autoconf crystal gcc git make openssh patch python-setuptools shards"
+
+ui_packages="alsa-utils arandr dunst feh i3-gaps i3lock python-pywal rofi scrot"
+
+app_packages="emacs neofetch rxvt-unicode xclip w3m zsh"
+
+packages="$app_packages $core_packages $dev_packages $ui_packages $xorg_packages"
 
 kernel_parameters="verbose pcie_aspm=off"
 
