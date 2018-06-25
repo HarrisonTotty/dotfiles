@@ -53,7 +53,7 @@ client.background        $bg
 # ----------- Launching Programs ------------
 
 # Terminal (rxvt-unicode)
-bindsym $mod+Return exec urxvtc +sb -title "Terminal"
+bindsym $mod+Return exec urxvtc +sb -title "Terminal" -letsp 1
 
 # File manager (pcmanfm)
 bindsym $mod+f exec pcmanfm
@@ -199,7 +199,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 # --------------- Appearance ----------------
 
 # Set the default font and title format of all windows
-font pango:Iosevka 14
+font pango:Iosevka 12
 for_window [class=".*"] title_format "<span font='curie'> [ %title ]</span>"
 
 # Dynamically change wallpapers
