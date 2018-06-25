@@ -8,7 +8,7 @@ Xft.hinting: 1
 Xft.hintstyle: hintfull
 Xft.rgba: rgb
 Xft.lcdfilter: lcddefault
-Xft.dpi: 96
+Xft.dpi: 75
 Xcursor.theme: Default
 
 ! ----- Emacs settings -----
