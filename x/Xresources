@@ -13,7 +13,7 @@ Xcursor.theme: Default
 
 ! ----- Emacs settings -----
 ! Set the default font
-emacs.font: Iosevka:pixelsize=16:weight=normal
+emacs.font: Iosevka SS02:pixelsize=16:weight=normal
 
 ! ----- urxvt settings -----
 ! Disable the scrollbar by default
