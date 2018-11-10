@@ -1,5 +1,5 @@
 #!/bin/bash
-# ~/.config/polybar/network-status
+# ~/.config/polybar/vpn-status
 # Script for displaying vpn status as a polybar module
 
 if pgrep -x openvpn; then

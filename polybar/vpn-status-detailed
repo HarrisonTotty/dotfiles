@@ -1,6 +1,6 @@
 #!/bin/bash
-# ~/.config/polybar/network-status
-# Script for displaying vpn status as a polybar module
+# ~/.config/polybar/vpn-status-detailed
+# Script for displaying (detailed) vpn status as a polybar module
 
 if pgrep -x openvpn; then
     notify-send -u low "VPN" "UP" -t 10000
