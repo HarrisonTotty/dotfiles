@@ -13,7 +13,7 @@ if [ "$#" -ne 1 ]; then
     elif [ "$choice" == "" ]; then
         exit 0
     else
-        template_conf="$choice"
+        template_conf="$template_confs/$choice"
     fi
 else
     template_conf="$1"
