@@ -1,0 +1,111 @@
+# Primary Template Configuration File
+# -----------------------------------
+
+
+# --- General Configuration Variables ---
+
+# The list of colors leveraged by this configuration.
+colors:
+  - "#1f1e20" #0
+  - "#3F3A87" #1
+  - "#1F6887" #2
+  - "#6A5894" #3
+  - "#AE6D92" #4
+  - "#319D8C" #5
+  - "#60A09A" #6
+  - "#c2c4c9" #7
+  - "#87898c" #8
+  - "#3F3A87" #9
+  - "#1F6887" #10
+  - "#6A5894" #11
+  - "#AE6D92" #12
+  - "#319D8C" #13
+  - "#60A09A" #14
+  - "#c2c4c9" #15
+
+# ---------------------------------------
+
+
+
+# ----------- Supporting Files ----------
+files:
+  # ----- Cursor Theme: Paper -----
+  - dst: "misc/cursor.theme"
+    link: "~/.icons/default/index.theme"
+    
+  # ----- X Window System -----
+  - dst: "x/exports.sh"
+
+  # ----- XDG Directory Settings -----
+  - dst: "misc/user-dirs.dirs"
+    link: "user-dirs.dirs"
+
+  # ----- Shell: zsh -----
+  - dst: "zsh/*.zsh"
+  
+  # ----- Supporting Scripts -----
+  - dst: "scripts/*.sh"
+
+  # ----- Theme Generation: pywal -----
+  - dst: "wal/templates/*"
+  - dst: "wal/wallpapers/*"
+
+# ---------------------------------------
+
+
+
+# ------- Configuration Templates -------
+templates:
+  # ----- Application Launcher: rofi -----
+  - file: "rofi/config"
+    template: "rofi/config.template"
+    font: "Iosevka SS02 14"
+
+  # ----- AUR Helper: trizen -----
+  - file: "trizen/trizen.conf"
+    template: "trizen/trizen.template"
+  
+  # ----- Notification Daemon: dunst -----
+  - file: "dunst/dunstrc"
+    template: "dunst/dunstrc.template"
+    
+  # ----- Shell: zsh -----
+  - file: "zsh/zshrc.sh"
+    template: "zsh/zshrc.template"
+    link: "~/.zshrc"
+
+  # ----- Status Bar: polybar -----
+  - file: "polybar/config"
+    template: "polybar/config.template"
+    font: "curie:pixelsize=12"
+    window_manager: "herbstluftwm"
+
+  # ----- X Window System -----
+  - file: "x/initrc.sh"
+    template: "x/initrc.template"
+    link: "~/.xinitrc"
+    window_manager: "herbstluftwm"
+  - file: "x/resources.conf"
+    template: "x/resources.template"
+    emacs_font: "Iosevka SS02:pixelsize=14:weight=normal"
+    urxvt_font: "xft:curie:size=12"
+    
+  # ----- Window Manager: herbstluftwm -----
+  - file: "herbstluftwm/autostart"
+    template: "herbstluftwm/autostart.template"
+    exec_editor: "emacs"
+    exec_exit: "$HOME/.config/scripts/rofi-exit.sh"
+    exec_file_manager: "pcmanfm"
+    exec_launcher: "$HOME/.config/scripts/rofi-run.sh"
+    exec_lock: "$HOME/.config/scripts/lock.sh"
+    exec_network: "$HOME/.config/scripts/rofi-network.sh"
+    exec_passwords: "$HOME/.config/scripts/rofi-lpass.sh"
+    exec_restart_wm: "$HOME/.config/scripts/i3-restart-wrapper.sh"
+    exec_screenshot_full: "$HOME/.config/scripts/scrot-full.sh"
+    exec_screenshot_select: "$HOME/.config/scripts/scrot-select.sh"
+    exec_ssh: "$HOME/.config/scripts/rofi-ssh.sh"
+    exec_startup: "$HOME/.config/scripts/i3-startup.sh"
+    exec_terminal: "urxvtc +sb -title Terminal -letsp 1"
+    exec_window_switcher: "$HOME/.config/scripts/rofi-window.sh"
+
+# ---------------------------------------

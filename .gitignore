@@ -1,5 +1,4 @@
-# ~/.config/.gitignore
-# The gitignore file for my dotfiles setup
+# .gitignore file
 
 # Ignore everything by default
 /*
@@ -10,21 +9,8 @@
 # Allow README.md
 !/README.md
 
-# Allow other certain files
-!/install-arch.sh
-!/user-dirs.dirs
+# Allow the templates folder
+!/templates/
 
-# Allow certain directories
-!/cssh/
-!/cursor/
-!/dunst/
-!/i3/
-!/packages/
-!/polybar/
-!/rofi/
-!/scripts/
-!/trizen/
-!/wal/
-!/x/
-!/zsh/
-
+# Allow the yaml folder
+!/yaml/

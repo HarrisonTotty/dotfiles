@@ -1,0 +1,21 @@
+# Contains additional (non-templated) exported environment variables.
+export DUNST_FONT='pango:curie 12'
+export DUNST_SIZE='300x30-40+40'
+export EDITOR='emacs'
+export LANG='en_US.UTF-8'
+export LC_CTYPE='en_US.UTF-8'
+export MKDOT_BLOCK_END_STR='%}'
+export MKDOT_BLOCK_START_STR='{%'
+export MKDOT_COMMENT_END_STR='#}'
+export MKDOT_COMMENT_START_STR='{#'
+export MKDOT_EXCLUDE=''
+export MKDOT_LOG_FILE="$HOME/.mkdot.log"
+export MKDOT_LOG_LVL='info'
+export MKDOT_LOG_MODE='append'
+export MKDOT_OUTPUT="$HOME/.config"
+export MKDOT_RSYNC_PATH='/usr/bin/rsync'
+export MKDOT_RUN="chmod +x $HOME/.config/scripts/*.sh"
+export MKDOT_VAR_END_STR='}}'
+export MKDOT_VAR_START_STR='{{'
+export MKDOT_WORKING_DIR='/tmp/mkdot'
+export UI_FONT='curie 12'
