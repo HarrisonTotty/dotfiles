@@ -59,7 +59,7 @@ templates:
   # ----- Application Launcher: rofi -----
   - file: "rofi/config"
     template: "rofi/config.template"
-    font: "Iosevka SS02 14"
+    font: "Iosevka SS02 12"
 
   # ----- AUR Helper: trizen -----
   - file: "trizen/trizen.conf"

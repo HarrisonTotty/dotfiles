@@ -1,11 +1,11 @@
 #!/bin/bash
 # Script to autogenerate and reload an entire dotfile configuration.
 
-template_confs="$HOME/projects/dotfiles/mkdot/yaml"
-template_source="$HOME/projects/dotfiles/mkdot/templates"
+template_confs="$HOME/projects/dotfiles/master/yaml"
+template_source="$HOME/projects/dotfiles/master/templates"
 
 if [ "$#" -ne 1 ]; then
-    configs=$(find "$template_confs" -maxdepth 1 -type f | cut -d '/' -f 4 | sort | paste -sd '|')
+    configs=$(find "$template_confs" -maxdepth 1 -type f | cut -d '/' -f 8 | sort | paste -sd '|')
     prompt='select template configuration file :'
     choice=$(echo "CANCEL|$configs" | rofi -sep '|' -dmenu -i -only-match -p "$prompt")
     if [ "$choice" == "CANCEL" ]; then
