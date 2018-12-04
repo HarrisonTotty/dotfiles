@@ -1,9 +1,0 @@
-#!/bin/bash
-# ~/.config/polybar/network-status
-# Script for displaying network status as a polybar module
-
-if ip -4 addr | grep -q 'state UP'; then
-    echo "UP"
-else
-    echo "DOWN"
-fi
