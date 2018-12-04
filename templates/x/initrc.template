@@ -1,0 +1,27 @@
+# Primary X configuration file.
+{{ require('this.window_manager') }}
+
+# ----- Environment Variables -----
+source "$HOME/.config/x/exports.sh"
+export WINDOW_MANAGER='{{ this.window_manager }}'
+
+# Additional x settings
+xset s off -dpms
+xset m 1/1
+xset -b
+
+# Merge in the Xresources
+xrdb -merge "$HOME/.config/x/resources.conf"
+
+# Setup the urxvt daemon
+urxvtd -q -f &
+
+# Restore the previous colorscheme without setting the wallpaper
+wal -R -n
+
+# Start the window manager
+if [ "$WINDOW_MANAGER" == "i3" ]; then
+    exec i3
+elif [ "$WINDOW_MANAGER" == "herbstluftwm" ]; then
+    exec herbstluftwm --locked
+fi

@@ -1,0 +1,14 @@
+# Primary rofi configuration file.
+{{ require('this.font') }}
+
+# Set the border width.
+rofi.bw: 3
+
+# Set the font.
+rofi.font: {{ this.font }}
+
+# Hide the scrollbar.
+rofi.hide-scrollbar: true
+
+# Import colorscheme and some additional options from pywal.
+rofi.theme: ~/.cache/wal/colors-rofi.rasi
