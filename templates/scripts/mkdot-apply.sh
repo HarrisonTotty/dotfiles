@@ -29,4 +29,18 @@ fi
 
 notify-send -u low 'MKDOT' 'Generating dotfile configuration...' &
 
-mkdot "$1" "$template_source"
+if mkdot "$1" "$template_source"; then
+    notify-send -u normal 'MKDOT' 'Dotfiles successfully generated.' &
+    exit 0
+else
+    notify-send -u critical 'MKDOT' 'ERROR: Dotfile generation unsuccessful.' &
+    exit 1
+fi
+
+if [ "$WINDOW_MANAGER" == 'i3' ]; then
+    if [ -f "$HOME/.config/scripts/i3-restart-wrapper.sh" ]; then
+        $HOME/.config/scripts/i3-restart-wrapper.sh
+    fi
+elif [ "$WINDOW_MANAGER" == 'herbstluftwm' ]; then
+    herbstclient reload
+fi
