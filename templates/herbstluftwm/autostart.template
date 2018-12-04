@@ -109,6 +109,11 @@ hc mousebind $Mod-Button3 resize
 
 # --------- Launching Programs ----------
 
+{% if this.exec_mkdot is defined %}
+# Dotfiles Generator
+hc keybind $Mod+period spawn {{ this.exec_mkdot }}
+{% endif %}
+
 {% if this.exec_file_manager is defined %}
 # File Manager
 hc keybind $Mod+f spawn {{ this.exec_file_manager }}

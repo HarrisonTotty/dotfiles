@@ -1,11 +1,22 @@
 #!/bin/bash
 # Script to autogenerate and reload an entire dotfile configuration.
 
+template_confs="$HOME/projects/dotfiles/mkdot/yaml"
 template_source="$HOME/projects/dotfiles/mkdot/templates"
 
 if [ "$#" -ne 1 ]; then
-    echo "USAGE: mkdot-apply.sh YAML_CONFIG_FILE_OR_DIR"
-    exit 1
+    configs=$(find "$template_confs" -maxdepth 1 -type f | cut -d '/' -f 4 | sort | paste -sd '|')
+    prompt='select template configuration file :'
+    choice=$(echo "CANCEL|$configs" | rofi -sep '|' -dmenu -i -only-match -p "$prompt")
+    if [ "$choice" == "CANCEL" ]; then
+        exit 0
+    elif [ "$choice" == "" ]; then
+        exit 0
+    else
+        template_conf="$choice"
+    fi
+else
+    template_conf="$1"
 fi
     
 if [ -f "$HOME/.config/x/exports.sh" ]; then
@@ -29,9 +40,8 @@ fi
 
 notify-send -u low 'MKDOT' 'Generating dotfile configuration...' &
 
-if mkdot "$1" "$template_source"; then
+if mkdot "$template_conf" "$template_source"; then
     notify-send -u normal 'MKDOT' 'Dotfiles successfully generated.' &
-    exit 0
 else
     notify-send -u critical 'MKDOT' 'ERROR: Dotfile generation unsuccessful.' &
     exit 1
