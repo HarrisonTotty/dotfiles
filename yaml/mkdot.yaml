@@ -98,6 +98,7 @@ templates:
     exec_file_manager: "pcmanfm"
     exec_launcher: "$HOME/.config/scripts/rofi-run.sh"
     exec_lock: "$HOME/.config/scripts/lock.sh"
+    exec_mkdot: "$HOME/.config/scripts/mkdot-apply.sh"
     exec_network: "$HOME/.config/scripts/rofi-network.sh"
     exec_passwords: "$HOME/.config/scripts/rofi-lpass.sh"
     exec_restart_wm: "$HOME/.config/scripts/i3-restart-wrapper.sh"

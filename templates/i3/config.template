@@ -57,6 +57,11 @@ client.background        $bg
 
 # ----------- Launching Programs ------------
 
+{% if this.exec_mkdot is defined %}
+# Dotfiles Generator
+bindsym $mod+period exec {{ this.exec_mkdot }}
+{% endif %}
+
 {% if this.exec_file_manager is defined %}
 # File Manager
 bindsym $mod+f exec {{ this.exec_file_manager }}
