@@ -106,6 +106,7 @@ templates:
     exec_ssh: "$HOME/.config/scripts/rofi-ssh.sh"
     exec_startup: "$HOME/.config/scripts/i3-startup.sh"
     exec_terminal: "urxvtc +sb -title Terminal -letsp 1"
+    exec_terminal_alt: "urxvtc +sb -title Terminal -fn 'xft:Iosevka SS02:size=12'"
     exec_window_switcher: "$HOME/.config/scripts/rofi-window.sh"
 
 # ---------------------------------------
