@@ -105,6 +105,11 @@ bindsym $mod+Shift+grave exec {{ this.exec_ssh }}
 bindsym $mod+e exec {{ this.exec_editor }}
 {% endif %}
 
+{% if this.exec_editor_alt is defined %}
+# Text Editor (Alternative)
+bindsym $mod+t exec {{ this.exec_editor_alt }}
+{% endif %}
+
 # Terminal
 bindsym $mod+Return exec {{ this.exec_terminal }}
 
@@ -113,9 +118,9 @@ bindsym $mod+Return exec {{ this.exec_terminal }}
 bindsym $mod+Shift+Return exec {{ this.exec_terminal_alt }}
 {% endif %}
 
-{% if this.window_switcher is defined %}
+{% if this.exec_window_switcher is defined %}
 # Window Switcher
-bindsym Mod1+Tab exec {{ this.window_switcher }}
+bindsym Mod1+Tab exec {{ this.exec_window_switcher }}
 {% endif %}
 
 # -------------------------------------------
@@ -241,7 +246,7 @@ font pango:Iosevka 16
 for_window [class=".*"] title_format "<span font='curie' font_size='xx-small'> [ %title ]</span>"
 
 # Dynamically change wallpapers
-bindsym $mod+Shift+w exec --no-startup-id "$HOME/.config/scripts/theme-random"
+bindsym $mod+Shift+w exec --no-startup-id "$HOME/.config/scripts/theme-next.sh"
 
 # Set the window border size (in pixels)
 for_window [class="^.*"] border normal 3

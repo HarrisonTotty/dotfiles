@@ -93,6 +93,7 @@ templates:
   - file: "i3/config"
     template: "i3/config.template"
     exec_editor: "emacs"
+    exec_editor_alt: "urxvtc +sb -title 'GNU Emacs' -letsp 1 -e 'emacs -nw'"
     exec_exit: "$HOME/.config/scripts/rofi-exit.sh"
     exec_file_manager: "pcmanfm"
     exec_launcher: "$HOME/.config/scripts/rofi-run.sh"
