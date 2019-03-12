@@ -261,7 +261,7 @@ font pango:Iosevka 16
 for_window [class=".*"] title_format "<span font='curie' font_size='xx-small'> [ %title ]</span>"
 
 # Dynamically change wallpapers
-bindsym $mod+Shift+w exec --no-startup-id "$HOME/.config/scripts/theme-next.sh"
+bindsym $mod+Shift+w exec --no-startup-id "$HOME/.config/scripts/rofi-wal.sh"
 
 # Set the window border size (in pixels)
 for_window [class="^.*"] border normal 3
