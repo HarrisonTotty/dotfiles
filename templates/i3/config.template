@@ -67,6 +67,16 @@ bindsym $mod+period exec {{ this.exec_mkdot }}
 bindsym $mod+f exec {{ this.exec_file_manager }}
 {% endif %}
 
+{% if this.exec_jira is defined %}
+# JIRA Browser
+bindsym $mod+j exec --no-startup-id {{ this.exec_jira }}
+{% endif %}
+
+{% if this.exec_jira_alt is defined %}
+# JIRA Browser (Alternative)
+bindsym $mod+Shift+j exec --no-startup-id {{ this.exec_jira_alt }}
+{% endif %}
+
 # Lock Screen
 bindsym $mod+Shift+l exec --no-startup-id {{ this.exec_lock }}
 
@@ -83,6 +93,11 @@ bindsym $mod+F12 exec --no-startup-id {{ this.exec_passwords }}
 {% if this.exec_launcher is defined %}
 # Program Launcher
 bindsym $mod+grave exec {{ this.exec_launcher }}
+{% endif %}
+
+{% if this.exec_python is defined %}
+# Python Interpreter
+bindsym $mod+p exec {{ this.exec_python }}
 {% endif %}
 
 {% if this.exec_screenshot_full is defined %}
@@ -175,7 +190,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # Focus the parent container
-bindsym $mod+p focus parent
+bindsym $mod+Shift+p focus parent
 
 # Kill the currently focused container
 bindsym $mod+q kill

@@ -32,6 +32,9 @@ files:
   # ----- Cursor Theme: Paper -----
   - dst: "misc/cursor.theme"
     link: "~/.icons/default/index.theme"
+
+  # ----- Python Interpreter: IPython -----
+  - dst: "ipy/config.py"
     
   # ----- X Window System -----
   - dst: "x/exports.sh"
@@ -87,7 +90,7 @@ templates:
   - file: "x/resources.conf"
     template: "x/resources.template"
     emacs_font: "Iosevka SS02:pixelsize=14:weight=normal"
-    urxvt_font: "xft:curie:size=12"
+    urxvt_font: "xft:Iosevka SS02:size=14"
     
   # ----- Window Manager: i3 -----
   - file: "i3/config"
@@ -96,11 +99,14 @@ templates:
     exec_editor_alt: "urxvtc +sb -title 'GNU Emacs' -letsp 1 -e 'emacs -nw'"
     exec_exit: "$HOME/.config/scripts/rofi-exit.sh"
     exec_file_manager: "pcmanfm"
+    exec_jira: "$HOME/.config/scripts/rofi-jira.sh -s open_current_user"
+    exec_jira_alt: "$HOME/.config/scripts/rofi-jira.sh"
     exec_launcher: "$HOME/.config/scripts/rofi-run.sh"
     exec_lock: "$HOME/.config/scripts/lock.sh"
     exec_mkdot: "$HOME/.config/scripts/mkdot-apply.sh"
     exec_network: "$HOME/.config/scripts/rofi-network.sh"
     exec_passwords: "$HOME/.config/scripts/rofi-lpass.sh"
+    exec_python: "$HOME/.config/scripts/ipython.sh"
     exec_restart_wm: "$HOME/.config/scripts/i3-restart-wrapper.sh"
     exec_screenshot_full: "$HOME/.config/scripts/scrot-full.sh"
     exec_screenshot_select: "$HOME/.config/scripts/scrot-select.sh"

@@ -1,5 +1,5 @@
 ! Primary X resource file.
-{{ require('this.emacs_font') }}
+{{ require('this.emacs_font', 'this.urxvt_font') }}
 
 ! ----- Xft settings -----
 Xft.autohint: 0
