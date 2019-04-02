@@ -1,0 +1,40 @@
+# Git Configuration File
+# ----------------------
+
+[alias]
+
+# List all of the available aliases.
+alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ / | grep -v 'alias ' | sort -u | cut -c 1-80
+
+# Delete any local branch that has been deleted from the source repository.
+prune = fetch --prune
+
+# Include untracked files a "git stash save"
+stash-all = stash save --include-untracked
+
+# Displays an ASCII git tree.
+tree = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset)'
+
+# Revert the previous commit.
+undo = reset --soft HEAD^
+
+
+[user]
+
+# The email address associated with this git configuration.
+email = {{ this.git_email | default('harrisongtotty@gmail.com') }}
+
+# The name associated with this git configuration.
+name  = {{ this.git_name | default('Harrison Totty') }}
+
+
+[status]
+
+# Show files under newly-added folders.
+showUntrackedFiles = all
+
+
+[transfer]
+
+# Perform extra integrity checks on remote transfers.
+fsckobjects = true

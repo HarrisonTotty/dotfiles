@@ -82,6 +82,12 @@ templates:
     font: "curie:pixelsize=12"
     window_manager: "i3"
 
+  # ----- Version Control System: git -----
+  - file: "git/config"
+    template: "git/config.template"
+    link: "~/.gitconfig"
+    git_email: "harrisont@wolfram.com"
+
   # ----- X Window System -----
   - file: "x/initrc.sh"
     template: "x/initrc.template"
