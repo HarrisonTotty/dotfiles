@@ -35,3 +35,6 @@ URxvt.keysym.C-_: resize-font:smaller
 
 ! Set font
 URxvt.font: {{ this.urxvt_font }}
+
+! Disable printing in URXVT
+URxvt.print-pipe: "cat > /dev/null"
