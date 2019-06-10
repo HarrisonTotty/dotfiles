@@ -1,5 +1,5 @@
 ; Primary polybar configuration file
-{{ require('this.font', 'this.window_manager') }}
+{% do require('this.font', 'this.window_manager') %}
 
 [global/wm]
 margin-top = 100

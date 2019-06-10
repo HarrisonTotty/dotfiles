@@ -1,5 +1,5 @@
 # Primary rofi configuration file.
-{{ require('this.font') }}
+{% do require('this.font') %}
 
 # Set the border width.
 rofi.bw: 3

@@ -1,5 +1,5 @@
 # Primary X configuration file.
-{{ require('this.window_manager') }}
+{% do require('this.window_manager') %}
 
 # ----- Environment Variables -----
 source "$HOME/.config/x/exports.sh"

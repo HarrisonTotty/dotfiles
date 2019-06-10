@@ -1,11 +1,8 @@
 #!/bin/bash
 # Primary configuration file for herbstluftwm
-{{
-  require('colors', 'this.exec_exit', 'this.exec_lock', 'this.exec_restart_wm', 'this.exec_terminal')
-}}
-{% if colors|length != 16 %}
-{{ raise('"colors" variable is not a list of 16 colors') }}
-{% endif %}
+{%
+  do require('this.exec_exit', 'this.exec_lock', 'this.exec_restart_wm', 'this.exec_terminal')
+%}
 
 # ---------------- Setup ----------------
 

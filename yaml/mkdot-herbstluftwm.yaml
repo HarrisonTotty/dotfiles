@@ -4,24 +4,6 @@
 
 # --- General Configuration Variables ---
 
-# The list of colors leveraged by this configuration.
-colors:
-  - "#1f1e20" #0
-  - "#3F3A87" #1
-  - "#1F6887" #2
-  - "#6A5894" #3
-  - "#AE6D92" #4
-  - "#319D8C" #5
-  - "#60A09A" #6
-  - "#c2c4c9" #7
-  - "#87898c" #8
-  - "#3F3A87" #9
-  - "#1F6887" #10
-  - "#6A5894" #11
-  - "#AE6D92" #12
-  - "#319D8C" #13
-  - "#60A09A" #14
-  - "#c2c4c9" #15
 
 # ---------------------------------------
 

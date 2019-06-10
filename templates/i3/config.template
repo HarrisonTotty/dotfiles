@@ -1,8 +1,8 @@
 # ~/.config/i3/config
 # Primary i3 configuration file
-{{
-  require('colors', 'this.exec_exit', 'this.exec_lock', 'this.exec_restart_wm', 'this.exec_terminal')
-}}
+{%
+  do require('this.exec_exit', 'this.exec_lock', 'this.exec_restart_wm', 'this.exec_terminal')
+%}
 
 
 # ---------------- Modifier -----------------
@@ -18,29 +18,26 @@ floating_modifier $mod
 
 
 # ----------------- Colors ------------------
-{% if colors|length != 16 %}
-{{ raise('"colors" variable is not a list of 16 colors') }}
-{% endif %}
 
 # Set color variables
-set_from_resource $fg i3wm.color7 {{ colors[7] }}
-set_from_resource $bg i3wm.color2 {{ colors[2] }}
-set_from_resource $c0 i3wm.color0 {{ colors[0] }}
-set_from_resource $c1 i3wm.color1 {{ colors[1] }}
-set_from_resource $c2 i3wm.color2 {{ colors[2] }}
-set_from_resource $c3 i3wm.color3 {{ colors[3] }}
-set_from_resource $c4 i3wm.color4 {{ colors[4] }}
-set_from_resource $c5 i3wm.color5 {{ colors[5] }}
-set_from_resource $c6 i3wm.color6 {{ colors[6] }}
-set_from_resource $c7 i3wm.color7 {{ colors[7] }}
-set_from_resource $c8 i3wm.color8 {{ colors[8] }}
-set_from_resource $c9 i3wm.color9 {{ colors[9] }}
-set_from_resource $c10 i3wm.color10 {{ colors[10] }}
-set_from_resource $c11 i3wm.color11 {{ colors[11] }}
-set_from_resource $c12 i3wm.color12 {{ colors[12] }}
-set_from_resource $c13 i3wm.color13 {{ colors[13] }}
-set_from_resource $c14 i3wm.color14 {{ colors[14] }}
-set_from_resource $c15 i3wm.color15 {{ colors[15] }}
+set_from_resource $fg i3wm.color7
+set_from_resource $bg i3wm.color2
+set_from_resource $c0 i3wm.color0
+set_from_resource $c1 i3wm.color1
+set_from_resource $c2 i3wm.color2
+set_from_resource $c3 i3wm.color3
+set_from_resource $c4 i3wm.color4
+set_from_resource $c5 i3wm.color5
+set_from_resource $c6 i3wm.color6
+set_from_resource $c7 i3wm.color7
+set_from_resource $c8 i3wm.color8
+set_from_resource $c9 i3wm.color9
+set_from_resource $c10 i3wm.color10
+set_from_resource $c11 i3wm.color11
+set_from_resource $c12 i3wm.color12
+set_from_resource $c13 i3wm.color13
+set_from_resource $c14 i3wm.color14
+set_from_resource $c15 i3wm.color15
 
 # Set window colors
 # CLASS                  BRDR  BCKGRD  TXT  NDCTR  CHLDBRDR

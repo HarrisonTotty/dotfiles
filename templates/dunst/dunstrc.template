@@ -1,5 +1,4 @@
 [global]
-{{ require('colors') }}
 
 # Disable markup
 markup = no
