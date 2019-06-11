@@ -1,3 +1,8 @@
+# Dunst Configuration File
+# ------------------------
+
+# ----- Global Settings -----
+
 [global]
 
 # Disable markup
@@ -100,13 +105,13 @@ icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16
 frame_width = 0
 
 
+# ----- Urgency Settings -----
+
 [urgency_low]
 timeout = 1
 
-
 [urgency_normal]
 timeout = 3
-
 
 [urgency_critical]
 timeout = 10

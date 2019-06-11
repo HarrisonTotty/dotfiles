@@ -1,4 +1,6 @@
-# Primary rofi configuration file.
+# Rofi Configuration File
+# -----------------------
+
 {% do require('this.font') %}
 
 # Set the border width.
