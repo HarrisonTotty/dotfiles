@@ -1,5 +1,9 @@
-; Primary polybar configuration file
+; Polybar Configuration File
+; --------------------------
+
 {% do require('this.font', 'this.window_manager') %}
+
+; -------- General Configuration -------
 
 [global/wm]
 margin-top = 100
@@ -9,6 +13,11 @@ margin-bottom = 100
 fg = ${xrdb:color7}
 bg = ${xrdb:color3}
 modfg = ${xrdb:color1}
+
+; --------------------------------------
+
+
+; --------- Bars Configuration ---------
 
 [bar/bar-primary]
 monitor = eDP1
@@ -157,6 +166,11 @@ font-1 = {{ this.font }}
 font-2 = {{ this.font }}
 font-3 = {{ this.font }}
 
+; --------------------------------------
+
+
+; -------- Modules Configuration -------
+
 [module/brightness]
 type = internal/xbacklight
 output = eDP1
@@ -263,3 +277,5 @@ label-unfocused = "%{O2}  %index%   "
 label-visible = "%{O2}[ %index% ] "
 label-urgent = "%{O2}  %index%!  "
 label-mode = %mode%
+
+; --------------------------------------
