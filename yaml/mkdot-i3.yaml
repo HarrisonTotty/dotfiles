@@ -91,7 +91,7 @@ templates:
     exec_jira_alt: "$HOME/.config/scripts/rofi-jira.sh"
     exec_launcher: "$HOME/.config/scripts/rofi-run.sh"
     exec_lock: "$HOME/.config/scripts/lock.sh"
-    exec_mkdot: "$HOME/.config/scripts/mkdot-apply.sh mkdot-i3.yaml"
+    exec_mkdot: "$HOME/.config/scripts/mkdot-apply.sh $HOME/projects/dotfiles/master/yaml/mkdot-i3.yaml"
     exec_network: "$HOME/.config/scripts/rofi-network.sh"
     exec_passwords: "$HOME/.config/scripts/rofi-lpass.sh"
     exec_python: "$HOME/.config/scripts/ipython.sh"
