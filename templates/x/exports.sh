@@ -1,5 +1,5 @@
 # Contains additional (non-templated) exported environment variables.
-export DUNST_FONT='pango:curie 12'
+export DUNST_FONT='Iosevka SS02 10'
 export DUNST_SIZE='300x30-40+40'
 export EDITOR='emacs'
 export LANG='en_US.UTF-8'
@@ -18,4 +18,4 @@ export MKDOT_RUN="chmod +x $HOME/.config/scripts/*.sh"
 export MKDOT_VAR_END_STR='}}'
 export MKDOT_VAR_START_STR='{{'
 export MKDOT_WORKING_DIR='/tmp/mkdot'
-export UI_FONT='curie 12'
+export UI_FONT='Poppins 12'

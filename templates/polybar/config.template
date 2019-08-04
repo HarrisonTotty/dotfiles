@@ -14,6 +14,9 @@ fg = ${xrdb:color7}
 bg = ${xrdb:color3}
 modfg = ${xrdb:color1}
 
+[sizes]
+height = 20
+
 ; --------------------------------------
 
 
@@ -26,7 +29,7 @@ fixed-center = true
 border-size = 0
 border-color = ${colors.bg}
 width = 100%
-height = 19
+height = ${sizes.height}
 override-redirect = false
 offset-x = 0%
 offset-y = 0%
@@ -63,7 +66,7 @@ fixed-center = true
 border-size = 0
 border-color = ${colors.bg}
 width = 100%
-height = 20
+height = ${sizes.height}
 override-redirect = false
 offset-x = 0%
 offset-y = 0%
@@ -100,7 +103,7 @@ fixed-center = true
 border-size = 0
 border-color = ${colors.bg}
 width = 100%
-height = 20
+height = ${sizes.height}
 override-redirect = false
 offset-x = 0%
 offset-y = 0%
@@ -136,7 +139,7 @@ fixed-center = true
 border-size = 0
 border-color = ${colors.bg}
 width = 100%
-height = 20
+height = ${sizes.height}
 override-redirect = false
 offset-x = 0%
 offset-y = 0%

@@ -61,7 +61,7 @@ templates:
   # ----- Status Bar: polybar -----
   - file: "polybar/config"
     template: "polybar/config.template"
-    font: "curie:pixelsize=12"
+    font: "Iosevka SS02:size=10;3"
     window_manager: "i3"
 
   # ----- Version Control System: git -----
@@ -103,5 +103,6 @@ templates:
     exec_terminal: "urxvtc +sb -title Terminal -letsp 1"
     exec_terminal_alt: "urxvtc +sb -title Terminal -fn 'xft:Iosevka SS02:size=14'"
     exec_window_switcher: "$HOME/.config/scripts/rofi-window.sh"
+    font: "Iosevka SS02"
 
 # ---------------------------------------

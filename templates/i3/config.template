@@ -1,7 +1,7 @@
 # ~/.config/i3/config
 # Primary i3 configuration file
 {%
-  do require('this.exec_exit', 'this.exec_lock', 'this.exec_restart_wm', 'this.exec_terminal')
+  do require('this.exec_exit', 'this.exec_lock', 'this.exec_restart_wm', 'this.exec_terminal', 'this.font')
 %}
 
 
@@ -252,10 +252,10 @@ bindsym $mod+Shift+0 move container to workspace 10
 # --------------- Appearance ----------------
 
 # Set a dummy font to make the title bars taller.
-font pango:Iosevka 16
+font pango:Iosevka SS02 18
 
 # This is what *actually* sets the font.
-for_window [class=".*"] title_format "<span font='curie' font_size='xx-small'> [ %title ]</span>"
+for_window [class=".*"] title_format "<span font='{{ this.font }}' font_size='x-small'> [ %title ]</span>"
 
 # Dynamically change wallpapers
 bindsym $mod+Shift+w exec --no-startup-id "$HOME/.config/scripts/rofi-wal.sh"
