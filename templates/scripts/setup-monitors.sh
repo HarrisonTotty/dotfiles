@@ -3,23 +3,23 @@
 
 connected=$(xrandr -q | grep ' connected')
 
-if echo "$connected" | grep -q 'eDP1'; then
-    if echo "$connected" | grep -q 'HDMI1' && echo "$connected" | grep -q 'DP2'; then
+if echo "$connected" | grep -q 'eDP'; then
+    if echo "$connected" | grep -q 'HDMI-1' && echo "$connected" | grep -q 'DP-2'; then
         xrandr \
             --output VIRTUAL1 --off \
-            --output eDP1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal \
-            --output DP1 --off \
-            --output HDMI2 --off \
-            --output HDMI1 --mode 1920x1080 --pos 3840x0 --rotate normal \
-            --output DP2 --mode 1920x1080 --pos 0x0 --rotate normal
+            --output eDP-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal \
+            --output DP-1 --off \
+            --output HDMI-2 --off \
+            --output HDMI-1 --mode 1920x1080 --pos 3840x0 --rotate normal \
+            --output DP-2 --mode 1920x1080 --pos 0x0 --rotate normal
     else
         xrandr \
             --output VIRTUAL1 --off \
-            --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
-            --output DP1 --off \
-            --output HDMI2 --off \
-            --output HDMI1 --off \
-            --output DP2 --off
+            --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
+            --output DP-1 --off \
+            --output HDMI-2 --off \
+            --output HDMI-1 --off \
+            --output DP-2 --off
     fi
 else
     echo "Primary display is not connected..."

@@ -5,6 +5,9 @@
 
 # --- General Configuration Variables ---
 
+primary_monitor: 'eDP-1'
+left_monitor: 'DP-2'
+right_monitor: 'HDMI-1'
 
 # ---------------------------------------
 

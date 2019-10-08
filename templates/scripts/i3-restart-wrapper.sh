@@ -8,5 +8,5 @@ fi
 rofi -e "[!] The window manager will now restart." -width -44
 killall -q polybar >/dev/null 2>&1
 i3-msg reload >/dev/null 2>&1
-$HOME/.config/polybar/launch.sh
+$HOME/.config/scripts/polybar-start.sh
 notify-send -u low "WM" "Successfully restarted window manager..." &

@@ -23,7 +23,7 @@ height = 20
 ; --------- Bars Configuration ---------
 
 [bar/bar-primary]
-monitor = eDP1
+monitor = {{ primary_monitor }}
 bottom = false
 fixed-center = true
 border-size = 0
@@ -60,7 +60,7 @@ font-2 = {{ this.font }}
 font-3 = {{ this.font }}
 
 [bar/bar-left]
-monitor = DP2
+monitor = {{ left_monitor }}
 bottom = false
 fixed-center = true
 border-size = 0
@@ -97,7 +97,7 @@ font-2 = {{ this.font }}
 font-3 = {{ this.font }}
 
 [bar/bar-single-monitor]
-monitor = HDMI1
+monitor = {{ right_monitor }}
 bottom = false
 fixed-center = true
 border-size = 0
@@ -133,7 +133,7 @@ font-2 = {{ this.font }}
 font-3 = {{ this.font }}
 
 [bar/bar-right]
-monitor = HDMI1
+monitor = {{ right_monitor }}
 bottom = false
 fixed-center = true
 border-size = 0
@@ -176,7 +176,7 @@ font-3 = {{ this.font }}
 
 [module/brightness]
 type = internal/xbacklight
-output = eDP1
+output = {{ primary_monitor }}
 enable-scroll = true
 label = [ BKLT %percentage%% ]
 

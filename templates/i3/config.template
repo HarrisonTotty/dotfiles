@@ -205,9 +205,9 @@ bindsym $mod+Shift+Escape exec --no-startup-id {{ this.exec_exit }}
 # --------------- Workspaces ----------------
 
 # Connected Monitors
-set $MonitorCenter {{ primary_display.name }}
-set $MonitorLeft DP2
-set $MonitorRight HDMI1
+set $MonitorCenter {{ primary_monitor }}
+set $MonitorLeft {{ left_monitor }}
+set $MonitorRight {{ right_monitor }}
 
 # Define workspace output monitors
 workspace 1 output $MonitorCenter
