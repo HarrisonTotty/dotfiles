@@ -2,14 +2,14 @@
 
 ## Summary
 
-The following repo contains the dotfile templates for my current GNU/Linux setup. These templates are translated into their final form via [mkdot](https://github.com/HarrisonTotty/mkdot).
+The following repo contains the dotfile templates for my current GNU/Linux setup. These templates are translated into their final form via [tmpl](https://github.com/HarrisonTotty/tmpl).
 
 ## Breakdown
 
 Bar: [polybar](https://github.com/jaagr/polybar)<br/>
 Cursor Theme: [Paper](https://github.com/snwh/paper-icon-theme)<br/>
 Dialogs: [rofi](https://github.com/DaveDavenport/rofi)<br/>
-Editor: [GNU Emacs](https://www.gnu.org/software/emacs) (configuration [here](https://github.com/HarrisonTotty/.emacs.d))<br/>
+Editor: [GNU Emacs](https://www.gnu.org/software/emacs)<br/>
 Font: [Iosevka](https://github.com/be5invis/Iosevka)<br/>
 GTK Theme: "wal" via [oomox](https://github.com/actionless/oomox) (see pywal documentation on [system theme customization](https://github.com/dylanaraps/pywal/wiki/Customization#system-themes))<br/>
 Icon Theme: [Paper](https://github.com/snwh/paper-icon-theme)<br/>
