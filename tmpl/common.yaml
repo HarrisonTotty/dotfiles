@@ -1,0 +1,48 @@
+# Common Template Configuration File
+# ----------------------------------
+
+aur_packages:
+  - 'oomox'
+  - 'paper-icon-theme-git'
+  - 'polybar-git'
+  - 'ttf-iosevka-ss02'
+  - 'urxvt-resize-font-git'
+
+files:
+  # ----- Shell Scripts -----
+  - dst: 'scripts/*.sh'
+    chmod: '+x'
+
+packages:
+  - 'arandr'
+  - 'autoconf'
+  - 'base'
+  - 'dialog'
+  - 'dunst'
+  - 'emacs'
+  - 'fakeroot'
+  - 'feh'
+  - 'gcc'
+  - 'git'
+  - 'i3-gaps'
+  - 'i3lock'
+  - 'intel-ucode'
+  - 'lxappearance'
+  - 'make'
+  - 'neofetch'
+  - 'openssh'
+  - 'patch'
+  - 'python-pywal'
+  - 'python-setuptools'
+  - 'rofi'
+  - 'rxvt-unicode'
+  - 'scrot'
+  - 'sudo'
+  - 'w3m'
+  - 'wpa_supplicant'
+  - 'xclip'
+  - 'xorg-server'
+  - 'xorg-xinit'
+  - 'xorg-xlsfonts'
+  - 'xorg-xset'
+  - 'zsh'
