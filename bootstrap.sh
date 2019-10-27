@@ -19,7 +19,7 @@ fi
 
 wget "$tmpl_url" -O /usr/local/bin/tmpl && chmod +x /usr/local/bin/tmpl
 
-pacman -S python-jinja python-yaml --noconfirm
+pacman -Sy python-jinja python-yaml --noconfirm
 
 if [ -d "$HOME/dotfiles" ]; then
     rm -rf "$HOME/dotfiles"
