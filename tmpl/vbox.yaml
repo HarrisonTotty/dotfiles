@@ -6,10 +6,11 @@ include:
 
 installer:
   drive: '/dev/sda'
+  disable_uefi: true
+  filesystems:
+    - name: 'EFI'
   partitions:
     - name: 'EFI'
       size: '1G'
       typecode: 'ef00' # EFI System
     - name: 'system'
-  filesystems:
-    - name: 'EFI'

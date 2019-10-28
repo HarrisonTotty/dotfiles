@@ -60,6 +60,7 @@ EC=2
 
 print_sec "Performing initial setup..."
 
+{% if not installer.disable_uefi is defined or not installer.disable_uefi %}
 print_subsec "Verifying UEFI mode..."
 if [ ! -d "$efivars_dir" ]; then
     print_nosubsec_err "Unable to verify UEFI mode - \"$efivars_dir\" does not exist."
@@ -68,6 +69,7 @@ elif [ -z "$(ls -A $efivars_dir)" ]; then
     print_nosubsec_err "Unable to verify UEFI mode - \"$efivars_dir\" is empty."
     exit $EC
 fi
+{% endif %}
 
 print_subsec "Verifying internet connection..."
 if ! host "archlinux.org" >> install-arch.log 2>&1; then
