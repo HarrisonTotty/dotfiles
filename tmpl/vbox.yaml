@@ -1,0 +1,15 @@
+# Virtual Box Configuration File
+# ------------------------------
+
+include:
+  - 'common.yaml'
+
+installer:
+  drive: '/dev/sda'
+  partitions:
+    - name: 'EFI'
+      size: '1G'
+      typecode: 'ef00' # EFI System
+    - name: 'system'
+  filesystems:
+    - name: 'EFI'
