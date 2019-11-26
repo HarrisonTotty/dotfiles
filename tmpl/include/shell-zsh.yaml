@@ -1,0 +1,10 @@
+# Shell : zsh
+# -----------
+
+shell: 'zsh'
+
+files:
+  - dst: 'zsh/*.zsh'
+  - dst: 'zsh/zshrc.zsh'
+    src: 'zsh/zshrc.template'
+    symlink: '~/.zshrc'

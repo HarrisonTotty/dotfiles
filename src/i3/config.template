@@ -1,0 +1,228 @@
+# i3 Window Manager Configuration
+# -------------------------------
+{%
+  do require(
+    'font.name',
+    'monitors.primary',
+    'monitors.left',
+    'monitors.right',
+    'this.key_bindings'
+  )
+%}
+{% set scripts_dir = '$HOME/.config/scripts' %}
+
+# ---------------- Modifier -----------------
+
+# Set modifier to the "Windows key".
+set $mod {{ this.modifier|default('Mod4', true) }}
+
+# Set the floating modifier.
+floating_modifier $mod
+
+# -------------------------------------------
+
+
+
+# ----------------- Colors ------------------
+
+# Set some color variables for use below.
+set_from_resource $fg i3wm.color7
+set_from_resource $bg i3wm.color2
+set_from_resource $c0 i3wm.color0
+set_from_resource $c1 i3wm.color1
+set_from_resource $c2 i3wm.color2
+set_from_resource $c3 i3wm.color3
+set_from_resource $c4 i3wm.color4
+set_from_resource $c5 i3wm.color5
+set_from_resource $c6 i3wm.color6
+set_from_resource $c7 i3wm.color7
+set_from_resource $c8 i3wm.color8
+set_from_resource $c9 i3wm.color9
+set_from_resource $c10 i3wm.color10
+set_from_resource $c11 i3wm.color11
+set_from_resource $c12 i3wm.color12
+set_from_resource $c13 i3wm.color13
+set_from_resource $c14 i3wm.color14
+set_from_resource $c15 i3wm.color15
+
+# Sets the colors of various window components based on the variables above.
+# CLASS                  BRDR  BCKGRD  TXT  NDCTR  CHLDBRDR
+client.focused           $c3   $c3     $fg  $c3    $c3
+client.focused_inactive  $bg   $bg     $fg  $bg    $bg
+client.unfocused         $bg   $bg     $fg  $bg    $bg
+client.urgent            $bg   $bg     $fg  $bg    $bg
+client.placeholder       $bg   $bg     $fg  $bg    $bg
+client.background        $bg
+
+# -------------------------------------------
+
+
+
+# ---------- Program Key Bindings -----------
+
+# Show program launcher.
+bindsym $mod+grave exec --no-startup-id "{{ scripts_dir }}/run.sh"
+
+# Start an SSH session.
+bindsym $mod+Shift+grave exec --no-startup-id "{{ scripts_dir }}/ssh.sh"
+
+{% for kb in this.key_bindings %}
+{% if not kb.keys is defined %}
+{% do raise('key binding does not specify keys to bind') %}
+{% endif %}
+{% if not kb.action is defined %}
+{% do raise('key binding does not specify an action') %}
+{% endif %}
+
+{% if kb.desc is defined %}
+# {{ kb.desc }}
+{% endif %}
+bindsym {{ kb.keys }} {{ kb.action }}
+{% endfor %}
+
+# -------------------------------------------
+
+
+
+# ----------------- Workflow ----------------
+
+# Float all windows by default.
+for_window [class="^.*"] floating enable
+
+# Don't focus windows on mouse hover.
+focus_follows_mouse no
+
+# Change which window is currently focused.
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move the currently focused window.
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Switch the current window split mode between "horizontal" and "vertical".
+bindsym $mod+Shift+h exec --no-startup-id "{{ scripts_dir }}/split-horizontal.sh"
+bindsym $mod+Shift+v exec --no-startup-id "{{ scripts_dir }}/split-vertical.sh"
+
+# Toggle fullscreen mode for the currently focused window.
+bindsym $mod+Shift+f fullscreen toggle
+
+# Center the currently focused window.
+bindsym $mod+Shift+c move position center
+
+# Switch the current container layout between "stacking", "tabbed", and "split".
+bindsym $mod+Shift+s exec --no-startup-id "{{ scripts_dir }}/switch-stacking.sh"
+bindsym $mod+Shift+t exec --no-startup-id "{{ scripts_dir }}/switch-tabbed.sh"
+bindsym $mod+Shift+e exec --no-startup-id "{{ scripts_dir }}/switch-split.sh"
+
+# Toggle between tiling and floating mode for the currently focused window.
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling and floating windows.
+bindsym $mod+space focus mode_toggle
+
+# Change focus to the parent container of the currently focused window.
+bindsym $mod+Shift+p focus parent
+
+# Kill (quit) the currently focused window.
+bindsym $mod+q kill
+
+# Restart the window manager.
+bindsym $mod+Shift+r exec --no-startup-id "{{ scripts_dir }}/restart.sh"
+
+# Show shutdown/restart/exit dialog.
+bindsym $mod+Shift+Escape exec --no-startup-id "{{ scripts_dir }}/exit.sh"
+
+# Lock the screen.
+bindsym $mod+Shift+l exec --no-startup-id "{{ scripts_dir }}/lock.sh"
+
+# Switch between windows.
+bindsym Mod1+Tab exec --no-startup-id "{{ scripts_dir }}/switch-windows.sh"
+
+
+# -------------------------------------------
+
+
+
+# --------------- Workspaces ----------------
+
+# Define the names of potentially connected monitors.
+set $MonitorCenter {{ monitors.primary }}
+set $MonitorLeft {{ monitors.left }}
+set $MonitorRight {{ monitors.right }}
+
+# Define the default output monitors for each workspace.
+workspace 1 output $MonitorCenter
+workspace 2 output $MonitorCenter
+workspace 3 output $MonitorCenter
+workspace 4 output $MonitorCenter
+workspace 5 output $MonitorLeft
+workspace 6 output $MonitorLeft
+workspace 7 output $MonitorLeft
+workspace 8 output $MonitorRight
+workspace 9 output $MonitorRight
+workspace 10 output $MonitorRight
+
+# Switch between workspaces.
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# Move the currently focused container between workspaces.
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# -------------------------------------------
+
+
+
+# --------------- Appearance ----------------
+
+# Set a dummy font to make the title bars taller.
+font pango:{{ font.name }} 18
+
+# This is what _actually_ sets the font.
+for_window [class=".*"] title_format "<span font='{{ font.name }}' font_size='x-small'> [ %title ]</span>"
+
+# Dynamically change wallpapers.
+bindsym $mod+Shift+w exec --no-startup-id "{{ scripts_dir }}/switch-wallpaper.sh"
+
+# Set the window border size (in pixels).
+for_window [class="^.*"] border normal 3
+
+# Enable smart borders.
+smart_borders on
+
+# Set the inner and outer gap sizes (in pixels).
+gaps inner 0
+gaps outer 0
+
+# -------------------------------------------
+
+
+
+# ------------- Initialization --------------
+
+# Run the following after startup.
+exec --no-startup-id "{{ scripts_dir }}/startup.sh"
+
+# -------------------------------------------

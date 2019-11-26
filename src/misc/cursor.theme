@@ -1,0 +1,6 @@
+# This sets the default cursor theme to Paper
+
+[Icon Theme]
+Name=Default
+Comment=Default Cursor Theme
+Inherits=Paper

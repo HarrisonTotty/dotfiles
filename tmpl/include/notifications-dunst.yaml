@@ -1,0 +1,8 @@
+# Notification Daemon : Dunst
+# ---------------------------
+
+notification_daemon: 'dunst'
+
+files:
+  - dst: 'dunst/dunstrc'
+    src: 'dunst/dunstrc.template'

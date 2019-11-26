@@ -2,4 +2,14 @@
 # ----------------------------------
 
 include:
-  - 'common.yaml'
+  - 'include/common.yaml'
+  - 'include/bar-polybar.yaml'
+  - 'include/font-iosevka.yaml'
+  - 'include/notifications-dunst.yaml'
+  - 'include/shell-zsh.yaml'
+  - 'include/wm-i3.yaml'
+
+monitors:
+  primary: 'eDP-1'
+  left: 'DP-2'
+  right: 'HDMI-1'

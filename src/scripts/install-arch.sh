@@ -108,7 +108,7 @@ fi
 
 
 
-# ----- Filesystem Setup -----
+# ----- Disk Partitioning ----
 
 EC=3
 
@@ -130,20 +130,25 @@ if ! sgdisk --clear "{{ installer.drive }}" >> install-arch.log 2>&1; then
     exit $EC
 fi
 
-{% for partition in installer.partitions %}
-{% if not partition.name is defined %}
-{% do raise('One or more partitions do not specify a name') %}
+{% for p in installer.partitions %}
+{% if not p.name is defined %}
+{% do raise('one or more partitions does not specify a name') %}
 {% endif %}
-print_subsec "Creating \"{{ partition.name }}\" partition..."
-if ! sgdisk --new={{ loop.index }}:0:+{{ partition.size|default('0', true) }} "{{ installer.drive }}" >> install-arch.log 2>&1; then
+print_subsec "Creating \"{{ p.name }}\" partition..."
+if ! sgdisk --new={{ loop.index }}:0:+{{ p.size|default('0', true) }} "{{ installer.drive }}" >> install-arch.log 2>&1; then
     print_nosubsec_err "Unable to create new partition - {{ n0ec }}"
     exit $EC
 fi
-if ! sgdisk --typecode={{ loop.index }}:{{ partition.typecode|default('8300', true) }} "{{ installer.drive }}" >> install-arch.log 2>&1; then
+if ! sgdisk --typecode={{ loop.index }}:{{ p.typecode|default('8300', true) }} "{{ installer.drive }}" >> install-arch.log 2>&1; then
     print_nosubsec_err "Unable to set partition type - {{ n0ec }}"
     exit $EC
 fi
-if ! sgdisk --change-name={{ loop.index }}:{{ partition.name }} "{{ installer.drive }}" >> install-arch.log 2>&1; then
+{% if p.encrypted is defined and p.encrypted %}
+{% set pname = p.name + '-encrypted' %}
+{% else %}
+{% set pname = p.name %}
+{% endif %}
+if ! sgdisk --change-name={{ loop.index }}:{{ pname }} "{{ installer.drive }}" >> install-arch.log 2>&1; then
     print_nosubsec_err "Unable to set partition name - {{ n0ec }}"
     exit $EC
 fi
@@ -151,3 +156,25 @@ fi
 
 # ----------------------------
 
+
+
+# ----- Filesystem Setup -----
+
+EC=4
+
+print_sec "Creating filesystems..."
+
+{% for fs in installer.filesystems %}
+{% if not fs.name is defined %}
+{% do raise('one or more filesystems does not specify a name') %}
+{% endif %}
+{% if not fs.kind is defined %}
+{% do raise('one or more filesystems does not specify a filesystem kind') %}
+{% endif %}
+print_subsec "Creating \"{{ fs.name }}\" filesystem..."
+{% if fs.kind == 'fat32' %}
+mkfs.vfat -F 32 -n "{{ fs.name }}" "/dev/disk/by-partlabel/{{ fs.partition }}"
+{% endif %}
+{% endfor %}
+
+# ----------------------------

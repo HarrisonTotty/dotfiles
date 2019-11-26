@@ -1,0 +1,80 @@
+# Common Template Configuration File
+# ----------------------------------
+
+
+files:
+  # ----- Application Launcher : rofi -----
+  - dst: 'rofi/config'
+    src: 'rofi/config.template'
+  # ----- AUR Helper : trizen -----
+  - dst: 'trizen/trizen.conf'
+    src: 'trizen/trizen.template'
+  # ----- Cursor Theme : Paper -----
+  - dst: 'misc/cursor.theme'
+    symlink: '~/.icons/default/index.theme'
+  # ----- Python Interpreter : IPython -----
+  - dst: 'ipy/config.py'
+    translate: false
+  # ----- Version Control System : git -----
+  - dst: 'git/config'
+    src: 'git/config.template'
+    symlink: '~/.gitconfig'
+  # ----- X Window System -----
+  - dst: 'x/exports.sh'
+  - dst: 'x/initrc.sh'
+    src: 'x/initrc.template'
+    symlink: '~/.xinitrc'
+  - dst: 'x/resources.conf'
+    src: 'x/resources.template'
+  # ----- XDG Directory Settings -----
+  - dst: 'user-dirs.dirs'
+    src: 'misc/user-dirs.dirs'
+  # ----- Shell Scripts -----
+  - dst: 'scripts/*.sh'
+    chmod: '+x'
+  # ----- Theme Generation : pywal -----
+  - dst: 'wal/templates/*'
+    translate: false
+  - dst: 'wal/wallpapers/*'
+    translate: false
+
+installer:
+  aur_packages:
+    - 'oomox'
+    - 'paper-icon-theme-git'
+    - 'polybar-git'
+    - 'ttf-iosevka-ss02'
+    - 'urxvt-resize-font-git'
+  packages:
+    - 'arandr'
+    - 'autoconf'
+    - 'base'
+    - 'dialog'
+    - 'dunst'
+    - 'emacs'
+    - 'fakeroot'
+    - 'feh'
+    - 'gcc'
+    - 'git'
+    - 'i3-gaps'
+    - 'i3lock'
+    - 'intel-ucode'
+    - 'lxappearance'
+    - 'make'
+    - 'neofetch'
+    - 'openssh'
+    - 'patch'
+    - 'python-pywal'
+    - 'python-setuptools'
+    - 'rofi'
+    - 'rxvt-unicode'
+    - 'scrot'
+    - 'sudo'
+    - 'w3m'
+    - 'wpa_supplicant'
+    - 'xclip'
+    - 'xorg-server'
+    - 'xorg-xinit'
+    - 'xorg-xlsfonts'
+    - 'xorg-xset'
+    - 'zsh'

@@ -1,0 +1,8 @@
+# Status Bar : Polybar
+# --------------------
+
+status_bar: 'polybar'
+
+files:
+  - dst: 'polybar/config'
+    src: 'polybar/config.template'

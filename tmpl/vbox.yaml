@@ -2,15 +2,27 @@
 # ------------------------------
 
 include:
-  - 'common.yaml'
+  - 'include/common.yaml'
+  - 'include/bar-polybar.yaml'
+  - 'include/font-iosevka.yaml'
+  - 'include/notifications-dunst.yaml'
+  - 'include/shell-zsh.yaml'
+  - 'include/wm-i3.yaml'
 
 installer:
   drive: '/dev/sda'
   disable_uefi: true
   filesystems:
     - name: 'EFI'
+      kind: 'fat32'
+      partition: 'EFI'
   partitions:
     - name: 'EFI'
       size: '1G'
       typecode: 'ef00' # EFI System
     - name: 'system'
+
+monitors:
+  primary: 'eDP-1'
+  left: ''
+  right: ''
