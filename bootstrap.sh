@@ -38,6 +38,8 @@ wget -q "$tmpl_url" -O /usr/local/bin/tmpl && chmod +x /usr/local/bin/tmpl
 
 pacman -Sy python-jinja python-yaml unzip --noconfirm
 
+paccache -rk0
+
 if [ -d "$HOME/dotfiles" ]; then
     rm -rf "$HOME/dotfiles"
 fi

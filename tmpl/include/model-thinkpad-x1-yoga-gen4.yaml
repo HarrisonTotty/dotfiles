@@ -1,0 +1,10 @@
+# ThinkPad X1 Yoga (Generation 4)
+# -------------------------------
+
+monitors:
+  primary: 'eDP-1'
+  left: 'DP-2'
+  right: 'HDMI-1'
+
+installer:
+  drive: '/dev/nvme0n1'

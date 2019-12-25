@@ -135,7 +135,12 @@ fi
 {% do raise('one or more partitions does not specify a name') %}
 {% endif %}
 print_subsec "Creating \"{{ p.name }}\" partition..."
-if ! sgdisk --new={{ loop.index }}:0:+{{ p.size|default('0', true) }} "{{ installer.drive }}" >> install-arch.log 2>&1; then
+{% if p.size is defined and p.size != '0' %}
+{% set psize = '+' + p.size %}
+{% else %}
+{% set psize = '0' %}
+{% endif %}
+if ! sgdisk --new={{ loop.index }}:0:{{ psize }} "{{ installer.drive }}" >> install-arch.log 2>&1; then
     print_nosubsec_err "Unable to create new partition - {{ n0ec }}"
     exit $EC
 fi
@@ -144,6 +149,9 @@ if ! sgdisk --typecode={{ loop.index }}:{{ p.typecode|default('8300', true) }} "
     exit $EC
 fi
 {% if p.encrypted is defined and p.encrypted %}
+{% if not system_encrypted is defined %}
+{% set system_encrypted = True %}
+{% endif %}
 {% set pname = p.name + '-encrypted' %}
 {% else %}
 {% set pname = p.name %}
@@ -158,9 +166,49 @@ fi
 
 
 
-# ----- Filesystem Setup -----
+# ----- Encryption Setup -----
 
 EC=4
+
+cryptcmd='cryptsetup luksFormat --align-payload=8192'
+cryptswapcmd='cryptsetup open --type plain --key-file /dev/urandom'
+
+{% if system_encrypted is defined and system_encrypted %}
+
+print_sec "Encrypting partitions..."
+
+{% for p in installer.partitions %}
+{% if p.encrypted is defined and p.encrypted %}
+print_subsec "Encrypting \"{{ p.name }}\" partition..."
+{% if p.typecode is defined and p.typecode == '8200' %}
+if ! $cryptswapcmd "/dev/disk/by-partlabel/{{ p.name + '-encrypted' }}" "{{ p.name }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to encrypt swap partition - {{ n0ec }}"
+    exit $EC
+fi
+{% else %}
+cipher="{{ p.cipher|default('aes-xts-plain64', true) }}"
+keysize="{{ p.keysize|default('256', true) }}"
+if ! $cryptcmd --cipher $cipher --key-size $keysize "/dev/disk/by-partlabel/{{ p.name + '-encrypted' }}"; then
+    print_nosubsec_err "Unable to encrypt partition - {{ n0ec }}"
+    exit $EC
+fi
+if ! cryptsetup open "/dev/disk/by-partlabel/{{ p.name + '-encrypted' }}" "{{ p.name }}"; then
+    print_nosubsec_err "Unable to unseal encrypted partition - {{ n0ec }}"
+    exit $EC
+fi
+{% endif %}
+{% endif %}
+{% endfor %}
+
+{% endif %}
+
+# ----------------------------
+
+
+
+# ----- Filesystem Setup -----
+
+EC=5
 
 print_sec "Creating filesystems..."
 
