@@ -120,6 +120,12 @@ if [ -d '/mnt' ]; then
     rm -rf /mnt >> install-arch.log 2>&1
 fi
 
+print_subsec "Probing existing disk partitions..."
+if ! partprobe "{{ installer.drive }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to probe existing disk partitions - {{ n0ec }}"
+    exit $EC
+fi
+
 print_subsec "Cleaning partition table..."
 if ! sgdisk --zap-all "{{ installer.drive }}" >> install-arch.log 2>&1; then
     print_nosubsec_err "Unable to zap partition table - {{ n0ec }}"
