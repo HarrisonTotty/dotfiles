@@ -226,17 +226,19 @@ print_sec "Creating & mounting filesystems..."
 {% endif %}
 {% for p in installer.paritions %}
 {% if p.name == fs.partition %}
-{% set fs_partition = p %}
+{% if p.encrypted is defined %]
+{% set fs_encrypted = p.encrypted %}
+{% else %}
+{% set fs_encrypted = False %}
 {% endif %}
 {% endfor %}
-{% if not fs_partition is defined or fs_partition.name != fs.partition %}
-{% do print(fs_partition) %}
+{% if not fs_encrypted is defined %}
 {% do raise(fs.name + ' filesystem specifies a reference partition that does not exist') %}
 {% endif %}
 
 {# ----- Create the filesystem ----- #}
 print_subsec "[{{ fs.kind }}] Creating \"{{ fs.name }}\" filesystem..."
-{% if fs_partition.encrypted is defined and fs_partition.encrypted %}
+{% if fs_encrypted %}
 {% set partition_path = '/dev/mapper/' + fs.partition %}
 {% else %}
 {% set partition_path = '/dev/disk/by-partlabel/' + fs.partition %}
