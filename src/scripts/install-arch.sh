@@ -159,6 +159,12 @@ if ! sgdisk --change-name={{ loop.index }}:{{ pname }} "{{ installer.drive }}" >
 fi
 {% endfor %}
 
+print_subsec "Informing kernel of partition changes..."
+if ! partprobe "{{ installer.drive }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to inform kernel of partition changes - {{ n0ec }}"
+    exit $EC
+fi
+
 # ----------------------------
 
 
