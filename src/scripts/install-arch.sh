@@ -369,7 +369,7 @@ if ! $chroot ln -sf "/usr/share/zoneinfo/{{ installer.timezone|default('America/
 fi
 
 print_subsec "Setting hardware clock..."
-if ! $chroot hwclock --systohc >> install-arch.log 2>&1; then
+if ! $chroot hwclock --verbose --systohc >> install-arch.log 2>&1; then
     print_nosubsec_err "Unable to set hardware clock - {{ n0ec }}"
     exit $EC
 fi
