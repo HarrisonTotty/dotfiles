@@ -149,9 +149,6 @@ if ! sgdisk --typecode={{ loop.index }}:{{ p.typecode|default('8300', true) }} "
     exit $EC
 fi
 {% if p.encrypted is defined and p.encrypted %}
-{% if not system_encrypted is defined %}
-{% set system_encrypted = True %}
-{% endif %}
 {% set pname = p.name + '-encrypted' %}
 {% else %}
 {% set pname = p.name %}
@@ -173,7 +170,7 @@ EC=4
 cryptcmd='cryptsetup luksFormat --align-payload=8192'
 cryptswapcmd='cryptsetup open --type plain --key-file /dev/urandom'
 
-{% if system_encrypted is defined and system_encrypted %}
+{% if installer.system_encrypted is defined and installer.system_encrypted %}
 
 print_sec "Encrypting partitions..."
 

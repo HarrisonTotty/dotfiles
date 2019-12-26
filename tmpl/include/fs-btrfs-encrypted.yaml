@@ -37,3 +37,4 @@ installer:
     - name: 'system'
       encrypted: true
       typecode: '8300' # Linux Filesystem
+  system_encrypted: true
