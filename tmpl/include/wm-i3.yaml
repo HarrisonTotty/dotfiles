@@ -42,3 +42,8 @@ files:
       - desc: 'Screenshot (selection)'
         keys: '$mod+Shift+Print'
         action: 'exec --no-startup-id "$HOME/.config/scripts/scrot-select.sh"'
+
+installer:
+  packages:
+    - 'i3-gaps'
+    - 'i3lock'

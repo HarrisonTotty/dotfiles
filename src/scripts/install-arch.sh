@@ -210,19 +210,134 @@ fi
 
 EC=5
 
-print_sec "Creating filesystems..."
+print_sec "Creating & mounting filesystems..."
 
 {% for fs in installer.filesystems %}
+
+{# ----- Check some stuff ----- #}
 {% if not fs.name is defined %}
 {% do raise('one or more filesystems does not specify a name') %}
 {% endif %}
 {% if not fs.kind is defined %}
 {% do raise('one or more filesystems does not specify a filesystem kind') %}
 {% endif %}
-print_subsec "Creating \"{{ fs.name }}\" filesystem..."
-{% if fs.kind == 'fat32' %}
-mkfs.vfat -F 32 -n "{{ fs.name }}" "/dev/disk/by-partlabel/{{ fs.partition }}"
+{% if not fs.partition is defined %}
+{% do raise('one or more filesystems does not specify a reference partition') %}
+{% endif %}
+{% for p in installer.paritions %}
+{% if p.name == fs.partition %}
+{% set fs_partition = p %}
 {% endif %}
 {% endfor %}
+{% if not fs_partition is defined or fs_partition.name != fs.partition %}
+{% do raise('one or more filesystems specifies a reference partition that does not exist') %}
+{% endif %}
+
+{# ----- Create the filesystem ----- #}
+print_subsec "[{{ fs.kind }}] Creating \"{{ fs.name }}\" filesystem..."
+{% if fs_partition.encrypted is defined and fs_partition.encrypted %}
+{% set partition_path = '/dev/mapper/' + fs.partition %}
+{% else %}
+{% set partition_path = '/dev/disk/by-partlabel/' + fs.partition %}
+{% endif %}
+{% if fs.kind == 'btrfs' %}
+if ! mkfs.btrfs --force --label "{{ fs.name }}" "{{ partition_path }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to create filesystem - {{ n0ec }}"
+    exit $EC
+fi
+{% elif fs.kind == 'fat32' %}
+if ! mkfs.vfat -F 32 -n "{{ fs.name }}" "{{ partition_path }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to create filesystem - {{ n0ec }}"
+    exit $EC
+fi
+{% elif fs.kind == 'swap' %}
+if ! mkswap --label "{{ fs.name }}" "{{ partition_path }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to create filesystem - {{ n0ec }}"
+    exit $EC
+fi
+{% else %}
+{% do raise('one or more filesystems specifies an unknown filesystem kind') %}
+{% endif %}
+
+{# ----- Mount the filesystem ----- #}
+{% if fs.mountpoint is defined or fs.kind == 'swap' %}
+print_subsec "[{{ fs.kind }}] Mounting \"{{ fs.name }}\" filesystem..."
+{% if fs.mountpoint is defined %}
+if [ -d "{{ fs.mountpoint }}" ]; then
+    rm -rf "{{ fs.mountpoint }}" >> install-arch.log 2>&1
+fi
+if ! mkdir -p "{{ fs.mountpoint }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to create filesystem mount directory - {{ n0ec }}"
+    exit $EC
+fi
+{% endif %}
+{% if fs.kind == 'btrfs' %}
+if ! mount -t btrfs "LABEL={{ fs.name }}" "{{ fs.mountpoint }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to mount filesystem - {{ n0ec }}"
+    exit $EC
+fi
+{% if not fs.subvolumes is defined %}
+{% do raise('btrfs filesystem does not specify subvolumes') %}
+{% endif %}
+print_subsec "[{{ fs.kind }}] Creating \"{{ fs.name }}\" subvolumes..."
+{% for sv in fs.subvolumes %}
+{% if not sv.name is defined %}
+{% do raise('subvolume does not specify a name') %}
+{% endif %}
+if ! btrfs subvolume create "{{ path_join(fs.mountpoint, sv.name) }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to create subvolume \"{{ sv.name }}\" - {{ n0ec }}"
+    exit $EC
+fi
+{% endfor %}
+print_subsec "[{{ fs.kind }}] Mounting \"{{ fs.name }}\" filesystem subvolumes..."
+if ! umount -R "{{ fs.mountpoint }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to unmount subvolume owner - {{ n0ec }}"
+    exit $EC
+fi
+{% for sv in fs.subvolumes %}
+{% if sv.mountpoint is defined %}
+if [ -d "{{ sv.mountpoint }}" ]; then
+    rm -rf "{{ sv.mountpoint }}" >> install-arch.log 2>&1
+fi
+if ! mkdir -p "{{ sv.mountpoint }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to create filesystem subvolume mount directory - {{ n0ec }}"
+    exit $EC
+fi
+mountcmd="mount -t btrfs -o subvol={{ sv.name }},{{ sv.mount_options|default('defaults', true) }}"
+if ! $mountcmd "LABEL={{ fs.name }}" "{{ sv.mountpoint }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to mount subvolume \"{{ sv.name }}\" - {{ n0ec }}"
+    exit $EC
+fi
+{% endif %}
+{% endfor %}
+{% elif fs.kind == 'fat32' %}
+if ! mount "LABEL={{ fs.name }}" "{{ fs.mountpoint }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to mount filesystem - {{ n0ec }}"
+    exit $EC
+fi
+{% elif fs.kind == 'swap' %}
+if ! swapon -L "{{ fs.name }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to mount filesystem - {{ n0ec }}"
+    exit $EC
+fi
+{% endif %}
+{% endif %}
+
+{% endfor %}
+
+# ----------------------------
+
+
+
+# ------ Install System ------
+
+EC=6
+
+print_sec "Installing system packages..."
+
+if ! pacstrap /mnt {{ installer.packages|join(' ') }} >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to install system packages - {{ n0ec }}"
+    exit $EC
+fi
 
 # ----------------------------

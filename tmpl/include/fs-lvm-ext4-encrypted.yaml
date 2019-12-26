@@ -1,0 +1,25 @@
+# Encrypted LVM (ext4) Setup
+# --------------------------
+
+installer:
+  filesystems:
+    - name: 'efi'
+      kind: 'fat32'
+      partition: 'efi'
+    - name: 'swap'
+      kind: 'swap'
+      partition: 'swap'
+    - name: 'system'
+      kind: 'lvm'
+      partition: 'system'
+  partitions:
+    - name: 'efi'
+      size: '1G'
+      typecode: 'ef00' # EFI System
+    - name: 'swap'
+      encrypted: true
+      size: '8G'
+      typecode: '8200' # Linux Swap
+    - name: 'system'
+      encrypted: true
+      typecode: '8300' # Linux Filesystem

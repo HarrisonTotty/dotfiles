@@ -3,3 +3,7 @@
 
 font:
   name: 'Iosevka SS02'
+
+installer:
+  aur_packages:
+    - 'ttf-iosevka-ss02'

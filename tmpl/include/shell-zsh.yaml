@@ -8,3 +8,7 @@ files:
   - dst: 'zsh/zshrc.zsh'
     src: 'zsh/zshrc.template'
     symlink: '~/.zshrc'
+
+installer:
+  packages:
+    - 'zsh'

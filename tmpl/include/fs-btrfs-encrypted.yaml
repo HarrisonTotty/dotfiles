@@ -1,0 +1,37 @@
+# Encrypted BTRFS Setup
+# ---------------------
+
+installer:
+  filesystems:
+    - name: 'swap'
+      kind: 'swap'
+      partition: 'swap'
+    - name: 'system'
+      kind: 'btrfs'
+      mountpoint: '/mnt'
+      partition: 'system'
+      subvolumes:
+        - name: 'root'
+          mountpoint: '/mnt'
+          mount_options: 'defaults,compress=lzo,ssd,noatime'
+        - name: 'home'
+          mountpoint: '/mnt/home'
+          mount_options: 'defaults,compress=lzo,ssd,noatime'
+        - name: 'snapshots'
+          mountpoint: '/mnt/.snapshots'
+          mount_options: 'defaults,compress=lzo,ssd,noatime'
+    - name: 'efi'
+      kind: 'fat32'
+      mountpoint: '/mnt/boot'
+      partition: 'efi'
+  partitions:
+    - name: 'efi'
+      size: '1G'
+      typecode: 'ef00' # EFI System
+    - name: 'swap'
+      encrypted: true
+      size: '8G'
+      typecode: '8200' # Linux Swap
+    - name: 'system'
+      encrypted: true
+      typecode: '8300' # Linux Filesystem

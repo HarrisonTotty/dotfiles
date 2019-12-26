@@ -3,26 +3,11 @@
 
 include:
   - 'include/common.yaml'
-  - 'include/model-thinkpad-x1-yoga-gen4.yaml'
   - 'include/bar-polybar.yaml'
   - 'include/font-iosevka.yaml'
+  - 'include/fs-btrfs-encrypted.yaml'
+  - 'include/model-thinkpad-x1-yoga-gen4.yaml'
   - 'include/notifications-dunst.yaml'
   - 'include/shell-zsh.yaml'
   - 'include/wm-i3.yaml'
 
-installer:
-  filesystems:
-    - name: 'efi'
-      kind: 'fat32'
-      partition: 'efi'
-  partitions:
-    - name: 'efi'
-      size: '1G'
-      typecode: 'ef00' # EFI System
-    - name: 'swap'
-      encrypted: true
-      size: '8G'
-      typecode: '8200' # Linux Swap
-    - name: 'system'
-      encrypted: true
-      typecode: '8300' # Linux Filesystem
