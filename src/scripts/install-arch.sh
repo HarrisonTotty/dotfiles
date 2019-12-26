@@ -167,7 +167,7 @@ fi
 
 EC=4
 
-cryptcmd='cryptsetup luksFormat --align-payload=8192'
+cryptcmd='cryptsetup luksFormat --align-payload=8192 --verify-passphrase'
 cryptswapcmd='cryptsetup open --type plain --key-file /dev/urandom'
 
 {% if installer.system_encrypted is defined and installer.system_encrypted %}
