@@ -211,32 +211,24 @@ print_sec "Creating & mounting filesystems..."
 
 {% for fs in installer.filesystems %}
 
-
 {# ----- Check some stuff ----- #}
-
 {% if not fs.name is defined %}
 {% do raise('one or more filesystems does not specify a name') %}
 {% endif %}
-
 {% if not fs.kind is defined %}
 {% do raise(fs.name + ' filesystem does not specify a filesystem kind') %}
 {% endif %}
-
 {% if not fs.partition is defined %}
 {% do raise(fs.name + ' filesystem does not specify a reference partition') %}
 {% endif %}
 
-
 {# ----- Create the filesystem ----- #}
-
 print_subsec "[{{ fs.kind }}] Creating \"{{ fs.name }}\" filesystem..."
-
 {% if fs.partition_encrypted is defined and fs.partition_encrypted %}
 {% set partition_path = '/dev/mapper/' + fs.partition %}
 {% else %}
 {% set partition_path = '/dev/disk/by-partlabel/' + fs.partition %}
 {% endif %}
-
 {% if fs.kind == 'btrfs' %}
 if ! mkfs.btrfs --force --label "{{ fs.name }}" "{{ partition_path }}" >> install-arch.log 2>&1; then
     print_nosubsec_err "Unable to create filesystem - {{ n0ec }}"
@@ -256,13 +248,9 @@ fi
 {% do raise(fs.name + ' filesystem specifies an unknown filesystem kind') %}
 {% endif %}
 
-
 {# ----- Mount the filesystem ----- #}
-
 {% if fs.mountpoint is defined or fs.kind == 'swap' %}
-
 print_subsec "[{{ fs.kind }}] Mounting \"{{ fs.name }}\" filesystem..."
-
 {% if fs.mountpoint is defined %}
 if [ -d "{{ fs.mountpoint }}" ]; then
     rm -rf "{{ fs.mountpoint }}" >> install-arch.log 2>&1
@@ -272,7 +260,6 @@ if ! mkdir -p "{{ fs.mountpoint }}" >> install-arch.log 2>&1; then
     exit $EC
 fi
 {% endif %}
-
 {% if fs.kind == 'btrfs' %}
 if ! mount -t btrfs "LABEL={{ fs.name }}" "{{ fs.mountpoint }}" >> install-arch.log 2>&1; then
     print_nosubsec_err "Unable to mount filesystem - {{ n0ec }}"
@@ -323,9 +310,7 @@ if ! swapon -L "{{ fs.name }}" >> install-arch.log 2>&1; then
     exit $EC
 fi
 {% endif %}
-
 {% endif %}
-
 {% endfor %}
 
 # ----------------------------
