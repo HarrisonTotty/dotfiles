@@ -11,3 +11,6 @@ include:
   - 'include/shell-zsh.yaml'
   - 'include/wm-i3.yaml'
 
+installer:
+  hostname: 'wired'
+  username: 'lain'

@@ -7,8 +7,11 @@
     'installer.aur_packages',
     'installer.drive',
     'installer.filesystems',
+    'installer.hostname',
     'installer.packages',
-    'installer.partitions'
+    'installer.partitions',
+    'installer.shell',
+    'installer.username'
   )
 %}
 {% set n0ec = 'subprocess returned non-zero exit code.' %}
@@ -17,8 +20,6 @@ trap "exit 100" INT
 
 # ------ Configuration ------
 
-aur_packages="{{ installer.aur_packages|join(' ') }}"
-
 dotfiles_url="{{ installer.dotfiles_url|default('https://github.com/HarrisonTotty/dotfiles/archive/master.zip', true) }}"
 
 efivars_dir="/sys/firmware/efi/efivars"
@@ -26,10 +27,6 @@ efivars_dir="/sys/firmware/efi/efivars"
 kernel_parameters="verbose"
 
 mirrorlist_url="https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on"
-
-packages="{{ installer.packages|join(' ') }}"
-
-timezone="{{ installer.timezone|default('America/Chicago', true) }}"
 
 tmpl_url="{{ installer.tmpl_url|default('https://raw.githubusercontent.com/HarrisonTotty/tmpl/master/tmpl.py', true) }}"
 
@@ -346,5 +343,80 @@ if ! pacstrap /mnt {{ installer.packages|join(' ') }} >> install-arch.log 2>&1; 
     print_nosubsec_err "Unable to install system packages - {{ n0ec }}"
     exit $EC
 fi
+
+# ----------------------------
+
+
+
+# --- System Configuration ---
+
+EC=7
+
+print_sec "Configuring system..."
+
+chroot='arch-chroot /mnt'
+
+print_subsec "Generating filesystem table..."
+if ! genfstab -U /mnt >> /mnt/etc/fstab 2>>install-arch.log; then
+    print_nosubsec_err "Unable to generate filesystem table - {{ n0ec }}"
+    exit $EC
+fi
+
+print_subsec "Setting time zone..."
+if ! $chroot ln -sf "/usr/share/zoneinfo/{{ installer.timezone|default('America/Chicago', true) }}" /etc/localtime >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to set time zone - {{ n0ec }}"
+    exit $EC
+fi
+
+print_subsec "Setting hardware clock..."
+if ! $chroot hwclock --systohc >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to set hardware clock - {{ n0ec }}"
+    exit $EC
+fi
+
+print_subsec "Generating localization..."
+if ! echo 'en_US.UTF-8 UTF-8' > /mnt/etc/locale.gen && $chroot locale-gen >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to generate localization - {{ n0ec }}"
+    exit $EC
+fi
+
+print_subsec "Setting system language..."
+if ! echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf; then
+    print_nosubsec_err "Unable to set system language - {{ n0ec }}"
+    exit $EC
+fi
+
+print_subsec "Setting system hostname..."
+if ! echo '{{ installer.hostname }}' > /mnt/etc/hostname && $chroot hostname '{{ installer.hostname }}' >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to set system hostname - {{ n0ec }}"
+    exit $EC
+fi
+
+print_subsec "Adding system hostname to hosts file..."
+hosts_entry='127.0.0.1 {{ installer.hostname }}.localdomain {{ installer.hostname }}'
+if ! echo "$hosts_entry" >> /mnt/etc/hosts 2>>install-arch.log; then
+    print_nosubsec_err "Unable to add system hostname to hosts file - {{ n0ec }}"
+    exit $EC
+fi
+
+print_subsec "Setting root user account password..."
+if ! $chroot passwd 2>>install-arch.log; then
+    print_nosubsec_err "Unable to set root user account password - {{ n0ec }}"
+    exit $EC
+fi
+
+print_subsec "Creating \"{{ installer.username }}\" user account..."
+useraddcmd='useradd -m -g wheel -s "{{ installer.shell }}" "{{ installer.username }}"'
+if ! $chroot $useraddcmd >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unsable to create primary user account - {{ n0ec }}"
+    exit $EC
+fi
+
+print_subsec "Setting \"{{ installer.username }}\" user account password..."
+if ! $chroot passwd "{{ installer.username }}" 2>>install-arch.log; then
+    print_nosubsec_err "Unable to set primary user account password - {{ n0ec }}"
+    exit $EC
+fi
+
 
 # ----------------------------

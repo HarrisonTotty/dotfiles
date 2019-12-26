@@ -12,3 +12,4 @@ files:
 installer:
   packages:
     - 'zsh'
+  shell: '/bin/zsh'
