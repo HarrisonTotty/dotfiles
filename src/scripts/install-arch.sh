@@ -190,10 +190,8 @@ print_sec "Encrypting partitions..."
 {% if p.encrypted is defined and p.encrypted %}
 print_subsec "Encrypting \"{{ p.name }}\" partition..."
 if [ -e "/dev/mapper/{{ p.name }}" ]; then
-    if ! cryptsetup remove "{{ p.name }}" >> install-arch.log 2>&1; then
-        print_nosubsec_err "Unable to encrypt partition - unable to close old crypt handle."
-        exit $EC
-    fi
+    cryptsetup close "{{ p.name }}" >/dev/null 2>&1
+    cryptsetup erase "{{ p.name }}" >/dev/null 2>&1
 fi
 {% if p.typecode is defined and p.typecode == '8200' %}
 if ! $cryptswapcmd "/dev/disk/by-partlabel/{{ p.name + '-encrypted' }}" "{{ p.name }}" >> install-arch.log 2>&1; then
