@@ -219,10 +219,10 @@ print_sec "Creating & mounting filesystems..."
 {% do raise('one or more filesystems does not specify a name') %}
 {% endif %}
 {% if not fs.kind is defined %}
-{% do raise('one or more filesystems does not specify a filesystem kind') %}
+{% do raise(fs.name + ' filesystem does not specify a filesystem kind') %}
 {% endif %}
 {% if not fs.partition is defined %}
-{% do raise('one or more filesystems does not specify a reference partition') %}
+{% do raise(fs.name + ' filesystem does not specify a reference partition') %}
 {% endif %}
 {% for p in installer.paritions %}
 {% if p.name == fs.partition %}
@@ -230,7 +230,7 @@ print_sec "Creating & mounting filesystems..."
 {% endif %}
 {% endfor %}
 {% if not fs_partition is defined or fs_partition.name != fs.partition %}
-{% do raise('one or more filesystems specifies a reference partition that does not exist') %}
+{% do raise(fs.name + ' filesystem specifies a reference partition that does not exist') %}
 {% endif %}
 
 {# ----- Create the filesystem ----- #}
@@ -256,7 +256,7 @@ if ! mkswap --label "{{ fs.name }}" "{{ partition_path }}" >> install-arch.log 2
     exit $EC
 fi
 {% else %}
-{% do raise('one or more filesystems specifies an unknown filesystem kind') %}
+{% do raise(fs.name + ' filesystem specifies an unknown filesystem kind') %}
 {% endif %}
 
 {# ----- Mount the filesystem ----- #}
@@ -277,7 +277,7 @@ if ! mount -t btrfs "LABEL={{ fs.name }}" "{{ fs.mountpoint }}" >> install-arch.
     exit $EC
 fi
 {% if not fs.subvolumes is defined %}
-{% do raise('btrfs filesystem does not specify subvolumes') %}
+{% do raise(fs.name + ' btrfs filesystem does not specify subvolumes') %}
 {% endif %}
 print_subsec "[{{ fs.kind }}] Creating \"{{ fs.name }}\" subvolumes..."
 {% for sv in fs.subvolumes %}
