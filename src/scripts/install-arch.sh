@@ -230,6 +230,7 @@ print_sec "Creating & mounting filesystems..."
 {% endif %}
 {% endfor %}
 {% if not fs_partition is defined or fs_partition.name != fs.partition %}
+{% do print(fs_partition) %}
 {% do raise(fs.name + ' filesystem specifies a reference partition that does not exist') %}
 {% endif %}
 
