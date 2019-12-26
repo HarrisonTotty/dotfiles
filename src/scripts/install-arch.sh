@@ -104,6 +104,9 @@ if ! curl -s "$mirrorlist_url" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmi
     exit $EC
 fi
 
+print_subsec "Disabling swap..."
+swapoff --all >/dev/null 2>&1
+
 # ----------------------------
 
 
