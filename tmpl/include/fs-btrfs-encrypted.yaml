@@ -6,10 +6,12 @@ installer:
     - name: 'swap'
       kind: 'swap'
       partition: 'swap'
+      partition_encrypted: true
     - name: 'system'
       kind: 'btrfs'
       mountpoint: '/mnt'
       partition: 'system'
+      partition_encrypted: true
       subvolumes:
         - name: 'root'
           mountpoint: '/mnt'
