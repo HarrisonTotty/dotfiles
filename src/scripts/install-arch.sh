@@ -226,7 +226,7 @@ print_sec "Creating & mounting filesystems..."
 {% endif %}
 {% for p in installer.paritions %}
 {% if p.name == fs.partition %}
-{% if p.encrypted is defined %]
+{% if p.encrypted is defined %}
 {% set fs_encrypted = p.encrypted %}
 {% else %}
 {% set fs_encrypted = False %}
