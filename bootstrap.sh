@@ -49,6 +49,8 @@ fi
 
 echo 'Downloading dotfile templates...'
 wget -q "$dotfiles_url" -O dotfiles.zip
+
+echo 'Extracting dotfile templates...'
 unzip dotfiles.zip >/dev/null
 rm -f dotfiles.zip
 mv dotfiles-* dotfiles
