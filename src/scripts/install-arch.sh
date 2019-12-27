@@ -409,7 +409,7 @@ if ! echo "$hosts_entry" >> /mnt/etc/hosts 2>>install-arch.log; then
 fi
 
 print_subsec "Setting root user account password..."
-if ! $chroot passwd 2>>install-arch.log; then
+if ! $chroot passwd; then
     print_nosubsec_err "Error: Unable to set root user account password - {{ n0ec }}"
     exit $EC
 fi
@@ -422,7 +422,7 @@ if ! $chroot $useraddcmd >> install-arch.log 2>&1; then
 fi
 
 print_subsec "Setting \"{{ installer.username }}\" user account password..."
-if ! $chroot passwd "{{ installer.username }}" 2>>install-arch.log; then
+if ! $chroot passwd "{{ installer.username }}"; then
     print_nosubsec_err "Error: Unable to set primary user account password - {{ n0ec }}"
     exit $EC
 fi
