@@ -72,3 +72,12 @@ installer:
     - 'xorg-xinit'
     - 'xorg-xlsfonts'
     - 'xorg-xset'
+  user_directories:
+    - ".cache/lock"
+    - "desktop"
+    - "docs"
+    - "downloads"
+    - "media/music"
+    - "media/videos"
+    - "pics/screenshots"
+    - "projects"

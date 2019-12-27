@@ -2,6 +2,10 @@
 # ---------------------
 
 installer:
+  bootloader:
+    kind: 'grub'
+    kernel_parameters: 'verbose'
+    root_partition: 'system'
   filesystems:
     - name: 'swap'
       kind: 'swap'
