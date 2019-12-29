@@ -371,6 +371,17 @@ if ! genfstab -U /mnt >> /mnt/etc/fstab 2>>install-arch.log; then
     exit $EC
 fi
 
+{% if installer.swap_encrypted is defined and installer.swap_encrypted %}
+{% if not installer.swap_partition is defined %}
+{% do raise('swap partition is not specified') %}
+{% endif %}
+print_subsec "Configuring swap encryption..."
+swap_crypttab="{{ installer.swap_partition }} /dev/disk/by-partlabel/{{ installer.swap_partition }} /dev/urandom swap,cipher=aes-xts-plain64,size=256"
+if ! echo "$swap_crypttab" >> /mnt/etc/crypttab 2>>install-arch.log; then
+    print_nosubsec_err "Error: Unable to configure swap encryption - {{ n0ec }}"
+    exit $EC
+{% endif %}
+
 print_subsec "Setting time zone..."
 if ! $chroot ln -sf "/usr/share/zoneinfo/{{ installer.timezone|default('America/Chicago', true) }}" /etc/localtime >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to set time zone - {{ n0ec }}"

@@ -26,6 +26,20 @@ installer:
       kind: 'fat32'
       mountpoint: '/mnt/boot'
       partition: 'efi'
+  mkinitcpio:
+    hooks:
+      - 'base'
+      - 'udev'
+      - 'autodetect'
+      - 'keyboard'
+      - 'keymap'
+      - 'consolefont'
+      - 'modconf'
+      - 'block'
+      - 'encrypt'
+      - 'filesystems'
+      - 'fsck'
+      - 'btrfs'
   packages:
     - 'btrfs-progs'
     - 'cryptsetup'
@@ -40,4 +54,6 @@ installer:
     - name: 'system'
       encrypted: true
       typecode: '8300' # Linux Filesystem
+  swap_encrypted: true
+  swap_partition: 'swap'
   system_encrypted: true
