@@ -379,8 +379,7 @@ fi
 
 print_subsec "Setting hardware clock..."
 if ! $chroot hwclock --verbose --systohc >> install-arch.log 2>&1; then
-    print_nosubsec_err "Error: Unable to set hardware clock - {{ n0ec }}"
-    exit $EC
+    print_nosubsec "Warning: Unable to set hardware clock - {{ n0ec }}"
 fi
 
 print_subsec "Generating localization..."
