@@ -380,6 +380,7 @@ swap_crypttab="{{ installer.swap_partition }} /dev/disk/by-partlabel/{{ installe
 if ! echo "$swap_crypttab" >> /mnt/etc/crypttab 2>>install-arch.log; then
     print_nosubsec_err "Error: Unable to configure swap encryption - {{ n0ec }}"
     exit $EC
+fi
 {% endif %}
 
 print_subsec "Setting time zone..."
