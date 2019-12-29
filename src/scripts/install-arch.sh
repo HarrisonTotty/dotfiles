@@ -415,7 +415,7 @@ if ! $chroot passwd; then
 fi
 
 print_subsec "Creating \"{{ installer.username }}\" user account..."
-useraddcmd='useradd -m -g wheel -s "{{ installer.shell }}" "{{ installer.username }}"'
+useraddcmd='useradd -m -g wheel -s {{ installer.shell }} {{ installer.username }}'
 if ! $chroot $useraddcmd >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to create primary user account - {{ n0ec }}"
     exit $EC
@@ -445,9 +445,19 @@ fi
 
 
 
-# ----- Setup Bootloader -----
+# --- Create RAM Filesystem --
 
 EC=8
+
+print_sec "[TODO] Creating initramfs..."
+
+# ----------------------------
+
+
+
+# ----- Setup Bootloader -----
+
+EC=9
 
 print_sec "Setting-up bootloader..."
 
@@ -524,7 +534,8 @@ if [ "$?" -ne 0 ]; then
 fi
 print_subsec "Configuring boot options..."
 {% if installer.system_encrypted is defined and installer.system_encrypted %}
-boot_root="root=PARTLABEL={{ installer.bootloader.root_partition }}"
+boot_cryptroot="cryptdevice=PARTLABEL={{ installer.bootloader.root_parition + '-encrypted' }}:{{ installer.bootloader.root_partition }}"
+boot_root="$boot_cryptroot root=PARTLABEL={{ installer.bootloader.root_partition }}"
 {% else %}
 boot_root="root=PARTLABEL={{ installer.bootloader.root_partition }}"
 {% endif %}

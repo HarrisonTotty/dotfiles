@@ -2,10 +2,6 @@
 # ---------------------
 
 installer:
-  bootloader:
-    kind: 'grub'
-    kernel_parameters: 'verbose'
-    root_partition: 'system'
   filesystems:
     - name: 'swap'
       kind: 'swap'
@@ -30,6 +26,9 @@ installer:
       kind: 'fat32'
       mountpoint: '/mnt/boot'
       partition: 'efi'
+  packages:
+    - 'btrfs-progs'
+    - 'cryptsetup'
   partitions:
     - name: 'efi'
       size: '1G'

@@ -1,0 +1,11 @@
+# GRUB Configuration
+# ------------------
+
+installer:
+  bootloader:
+    kind: 'grub'
+    kernel_parameters: 'verbose'
+    root_partition: 'system'
+  packages:
+    - 'efibootmgr'
+    - 'grub'
