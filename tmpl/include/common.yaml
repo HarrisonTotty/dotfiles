@@ -40,14 +40,13 @@ files:
 
 installer:
   aur_packages:
-    - 'oomox'
     - 'paper-icon-theme-git'
     - 'urxvt-resize-font-git'
   packages:
     - 'arandr'
     - 'autoconf'
     - 'base'
-    - 'dhclient'
+    - 'dhcp'
     - 'dialog'
     - 'emacs'
     - 'fakeroot'
