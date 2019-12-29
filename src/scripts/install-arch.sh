@@ -460,9 +460,41 @@ fi
 
 EC=8
 
-print_sec "Creating Initial RAM Filesystem..."
+print_sec "Configuring & Creating Initial RAM Filesystem..."
 
+print_subsec "Writing initramfs configuration script..."
+cat > /tmp/config-initramfs.py 2>>install-arch.log <<EOF
+#!/usr/bin/env python3
+import os
+import re
+import sys
 
+try:
+  with open('/mnt/etc/mkinitcpio.conf', 'r') as f:
+    conf = f.read()
+except Execption as e:
+  print('Error: Unable to open "/mnt/etc/mkinitcpio.conf" - ' + str(e))
+  sys.exit(1)
+
+hooks_regex = re.compile(r'')
+
+EOF
+if [ "$?" -ne 0 ]; then
+    print_nosubsec_err "Error: Unable to write initramfs configuration script - {{ n0ec }}"
+    exit $EC
+fi
+
+print_subsec "Configuring initramfs..."
+if ! /tmp/config-initramfs.py >> install-arch.log 2>&1; then
+    print_nosubsec_err "Error: Unable to configure initramfs - {{ n0ec }}"
+    exit $EC
+fi
+
+print_subsec "Generating initramfs..."
+if ! $chroot mkinitcpio -P >> install-arch.log 2>&1; then
+    print_nosubsec_err "Error: Unable to generate initramfs - {{ n0ec }}"
+    exit $EC
+fi
 
 # ----------------------------
 
