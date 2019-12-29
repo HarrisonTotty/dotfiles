@@ -534,7 +534,7 @@ if [ "$?" -ne 0 ]; then
 fi
 print_subsec "Configuring boot options..."
 {% if installer.system_encrypted is defined and installer.system_encrypted %}
-boot_cryptroot="cryptdevice=PARTLABEL={{ installer.bootloader.root_parition + '-encrypted' }}:{{ installer.bootloader.root_partition }}"
+boot_cryptroot="cryptdevice=PARTLABEL={{ installer.bootloader.root_partition + '-encrypted' }}:{{ installer.bootloader.root_partition }}"
 boot_root="$boot_cryptroot root=PARTLABEL={{ installer.bootloader.root_partition }}"
 {% else %}
 boot_root="root=PARTLABEL={{ installer.bootloader.root_partition }}"
