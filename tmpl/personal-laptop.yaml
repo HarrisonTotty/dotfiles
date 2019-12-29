@@ -13,5 +13,5 @@ include:
   - 'include/wm-i3.yaml'
 
 installer:
-  hostname: 'wired'
+  hostname: 'thewired'
   username: 'lain'
