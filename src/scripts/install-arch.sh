@@ -448,7 +448,9 @@ fi
 
 EC=8
 
-print_sec "[TODO] Creating initramfs..."
+print_sec "Creating Initial RAM Filesystem..."
+
+
 
 # ----------------------------
 
@@ -534,7 +536,7 @@ fi
 print_subsec "Configuring boot options..."
 {% if installer.system_encrypted is defined and installer.system_encrypted %}
 boot_cryptroot="cryptdevice=PARTLABEL={{ installer.bootloader.root_partition + '-encrypted' }}:{{ installer.bootloader.root_partition }}"
-boot_root="$boot_cryptroot root=PARTLABEL={{ installer.bootloader.root_partition }}"
+boot_root="$boot_cryptroot root=/dev/mapper/{{ installer.bootloader.root_partition }}"
 {% else %}
 boot_root="root=PARTLABEL={{ installer.bootloader.root_partition }}"
 {% endif %}
