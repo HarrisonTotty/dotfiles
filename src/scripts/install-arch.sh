@@ -528,6 +528,12 @@ print_sec "Setting-up bootloader..."
 {% if not installer.bootloader.kernel_parameters is defined %}
 {% do raise('bootloader kernel parameters not specified') %}
 {% endif %}
+{% if installer.system_encrypted is defined and installer.system_encrypted %}
+boot_cryptroot="cryptdevice=PARTLABEL={{ installer.bootloader.root_partition + '-encrypted' }}:{{ installer.bootloader.root_partition }}"
+boot_root="$boot_cryptroot root=/dev/mapper/{{ installer.bootloader.root_partition }}"
+{% else %}
+boot_root="root=PARTLABEL={{ installer.bootloader.root_partition }}"
+{% endif %}
 
 {% if installer.bootloader.kind == 'systemd-boot' %}
 print_subsec "Installing bootloader (systemd-boot)..."
@@ -591,12 +597,6 @@ if [ "$?" -ne 0 ]; then
     exit $EC
 fi
 print_subsec "Configuring boot options..."
-{% if installer.system_encrypted is defined and installer.system_encrypted %}
-boot_cryptroot="cryptdevice=PARTLABEL={{ installer.bootloader.root_partition + '-encrypted' }}:{{ installer.bootloader.root_partition }}"
-boot_root="$boot_cryptroot root=/dev/mapper/{{ installer.bootloader.root_partition }}"
-{% else %}
-boot_root="root=PARTLABEL={{ installer.bootloader.root_partition }}"
-{% endif %}
 boot_options="options $boot_root rw {{ installer.bootloader.kernel_parameters }}"
 if ! echo "$boot_options" >> /mnt/boot/loader/entries/arch.conf 2>>install-arch.log; then
     print_nosubsec_err "Error: Unable to configure boot options - unable to append \"/boot/loader/entries/arch.conf\"."
