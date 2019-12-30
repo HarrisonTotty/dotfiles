@@ -473,11 +473,24 @@ try:
   with open('/mnt/etc/mkinitcpio.conf', 'r') as f:
     conf = f.read()
 except Execption as e:
-  print('Error: Unable to open "/mnt/etc/mkinitcpio.conf" - ' + str(e))
+  print('Error: Unable to open "/mnt/etc/mkinitcpio.conf" - ' + str(e) + '.')
   sys.exit(1)
 
-hooks_regex = re.compile(r'')
+hooks_match = re.compile(r'^HOOKS=\([\w\s]+\)$', re.M).search(conf)
+if not hooks_match:
+  print('Error: Unable to locate "HOOKS" specification in "/mnt/etc/mkinitcpio.conf".')
+  sys.exit(2)
 
+new_conf = conf.replace(hooks_match.group(0), "HOOKS=({{ installer.mkinitcpio.hooks|join(' ') }})")
+
+try:
+  with open('/mnt/etc/mkinitcpio.conf', 'w') as f:
+    f.write(new_conf)
+except Exception as e:
+  print('Error: Unable to write "/mnt/etc/mkinitcpio.conf" - ' + str(e) + '.')
+  sys.exit(3)
+
+sys.exit(0)
 EOF
 if [ "$?" -ne 0 ]; then
     print_nosubsec_err "Error: Unable to write initramfs configuration script - {{ n0ec }}"
@@ -491,7 +504,7 @@ if ! /tmp/config-initramfs.py >> install-arch.log 2>&1; then
 fi
 
 print_subsec "Generating initramfs..."
-if ! $chroot mkinitcpio -P >> install-arch.log 2>&1; then
+if ! $chroot mkinitcpio --nocolor -P >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to generate initramfs - {{ n0ec }}"
     exit $EC
 fi
@@ -512,11 +525,11 @@ print_sec "Setting-up bootloader..."
 {% if not installer.bootloader.root_partition is defined %}
 {% do raise('bootloader root partition not specified') %}
 {% endif %}
-
-{% if installer.bootloader.kind == 'systemd-boot' %}
 {% if not installer.bootloader.kernel_parameters is defined %}
 {% do raise('bootloader kernel parameters not specified') %}
 {% endif %}
+
+{% if installer.bootloader.kind == 'systemd-boot' %}
 print_subsec "Installing bootloader (systemd-boot)..."
 if ! $chroot bootctl --path=/boot install >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to install bootloader - {{ n0ec }}"
@@ -590,6 +603,17 @@ if ! echo "$boot_options" >> /mnt/boot/loader/entries/arch.conf 2>>install-arch.
     exit $EC
 fi
 {% elif installer.bootloader.kind == 'grub' %}
+print_subsec "Installing bootloader (grub)..."
+if ! $chroot grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB >> install-arch.log 2>&1; then
+    print_nosubsec_err "Error: Unable to install bootloader - {{ n0ec }}"
+    exit $EC
+fi
+print_subsec "[TODO] Writing bootloader configuration..."
+print_subsec "Configuring bootloader..."
+if ! $chroot grub-mkconfig -o /boot/grub/grub.cfg >> install-arch.log 2>&1; then
+    print_nosubsec_err "Unable to configure bootloader - {{ n0ec }}"
+    exit $EC
+fi
 {% else %}
 {% do raise('unknown bootloader kind specified') %}
 {% endif %}

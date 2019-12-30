@@ -4,7 +4,7 @@
 include:
   - 'include/common.yaml'
   - 'include/bar-polybar.yaml'
-  - 'include/bootloader-systemd-boot-system.yaml'
+  - 'include/bootloader-grub-system.yaml'
   - 'include/font-iosevka.yaml'
   - 'include/fs-btrfs-encrypted.yaml'
   - 'include/model-thinkpad-x1-yoga-gen4.yaml'
