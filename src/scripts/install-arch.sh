@@ -47,6 +47,85 @@ print_subsec() { echo "  $(tput setaf 4)-->$(tput sgr0) $@"; echo "$@" >> instal
 print_nosubsec() { echo "      $@"; echo "$@" >> install-arch.log; }
 print_nosubsec_err() { echo "      $(tput setaf 1)$@$(tput sgr0)" 1>&2; echo "$@" >> install-arch.log; }
 
+show_help() {
+    echo "Harrison's Arch Linux installer script."
+    echo 'Usage: install-arch.sh [...]'
+    echo
+    echo "OPTIONS:"
+    echo "-b, --no-bootloader   Don't install/configure the bootloader. Implies \"-f\" and \"-P\"."
+    echo "-f, --no-filesystems  Don't setup partition filesystems (or encryption). Implies \"-P\"."
+    echo "-h, --help            Show help and usage information."
+    echo "-i, --no-initramfs    Don't configure the Initial RAM Filesystem. Implies \"-f\" and \"-P\"."
+    echo "-m, --no-rankmirrors  Don't rank pacman mirrorlist during setup stage."
+    echo "-p, --no-packages     Don't install packages. Implies \"-f\" and \"-P\"."
+    echo "-P, --no-partitions   Don't setup partitions."
+}
+
+# ----------------------------
+
+
+
+# ------ Parse Arguments -----
+
+EC=10
+
+short_options="b,f,h,i,m,p,P"
+long_options="no-bootloader,no-filesystems,help,no-initramfs,no-rankmirrors,no-packages,no-partitions"
+
+getopt --test > /dev/null
+if [ "$?" -ne 4 ]; then
+    print_nosec_err "Unable to parse command-line arguments - enhanced getopt does not exist on the system."
+    exit $EC
+fi
+
+args=$(getopt --options=$short_options --longoptions=$long_options --name "install-arch.sh" -- "$@")
+if [ "$?" -ne 0 ]; then
+    exit $EC
+fi
+
+eval set -- "$args"
+while true; do
+    case "$1" in
+        -b|--no-bootloader)
+            do_bootloader=false
+            shift
+            ;;
+        -f|--no-filesystems)
+            do_filesystems=false
+            shift
+            ;;
+        -h|--help)
+            show_help
+            exit 0
+            ;;
+        -i|--no-initramfs)
+            do_initramfs=false
+            shift
+            ;;
+        -m|--no-rankmirrors)
+            do_rankmirrors=false
+            shift
+            ;;
+        -p|--no-packages)
+            do_rankmirrors=false
+            shift
+            ;;
+        -P|--no-partitions)
+            do_partitions=false
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            print_nosec_err "Unable to parse command-line arguments - encountered * in argument case."
+            exit $EC
+            ;;
+    esac
+done
+
+
 # ----------------------------
 
 
@@ -92,22 +171,24 @@ if ! timedatectl set-ntp true >> install-arch.log 2>&1; then
     exit $EC
 fi
 
-print_subsec "Backing-up previous pacman mirror list..."
-if ! cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup >> install-arch.log 2>&1; then
-    print_nosubsec_err "Error: Unable to back-up previous pacman mirror list - {{ n0ec }}"
-    exit $EC
-fi
-
-print_subsec "Installing rankmirrors package..."
-if ! pacman -Sy pacman-contrib --noconfirm >> install-arch.log 2>&1; then
-    print_nosubsec_err "Error: Unable to install rankmirrors package - {{ n0ec }}"
-    exit $EC
-fi
-
-print_subsec "Fetching and ranking fastest mirrors..."
-if ! curl -s "$mirrorlist_url" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - >/etc/pacman.d/mirrorlist 2>/dev/null; then
-    print_nosubsec_err "Error: Unable to generate pacman mirrorlist - {{ n0ec }}"
-    exit $EC
+if [ "$do_rankmirrors" != "false" ]; then
+    print_subsec "Backing-up previous pacman mirror list..."
+    if ! cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup >> install-arch.log 2>&1; then
+        print_nosubsec_err "Error: Unable to back-up previous pacman mirror list - {{ n0ec }}"
+        exit $EC
+    fi
+     
+    print_subsec "Installing rankmirrors package..."
+    if ! pacman -Sy pacman-contrib --noconfirm >> install-arch.log 2>&1; then
+        print_nosubsec_err "Error: Unable to install rankmirrors package - {{ n0ec }}"
+        exit $EC
+    fi
+     
+    print_subsec "Fetching and ranking fastest mirrors..."
+    if ! curl -s "$mirrorlist_url" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - >/etc/pacman.d/mirrorlist 2>/dev/null; then
+        print_nosubsec_err "Error: Unable to generate pacman mirrorlist - {{ n0ec }}"
+        exit $EC
+    fi
 fi
 
 print_subsec "Disabling swap..."
@@ -120,6 +201,8 @@ swapoff --all >/dev/null 2>&1
 # ----- Disk Partitioning ----
 
 EC=3
+
+if [ "$do_bootloader" != "false" ] && [ "$do_filesystems" != "false" ] && [ "$do_initramfs" != "false" ] && [ "$do_packages" != "false" ] && [ "$do_partitions" != "false" ]; then
 
 print_sec "Partitioning {{ installer.drive }}..."
 
@@ -180,6 +263,8 @@ if ! partprobe "{{ installer.drive }}" >> install-arch.log 2>&1; then
     exit $EC
 fi
 
+fi
+
 # ----------------------------
 
 
@@ -187,6 +272,8 @@ fi
 # ----- Encryption Setup -----
 
 EC=4
+
+if [ "$do_bootloader" != "false" ] && [ "$do_filesystems" != "false" ] && [ "$do_initramfs" != "false" ] && [ "$do_packages" != "false" ]; then
 
 cryptcmd='cryptsetup luksFormat --align-payload=8192 --verify-passphrase'
 cryptswapcmd='cryptsetup open --type plain --key-file /dev/urandom'
@@ -224,6 +311,8 @@ fi
 
 {% endif %}
 
+fi
+
 # ----------------------------
 
 
@@ -231,6 +320,8 @@ fi
 # ----- Filesystem Setup -----
 
 EC=5
+
+if [ "$do_bootloader" != "false" ] && [ "$do_filesystems" != "false" ] && [ "$do_initramfs" != "false" ] && [ "$do_packages" != "false" ]; then
 
 print_sec "Creating & mounting filesystems..."
 
@@ -338,6 +429,8 @@ fi
 {% endif %}
 {% endfor %}
 
+fi
+
 # ----------------------------
 
 
@@ -346,13 +439,14 @@ fi
 
 EC=6
 
-print_sec "Installing system packages..."
-
-if ! pacstrap /mnt {{ installer.packages|join(' ') }} >> install-arch.log 2>&1; then
-    print_nosubsec_err "Error: Unable to install system packages - {{ n0ec }}"
-    exit $EC
+if [ "$do_packages" != "false" ]; then
+    print_sec "Installing system packages..."
+    if ! pacstrap /mnt {{ installer.packages|join(' ') }} >> install-arch.log 2>&1; then
+        print_nosubsec_err "Error: Unable to install system packages - {{ n0ec }}"
+        exit $EC
+    fi
 fi
-
+    
 # ----------------------------
 
 
@@ -460,6 +554,8 @@ fi
 
 EC=8
 
+if [ "$do_initramfs" != "false" ]; then
+
 print_sec "Configuring & Creating Initial RAM Filesystem..."
 
 print_subsec "Writing initramfs configuration script..."
@@ -509,6 +605,8 @@ if ! $chroot mkinitcpio --nocolor -P >> install-arch.log 2>&1; then
     exit $EC
 fi
 
+fi
+
 # ----------------------------
 
 
@@ -516,6 +614,8 @@ fi
 # ----- Setup Bootloader -----
 
 EC=9
+
+if [ "$do_bootloader" != "false" ]; then
 
 print_sec "Setting-up bootloader..."
 
@@ -617,6 +717,8 @@ fi
 {% else %}
 {% do raise('unknown bootloader kind specified') %}
 {% endif %}
+
+fi
 
 # ----------------------------
 
