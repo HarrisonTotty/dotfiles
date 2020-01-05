@@ -68,6 +68,7 @@ installer:
     - 'rxvt-unicode'
     - 'scrot'
     - 'sudo'
+    - 'terminus-font'
     - 'w3m'
     - 'wpa_supplicant'
     - 'xclip'
