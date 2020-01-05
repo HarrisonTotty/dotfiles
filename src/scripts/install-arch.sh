@@ -59,6 +59,7 @@ show_help() {
     echo "-m, --no-rankmirrors  Don't rank pacman mirrorlist during setup stage."
     echo "-p, --no-packages     Don't install packages. Implies \"-f\" and \"-P\"."
     echo "-P, --no-partitions   Don't setup partitions."
+    echo "-u, --no-users        Don't setup user accounts (or root's password)."
 }
 
 # ----------------------------
@@ -69,8 +70,8 @@ show_help() {
 
 EC=10
 
-short_options="b,f,h,i,m,p,P"
-long_options="no-bootloader,no-filesystems,help,no-initramfs,no-rankmirrors,no-packages,no-partitions"
+short_options="b,f,h,i,m,p,P,u"
+long_options="no-bootloader,no-filesystems,help,no-initramfs,no-rankmirrors,no-packages,no-partitions,no-users"
 
 getopt --test > /dev/null
 if [ "$?" -ne 4 ]; then
@@ -112,6 +113,10 @@ while true; do
             ;;
         -P|--no-partitions)
             do_partitions=false
+            shift
+            ;;
+        -u|--no-users)
+            do_users=false
             shift
             ;;
         --)
@@ -513,37 +518,39 @@ if ! echo "$hosts_entry" >> /mnt/etc/hosts 2>>install-arch.log; then
     exit $EC
 fi
 
-print_subsec "Setting root user account password..."
-if ! $chroot passwd; then
-    print_nosubsec_err "Error: Unable to set root user account password - {{ n0ec }}"
-    exit $EC
-fi
-
-print_subsec "Creating \"{{ installer.username }}\" user account..."
-useraddcmd='useradd -m -g wheel -s {{ installer.shell }} {{ installer.username }}'
-if ! $chroot $useraddcmd >> install-arch.log 2>&1; then
-    print_nosubsec_err "Error: Unable to create primary user account - {{ n0ec }}"
-    exit $EC
-fi
-
-print_subsec "Setting \"{{ installer.username }}\" user account password..."
-if ! $chroot passwd "{{ installer.username }}"; then
-    print_nosubsec_err "Error: Unable to set primary user account password - {{ n0ec }}"
-    exit $EC
-fi
-
-print_subsec "Creating user home directories..."
-for d in {{ installer.user_directories|join(' ') }}; do
-    if ! mkdir -p "/mnt/home/{{ installer.username }}/$d" >> install-arch.log 2>&1; then
-        print_nosubsec_err "Error: Unable to create directory \"/mnt/home/{{ installer.username }}/$d\" - {{ n0ec }}"
+if [ "$do_users" != "false" ]; then
+    print_subsec "Setting root user account password..."
+    if ! $chroot passwd; then
+        print_nosubsec_err "Error: Unable to set root user account password - {{ n0ec }}"
         exit $EC
     fi
-done
-
-print_subsec "Setting \"{{ installer.username }}\" user account home permissions..."
-if ! $chroot chown -R {{ installer.username }}:wheel "/home/{{ installer.username }}" >> install-arch.log 2>&1; then
-    print_nosubsec_err "Error: Unable to set primary user account home permissions - {{ n0ec }}"
-    exit $EC
+     
+    print_subsec "Creating \"{{ installer.username }}\" user account..."
+    useraddcmd='useradd -m -g wheel -s {{ installer.shell }} {{ installer.username }}'
+    if ! $chroot $useraddcmd >> install-arch.log 2>&1; then
+        print_nosubsec_err "Error: Unable to create primary user account - {{ n0ec }}"
+        exit $EC
+    fi
+     
+    print_subsec "Setting \"{{ installer.username }}\" user account password..."
+    if ! $chroot passwd "{{ installer.username }}"; then
+        print_nosubsec_err "Error: Unable to set primary user account password - {{ n0ec }}"
+        exit $EC
+    fi
+     
+    print_subsec "Creating user home directories..."
+    for d in {{ installer.user_directories|join(' ') }}; do
+        if ! mkdir -p "/mnt/home/{{ installer.username }}/$d" >> install-arch.log 2>&1; then
+            print_nosubsec_err "Error: Unable to create directory \"/mnt/home/{{ installer.username }}/$d\" - {{ n0ec }}"
+            exit $EC
+        fi
+    done
+     
+    print_subsec "Setting \"{{ installer.username }}\" user account home permissions..."
+    if ! $chroot chown -R {{ installer.username }}:wheel "/home/{{ installer.username }}" >> install-arch.log 2>&1; then
+        print_nosubsec_err "Error: Unable to set primary user account home permissions - {{ n0ec }}"
+        exit $EC
+    fi
 fi
 
 # ----------------------------
