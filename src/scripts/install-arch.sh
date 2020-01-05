@@ -600,6 +600,8 @@ if [ "$?" -ne 0 ]; then
     exit $EC
 fi
 
+chmod +x /tmp/config-initramfs.py >> install-arch.log 2>&1
+
 print_subsec "Configuring initramfs..."
 if ! /tmp/config-initramfs.py >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to configure initramfs - {{ n0ec }}"
