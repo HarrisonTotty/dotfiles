@@ -267,6 +267,9 @@ label = "%percentage%%"
 
 [module/volume]
 type = internal/pulseaudio
+{% if this.pulseaudio_sink is defined %}
+sink = {{ this.pulseaudio_sink }}
+{% endif %}
 format-volume = [ VOL <label-volume> ]
 format-muted = [ VOL <label-muted> ]
 label-muted = "MUTED"
