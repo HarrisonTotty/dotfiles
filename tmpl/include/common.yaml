@@ -46,7 +46,7 @@ installer:
     - 'arandr'
     - 'autoconf'
     - 'base'
-    - 'dhcpd'
+    - 'dhcpcd'
     - 'dialog'
     - 'emacs'
     - 'fakeroot'
