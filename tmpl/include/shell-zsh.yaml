@@ -5,7 +5,7 @@ shell: 'zsh'
 
 files:
   - dst: 'zsh/*.zsh'
-  - dst: 'zsh/zshrc.zsh'
+  - dst: 'zsh/zshrc.conf'
     src: 'zsh/zshrc.template'
     symlink: '~/.zshrc'
 
