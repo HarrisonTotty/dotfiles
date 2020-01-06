@@ -761,7 +761,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="$boot_root rw {{ installer.bootloader.kernel_paramet
 GRUB_DEFAULT=0
 GRUB_DISABLE_RECOVERY=true
 GRUB_DISTRIBUTOR="Arch"
-{% if installer.system_encrypted is defined and installed.system_encrypted %}
+{% if installer.system_encrypted is defined and installer.system_encrypted %}
 GRUB_ENABLE_CRYPTODISK=y
 {% endif %}
 GRUB_GFXMODE=auto
