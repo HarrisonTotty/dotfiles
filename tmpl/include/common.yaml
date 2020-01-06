@@ -53,6 +53,8 @@ installer:
     - 'feh'
     - 'gcc'
     - 'git'
+    - 'hunspell'
+    - 'hunspell-en_US'
     - 'intel-ucode'
     - 'libnotify'
     - 'linux'
