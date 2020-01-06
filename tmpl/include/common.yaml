@@ -48,7 +48,6 @@ installer:
     - 'base'
     - 'dhcpcd'
     - 'dialog'
-    - 'emacs'
     - 'fakeroot'
     - 'feh'
     - 'gcc'
