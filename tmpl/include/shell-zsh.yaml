@@ -12,4 +12,5 @@ files:
 installer:
   packages:
     - 'zsh'
+    - 'zsh-completions'
   shell: '/bin/zsh'
