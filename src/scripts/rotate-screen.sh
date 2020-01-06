@@ -14,7 +14,7 @@ rotate_screen() {
 
 if xrandr -q | grep ' connected' | grep -q '{{ monitors.primary }}'; then
     prompt='switch screen mode :'
-    choice=$(echo 'Laptop|Tablet (Portrait)|Tablet (Landscape)' | rofi -sep '|' -dmenu -i -no-custom -p "$prompt")
+    choice=$(echo 'Laptop|Tablet (Landscape)|Tablet (Portrait)' | rofi -sep '|' -dmenu -i -l 3 -no-custom -p "$prompt")
     if [ "$choice" == "" ]; then
         notify-send -u low 'WM' 'Action cancelled.' &
     elif [ "$choice" == "Laptop" ]; then
