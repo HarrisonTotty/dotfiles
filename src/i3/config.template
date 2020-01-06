@@ -144,6 +144,9 @@ bindsym $mod+Shift+l exec --no-startup-id "{{ scripts_dir }}/lock.sh"
 # Switch between windows.
 bindsym Mod1+Tab exec --no-startup-id "{{ scripts_dir }}/switch-windows.sh"
 
+# Switch screen rotation modes.
+bindsym $mod+F7 exec --no-startup-id "{{ scripts_dir }}/rotate-screen.sh"
+
 
 # -------------------------------------------
 
