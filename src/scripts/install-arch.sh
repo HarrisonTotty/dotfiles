@@ -40,6 +40,26 @@ trizen_repo="https://aur.archlinux.org/trizen.git"
 
 # ----- Helper Functions -----
 
+finish_installation() {
+    EC=20
+    print_sec "Finishing installation..."
+
+    print_subsec "Unmounting filesystems..."
+    if ! umount -R /mnt >> install-arch.log 2>&1; then
+        print_nosubsec_err "Error: Unable to unmount filesystems - {{ n0ec }}"
+        exit $EC
+    fi
+
+{% for p in installer.partitions %}
+{% if p.encrypted is defined and p.encrypted %}
+    print_subsec "Closing encrypted container of \"{{ p.name }}\" partition..."
+    if ! cryptsetup close "{{ p.name }}" >> install-arch.log 2>&1; then
+        print_nosubsec_err "Warning: Unable to close encrypted container - {{ n0ec }}"
+    fi
+{% endif %}
+{% endfor %}
+}
+
 print_log() { echo "$@" >> install-arch.log; }
 
 print_sec() { echo "$(tput setaf 4)::$(tput sgr0) $@"; echo "$@" >> install-arch.log; }
@@ -54,6 +74,7 @@ show_help() {
     echo 'Usage: install-arch.sh [...]'
     echo
     echo "OPTIONS:"
+    echo "--finish              Unmount any partitions and close encrypted devices for reboot."
     echo "-b, --no-bootloader   Don't install/configure the bootloader. Implies \"-f\" and \"-P\"."
     echo "-f, --no-filesystems  Don't setup partition filesystems (or encryption). Implies \"-P\"."
     echo "-h, --help            Show help and usage information."
@@ -73,7 +94,7 @@ show_help() {
 EC=10
 
 short_options="b,f,h,i,m,p,P,u"
-long_options="no-bootloader,no-filesystems,help,no-initramfs,no-rankmirrors,no-packages,no-partitions,no-users"
+long_options="finish,no-bootloader,no-filesystems,help,no-initramfs,no-rankmirrors,no-packages,no-partitions,no-users"
 
 getopt --test > /dev/null
 if [ "$?" -ne 4 ]; then
@@ -96,6 +117,10 @@ while true; do
         -f|--no-filesystems)
             do_filesystems=false
             shift
+            ;;
+        --finish)
+            finish_installation
+            exit 0
             ;;
         -h|--help)
             show_help
@@ -750,7 +775,7 @@ fi
 print_sec "Installation complete."
 
 echo
-echo "Ensure that the installation process was successful and then run \"umount -R /mnt\" before rebooting."
+echo "Ensure that the installation process was successful and then run the script again with the \"--finish\" flag before rebooting."
 exit 0
 
 # ----------------------------
