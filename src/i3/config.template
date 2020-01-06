@@ -67,7 +67,7 @@ bindsym $mod+grave exec --no-startup-id "{{ scripts_dir }}/run.sh"
 bindsym $mod+Shift+grave exec --no-startup-id "{{ scripts_dir }}/ssh.sh"
 
 {% for kb in this.key_bindings %}
-{% if not kb.keys is defined %}
+{% if not kb.key_binding is defined %}
 {% do raise('key binding does not specify keys to bind') %}
 {% endif %}
 {% if not kb.action is defined %}
@@ -77,7 +77,7 @@ bindsym $mod+Shift+grave exec --no-startup-id "{{ scripts_dir }}/ssh.sh"
 {% if kb.desc is defined %}
 # {{ kb.desc }}
 {% endif %}
-bindsym {{ kb.keys }} {{ kb.action }}
+bindsym {{ kb.key_binding }} {{ kb.action }}
 {% endfor %}
 
 # -------------------------------------------
