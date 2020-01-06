@@ -15,7 +15,7 @@ if xrandr -q | grep ' connected' | grep -q '{{ monitors.primary }}'; then
     elif [ "$choice" == "Laptop" ]; then
         rotate_screen normal
         notify-send -u low 'WM' 'Screen Mode: Laptop' &
-    elif [ "$choice" == "Tablet (Portait)" ]; then
+    elif [ "$choice" == "Tablet (Portrait)" ]; then
         rotate_screen left
         notify-send -u low 'WM' 'Screen Mode: Tablet (Portrait)' &
     elif [ "$choice" == "Tablet (Landscape)" ]; then
