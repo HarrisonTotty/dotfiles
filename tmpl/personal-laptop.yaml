@@ -3,6 +3,7 @@
 
 include:
   - 'include/common.yaml'
+  - 'include/audio-pulseaudio.yaml'
   - 'include/bar-polybar.yaml'
   - 'include/bootloader-grub-system.yaml'
   - 'include/font-iosevka.yaml'
