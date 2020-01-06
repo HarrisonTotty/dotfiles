@@ -15,8 +15,8 @@ include:
   - 'include/wm-i3.yaml'
 
 accents:
-  left: '{'
-  right: '}'
+  left: '['
+  right: ']'
 
 installer:
   hostname: 'thewired'
