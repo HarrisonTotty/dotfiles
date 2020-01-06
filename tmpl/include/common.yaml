@@ -54,6 +54,7 @@ installer:
     - 'gcc'
     - 'git'
     - 'intel-ucode'
+    - 'libnotify'
     - 'linux'
     - 'linux-firmware'
     - 'lxappearance'
