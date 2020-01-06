@@ -542,6 +542,16 @@ if ! echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf; then
     exit $EC
 fi
 
+print_subsec "Setting TTY font..."
+cat > /mnt/etc/vconsole.conf 2>>install-arch.log <<EOF
+FONT=ter-132n
+FONT_MAP=8859-2
+EOF
+if [ "$?" -ne 0 ]; then
+    print_nosubsec_err "Error: Unable to set TTY font - unable to write to \"/etc/vconsole.conf\"."
+    exit $EC
+fi
+
 print_subsec "Setting system hostname..."
 if ! echo '{{ installer.hostname }}' > /mnt/etc/hostname && $chroot hostname '{{ installer.hostname }}' >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to set system hostname - {{ n0ec }}"
