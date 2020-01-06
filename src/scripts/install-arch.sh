@@ -40,6 +40,8 @@ trizen_repo="https://aur.archlinux.org/trizen.git"
 
 # ----- Helper Functions -----
 
+print_log() { echo "$@" >> install-arch.log; }
+
 print_sec() { echo "$(tput setaf 4)::$(tput sgr0) $@"; echo "$@" >> install-arch.log; }
 print_nosec() { echo "   $@"; echo "$@" >> install-arch.log; }
 print_nosec_err() { echo "   $(tput setaf 1)$@$(tput sgr0)" 1>&2; echo "$@" >> install-arch.log; }
@@ -108,7 +110,7 @@ while true; do
             shift
             ;;
         -p|--no-packages)
-            do_rankmirrors=false
+            do_packages=false
             shift
             ;;
         -P|--no-partitions)
@@ -130,14 +132,24 @@ while true; do
     esac
 done
 
+# Blank the log file.
+echo -n '' > install-arch.log
+
+print_log "----- CLI Options -----"
+if [ "$do_bootloader" != "false" ]; then print_log "Configure bootloader: true"; else print_log "Configure bootloader: false"; fi
+if [ "$do_filesystems" != "false" ]; then print_log "Configure filesystems: true"; else print_log "Configure filesystems: false"; fi
+if [ "$do_initramfs" != "false" ]; then print_log "Configure initramfs: true"; else print_log "Configure initramfs: false"; fi
+if [ "$do_rankmirrors" != "false" ]; then print_log "Rank mirrorlist: true"; else print_log "Rank mirrorlist: false"; fi
+if [ "$do_packages" != "false" ]; then print_log "Install packages: true"; else print_log "Install packages: false"; fi
+if [ "$do_partitions" != "false" ]; then print_log "Configure partitions: true"; else print_log "Configure partitions: false"; fi
+if [ "$do_users" != "false" ]; then print_log "Configure users: true"; else print_log "Configure users: false"; fi
+print_log "-----------------------"
 
 # ----------------------------
 
 
 
 # ------ Initial Setup -------
-
-echo -n '' > install-arch.log
 
 EC=2
 
