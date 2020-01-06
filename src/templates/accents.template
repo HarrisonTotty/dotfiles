@@ -1,0 +1,11 @@
+{# GUI Accents template #}
+{% if this.accents is defined %}
+{% set accent_left = this.accents.left|default('[') %}
+{% set accent_right = this.accents.right|default(']') %}
+{% elif accents is defined %}
+{% set accent_left = accents.left|default('[') %}
+{% set accent_right = accents.right|default(']') %}
+{% else %}
+{% set accent_left = '[' %}
+{% set accent_right = ']' %}
+{% endif %}

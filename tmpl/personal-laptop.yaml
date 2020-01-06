@@ -14,8 +14,11 @@ include:
   - 'include/shell-zsh.yaml'
   - 'include/wm-i3.yaml'
 
+accents:
+  left: '['
+  right: ']'
+
 installer:
   hostname: 'thewired'
   username: 'lain'
 
-  

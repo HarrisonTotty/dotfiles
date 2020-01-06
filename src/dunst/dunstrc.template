@@ -1,5 +1,6 @@
 # Dunst Configuration File
 # ------------------------
+{% from 'templates/accents.template' import accent_left, accent_right with context %}
 
 # ----- Global Settings -----
 
@@ -12,7 +13,7 @@ markup = no
 plain_text = no
 
 # Set the general message format
-format = "[%s]  %b"
+format = "{{ accent_left }}%s{{ accent_right }}  %b"
 
 # Sort messages by urgency
 sort = yes

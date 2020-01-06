@@ -9,6 +9,7 @@
     'this.key_bindings'
   )
 %}
+{% from 'templates/accents.template' import accent_left, accent_right with context %}
 {% set scripts_dir = '$HOME/.config/scripts' %}
 
 # ---------------- Modifier -----------------
@@ -201,7 +202,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 font pango:{{ font.name }} 18
 
 # This is what _actually_ sets the font.
-for_window [class=".*"] title_format "<span font='{{ font.name }}' font_size='x-small'> [ %title ]</span>"
+for_window [class=".*"] title_format "<span font='{{ font.name }}' font_size='x-small'> {{ accent_left }} %title {{ accent_right }}</span>"
 
 # Dynamically change wallpapers.
 bindsym $mod+Shift+w exec --no-startup-id "{{ scripts_dir }}/switch-wallpaper.sh"

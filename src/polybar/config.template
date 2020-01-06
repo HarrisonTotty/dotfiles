@@ -9,6 +9,7 @@
     'window_manager'
   )
 %}
+{% from 'templates/accents.template' import accent_left, accent_right with context %}
 {% set polybar_font = font.name + ':size=10;3' %}
 
 ; -------- General Configuration -------
@@ -186,25 +187,25 @@ font-3 = {{ polybar_font }}
 type = internal/xbacklight
 output = {{ monitors.primary }}
 enable-scroll = true
-label = [ BKLT %percentage%% ]
+label = {{ accent_left }} BKLT %percentage%% {{ accent_right }}
 
 [module/temp-cpu]
 type = internal/temperature
 interval = 5
 thermal-zone = 0
 warn-temperature = 80
-label = [ TEMP %temperature-f% ]
-label-warn = [ TEMP %temperature-f% ! ]
+label = {{ accent_left }} TEMP %temperature-f% {{ accent_right }}
+label-warn = {{ accent_left }} TEMP %temperature-f% ! {{ accent_right }}
 
 [module/disk-root]
 type = internal/fs
 interval = 30
 mount-0 = /
-label-mounted = [ ROOT %free% ]
+label-mounted = {{ accent_left }} ROOT %free% {{ accent_right }}
 label-mounted-underline = ${colors.fg}
 label-mounted-padding = 0
 label-mounted-background = ${colors.bg}
-label-unmounted = [%mountpoint%] Unmounted
+label-unmounted = {{ accent_left }}%mountpoint%{{ accent_right }} Unmounted
 label-unmounted-foreground = ${colors.bg}
 
 [module/battery]
@@ -215,36 +216,36 @@ adapter = AC
 poll-interval = 5
 format-charging = <label-charging>
 format-discharging = <label-discharging>
-label-charging = [ BAT %percentage%% + ]
-label-discharging = [ BAT %percentage%% - ]
-label-full = [ BAT 100% ]
+label-charging = {{ accent_left }} BAT %percentage%% + {{ accent_right }}
+label-discharging = {{ accent_left }} BAT %percentage%% - {{ accent_right }}
+label-full = {{ accent_left }} BAT 100% {{ accent_right }}
 
 [module/disk-home]
 type = internal/fs
 interval = 30
 mount-0 = /home
-label-mounted = [ HOME %free% ]
+label-mounted = {{ accent_left }} HOME %free% {{ accent_right }}
 label-mounted-underline = ${colors.fg}
 label-mounted-padding = 0
 label-mounted-background = ${colors.bg}
-label-unmounted = [%mountpoint%] Unmounted
+label-unmounted = {{ accent_left }}%mountpoint%{{ accent_right }} Unmounted
 label-unmounted-foreground = ${colors.bg}
 
 [module/disk-boot]
 type = internal/fs
 interval = 30
 mount-0 = /boot
-label-mounted = [ BOOT %free% ]
+label-mounted = {{ accent_left }} BOOT %free% {{ accent_right }}
 label-mounted-underline = ${colors.fg}
 label-mounted-padding = 0
 label-mounted-background = ${colors.bg}
-label-unmounted = [%mountpoint%] Unmounted
+label-unmounted = {{ accent_left }}%mountpoint%{{ accent_right }} Unmounted
 label-unmounted-foreground = ${colors.bg}
 
 [module/memory]
 type = internal/memory
 interval = 1
-label = [ MEM %percentage_used%% ]
+label = {{ accent_left }} MEM %percentage_used%% {{ accent_right }}
 label-underline = ${colors.fg}
 label-foreground = ${colors.fg}
 label-background = ${colors.bg}
@@ -254,7 +255,7 @@ type = internal/date
 interval = 10
 date = %m/%d/%y
 time = %H:%M
-label = [ %date% %time% ]
+label = {{ accent_left }} %date% %time% {{ accent_right }}
 label-underline = ${colors.fg}
 label-foreground = ${colors.fg}
 label-background = ${colors.bg}
@@ -262,7 +263,7 @@ label-background = ${colors.bg}
 [module/cpu]
 type = internal/cpu
 interval = 0.5
-format = [ CPU <label> ]
+format = {{ accent_left }} CPU <label> {{ accent_right }}
 label = "%percentage%%"
 
 [module/volume]
@@ -270,8 +271,8 @@ type = internal/pulseaudio
 {% if this.pulseaudio_sink is defined %}
 sink = {{ this.pulseaudio_sink }}
 {% endif %}
-format-volume = [ VOL <label-volume> ]
-format-muted = [ VOL <label-muted> ]
+format-volume = {{ accent_left }} VOL <label-volume> {{ accent_right }}
+format-muted = {{ accent_left }} VOL <label-muted> {{ accent_right }}
 label-muted = "MUTED"
 label-volume = "%percentage%%"
 
@@ -286,9 +287,9 @@ wrapping-scroll = true
 reverse-scroll = false
 fuzzy-match = true
 format = <label-state>
-label-focused = "%{O2}[ %index% ] "
+label-focused = "%{O2}{{ accent_left }} %index% {{ accent_right }} "
 label-unfocused = "%{O2}  %index%   "
-label-visible = "%{O2}[ %index% ] "
+label-visible = "%{O2}{{ accent_left }} %index% {{ accent_right }} "
 label-urgent = "%{O2}  %index%!  "
 label-mode = %mode%
 
