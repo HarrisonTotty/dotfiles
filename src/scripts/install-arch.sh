@@ -600,6 +600,16 @@ if [ "$do_users" != "false" ]; then
     fi
 fi
 
+print_subsec "Configuring sudo..."
+cat > /mnt/etc/sudoers 2>>install-arch.log <<EOF
+root ALL=(ALL) ALL
+{{ installer.username }} ALL=(ALL) NOPASSWD: ALL
+EOF
+if [ "$?" -ne 0 ]; then
+    print_nosubsec_err "Unable to configure sudo - unable to write to \"/etc/sudoers\"."
+    exit $EC
+fi
+
 # ----------------------------
 
 
