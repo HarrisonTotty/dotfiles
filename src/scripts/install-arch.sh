@@ -754,7 +754,25 @@ if ! $chroot grub-install --target=x86_64-efi --efi-directory=/boot --bootloader
     print_nosubsec_err "Error: Unable to install bootloader - {{ n0ec }}"
     exit $EC
 fi
-print_subsec "[TODO] Writing bootloader configuration..."
+print_subsec "Writing bootloader configuration..."
+cat > /mnt/etc/default/grub 2>>install-arch.log <<EOF
+GRUB_CMDLINE_LINUX=""
+GRUB_CMDLINE_LINUX_DEFAULT="$boot_root rw {{ installer.bootloader.kernel_parameters }}"
+GRUB_DEFAULT=0
+GRUB_DISABLE_RECOVERY=true
+GRUB_DISTRIBUTOR="Arch"
+GRUB_ENABLE_CRYPTODISK=y
+GRUB_GFXMODE=auto
+GRUB_GFXPAYLOAD_LINUX=keep
+GRUB_PRELOAD_MODULES="part_gpt part_msdos"
+GRUB_TERMINAL_INPUT=console
+GRUB_TIMEOUT=3
+GRUB_TIMEOUT_STYLE=menu
+EOF
+if [ "$?" -ne 0 ]; then
+    print_nosubsec_err "Unable to write bootloader configuration - {{ n0ec }}"
+    exit $EC
+fi
 print_subsec "Configuring bootloader..."
 if ! $chroot grub-mkconfig -o /boot/grub/grub.cfg >> install-arch.log 2>&1; then
     print_nosubsec_err "Unable to configure bootloader - {{ n0ec }}"
