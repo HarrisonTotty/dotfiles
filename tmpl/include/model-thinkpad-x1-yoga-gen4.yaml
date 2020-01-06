@@ -9,6 +9,7 @@ monitors:
 installer:
   drive: '/dev/nvme0n1'
   packages:
-    - 'fprintd'     # For the fingerprint reader.
-    - 'fwupd'       # For firmware updates.
-    - 'imagemagick' # Also for the fingerprint reader.
+    - 'fprintd'          # For the fingerprint reader.
+    - 'fwupd'            # For firmware updates.
+    - 'imagemagick'      # Also for the fingerprint reader.
+    - 'xf86-input-wacom' # For stylus.
