@@ -1,0 +1,52 @@
+# Window Manager : i3
+# -------------------
+
+window_manager: 'i3'
+
+files:
+  - dst: 'i3/config'
+    src: 'i3/config.template'
+    accents:
+      left: '{'
+      right: '}'
+    key_bindings:
+      # ----- Standard Programs -----
+      - desc: 'File Manager'
+        key_binding: '$mod+f'
+        action: 'exec pcmanfm'
+      - desc: 'Python Interpreter'
+        key_binding: '$mod+p'
+        action: 'exec "$HOME/.config/scripts/ipython.sh"'
+      - desc: 'Terminal'
+        key_binding: '$mod+Return'
+        action: 'exec "urxvtc +sb -title Terminal -letsp 1"'
+      - desc: 'Text Editor'
+        key_binding: '$mod+e'
+        action: 'exec emacs'
+      # ----- Utilities -----
+      - desc: 'Dotfiles Management'
+        key_binding: '$mod+period'
+        action: 'exec --no-startup-id "$HOME/.config/scripts/mkdot.sh"'
+      - desc: 'JIRA Browser'
+        key_binding: '$mod+j'
+        action: 'exec --no-startup-id "$HOME/.config/scripts/rofi-jira.sh -s open_current_user"'
+      - desc: 'JIRA Browser (Alternative)'
+        key_binding: '$mod+Shift+j'
+        action: 'exec --no-startup-id "$HOME/.config/scripts/rofi-jira.sh"'
+      - desc: 'Network Manager'
+        key_binding: '$mod+Shift+F2'
+        action: 'exec --no-startup-id "$HOME/.config/scripts/rofi-network.sh"'
+      - desc: 'Password Manager'
+        key_binding: '$mod+F12'
+        action: 'exec --no-startup-id "$HOME/.config/scripts/rofi-lpass.sh"'
+      - desc: 'Screenshot (fullscreen)'
+        key_binding: '$mod+Print'
+        action: 'exec --no-startup-id "$HOME/.config/scripts/scrot-full.sh"'
+      - desc: 'Screenshot (selection)'
+        key_binding: '$mod+Shift+Print'
+        action: 'exec --no-startup-id "$HOME/.config/scripts/scrot-select.sh"'
+
+installer:
+  packages:
+    - 'i3-gaps'
+    - 'i3lock'

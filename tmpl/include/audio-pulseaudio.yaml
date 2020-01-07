@@ -1,0 +1,8 @@
+# Pulseaudio Configuration
+# ------------------------
+
+installer:
+  packages:
+    - 'pulseaudio'
+    - 'pulseaudio-alsa'
+    - 'pavucontrol'

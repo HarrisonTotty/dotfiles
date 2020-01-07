@@ -1,0 +1,12 @@
+# Primary ZSH Configuration File
+# ------------------------------
+
+# Import the rest of the zsh configuration files
+for f in $HOME/.config/zsh/*.zsh; do
+    source $f
+done
+
+# Automatically start the window manager at login
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+    exec startx > "$HOME/.wm-last-run.log" 2>&1
+fi

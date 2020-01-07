@@ -1,0 +1,26 @@
+# Work Laptop Configuration File
+# ------------------------------
+
+include:
+  - 'include/common.yaml'
+  - 'include/bar-polybar.yaml'
+  - 'include/font-iosevka.yaml'
+  - 'include/notifications-dunst.yaml'
+  - 'include/shell-zsh.yaml'
+  - 'include/wm-i3.yaml'
+
+installer:
+  drive: '/dev/nvme0n1'
+  filesystems:
+    - name: 'EFI'
+      kind: 'fat32'
+      partition: 'EFI'
+  partitions:
+    - name: 'EFI'
+      size: '1G'
+      typecode: 'ef00' # EFI System
+
+monitors:
+  primary: 'eDP-1'
+  left: 'DP-2'
+  right: 'HDMI-1'

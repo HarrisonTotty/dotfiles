@@ -1,0 +1,12 @@
+# Status Bar : Polybar
+# --------------------
+
+installer:
+  aur_packages:
+    - 'polybar-git'
+
+status_bar: 'polybar'
+
+files:
+  - dst: 'polybar/config'
+    src: 'polybar/config.template'

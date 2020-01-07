@@ -1,0 +1,6 @@
+# GNU Emacs Configuration
+# -----------------------
+
+installer:
+  packages:
+    - 'emacs'

@@ -1,0 +1,296 @@
+; Polybar Configuration File
+; --------------------------
+{%
+  do require(
+    'font.name',
+    'monitors.primary',
+    'monitors.left',
+    'monitors.right',
+    'window_manager'
+  )
+%}
+{% from 'templates/accents.template' import accent_left, accent_right with context %}
+{% set polybar_font = font.name + ':size=10;3' %}
+
+; -------- General Configuration -------
+
+[global/wm]
+margin-top = 100
+margin-bottom = 100
+
+[colors]
+fg = ${xrdb:color7}
+bg = ${xrdb:color3}
+modfg = ${xrdb:color1}
+
+[sizes]
+height = 20
+
+; --------------------------------------
+
+
+; --------- Bars Configuration ---------
+
+[bar/bar-primary]
+monitor = {{ monitors.primary }}
+bottom = false
+fixed-center = true
+border-size = 0
+border-color = ${colors.bg}
+width = 100%
+height = ${sizes.height}
+override-redirect = false
+offset-x = 0%
+offset-y = 0%
+radius = 0.0
+enable-ipc = false
+padding-left = 1
+padding-right = 1
+module-margin-right = 0
+module-margin-left = 2
+modules-right = brightness volume battery
+modules-center = date
+{% if window_manager == 'i3' %}
+modules-left = i3
+{% elif window_manager == 'herbstluftwm' %}
+modules-left =
+{% else %}
+modules-left =
+{% endif %}
+background = ${colors.bg}
+foreground = ${colors.fg}
+overline-size = 2
+overline-color = ${colors.fg}
+underline-size = 0
+underline-color = ${colors.fg}
+font-0 = {{ polybar_font }}
+font-1 = {{ polybar_font }}
+font-2 = {{ polybar_font }}
+font-3 = {{ polybar_font }}
+
+[bar/bar-left]
+monitor = {{ monitors.left }}
+bottom = false
+fixed-center = true
+border-size = 0
+border-color = ${colors.bg}
+width = 100%
+height = ${sizes.height}
+override-redirect = false
+offset-x = 0%
+offset-y = 0%
+radius = 0.0
+enable-ipc = false
+padding-left = 1
+padding-right = 1
+module-margin-right = 0
+module-margin-left = 2
+modules-right = cpu memory temp-cpu
+modules-center = date
+{% if window_manager == 'i3' %}
+modules-left = i3
+{% elif window_manager == 'herbstluftwm' %}
+modules-left =
+{% else %}
+modules-left =
+{% endif %}
+background = ${colors.bg}
+foreground = ${colors.fg}
+overline-size = 2
+overline-color = ${colors.fg}
+underline-size = 0
+underline-color = ${colors.fg}
+font-0 = {{ polybar_font }}
+font-1 = {{ polybar_font }}
+font-2 = {{ polybar_font }}
+font-3 = {{ polybar_font }}
+
+[bar/bar-single-monitor]
+monitor = {{ monitors.right }}
+bottom = false
+fixed-center = true
+border-size = 0
+border-color = ${colors.bg}
+width = 100%
+height = ${sizes.height}
+override-redirect = false
+offset-x = 0%
+offset-y = 0%
+radius = 0.0
+enable-ipc = false
+padding-left = 1
+padding-right = 1
+module-margin-right = 0
+module-margin-left = 2
+modules-right = 
+{% if window_manager == 'i3' %}
+modules-left = i3
+{% elif window_manager == 'herbstluftwm' %}
+modules-left =
+{% else %}
+modules-left =
+{% endif %}
+background = ${colors.bg}
+foreground = ${colors.fg}
+overline-size = 0
+overline-color = ${colors.fg}
+underline-size = 0
+underline-color = ${colors.fg}
+font-0 = {{ polybar_font }}
+font-1 = {{ polybar_font }}
+font-2 = {{ polybar_font }}
+font-3 = {{ polybar_font }}
+
+[bar/bar-right]
+monitor = {{ monitors.right }}
+bottom = false
+fixed-center = true
+border-size = 0
+border-color = ${colors.bg}
+width = 100%
+height = ${sizes.height}
+override-redirect = false
+offset-x = 0%
+offset-y = 0%
+radius = 0.0
+enable-ipc = false
+padding-left = 1
+padding-right = 1
+module-margin-right = 0
+module-margin-left = 2
+modules-right = disk-boot disk-root disk-home
+modules-center = date
+{% if window_manager == 'i3' %}
+modules-left = i3
+{% elif window_manager == 'herbstluftwm' %}
+modules-left =
+{% else %}
+modules-left =
+{% endif %}
+background = ${colors.bg}
+foreground = ${colors.fg}
+overline-size = 0
+overline-color = ${colors.fg}
+underline-size = 0
+underline-color = ${colors.fg}
+font-0 = {{ polybar_font }}
+font-1 = {{ polybar_font }}
+font-2 = {{ polybar_font }}
+font-3 = {{ polybar_font }}
+
+; --------------------------------------
+
+
+; -------- Modules Configuration -------
+
+[module/brightness]
+type = internal/xbacklight
+output = {{ monitors.primary }}
+enable-scroll = true
+label = {{ accent_left }} BKLT %percentage%% {{ accent_right }}
+
+[module/temp-cpu]
+type = internal/temperature
+interval = 5
+thermal-zone = 0
+warn-temperature = 80
+label = {{ accent_left }} TEMP %temperature-f% {{ accent_right }}
+label-warn = {{ accent_left }} TEMP %temperature-f% ! {{ accent_right }}
+
+[module/disk-root]
+type = internal/fs
+interval = 30
+mount-0 = /
+label-mounted = {{ accent_left }} ROOT %free% {{ accent_right }}
+label-mounted-underline = ${colors.fg}
+label-mounted-padding = 0
+label-mounted-background = ${colors.bg}
+label-unmounted = {{ accent_left }}%mountpoint%{{ accent_right }} Unmounted
+label-unmounted-foreground = ${colors.bg}
+
+[module/battery]
+type = internal/battery
+full-at = 99
+battery = BAT0
+adapter = AC
+poll-interval = 5
+format-charging = <label-charging>
+format-discharging = <label-discharging>
+label-charging = {{ accent_left }} BAT %percentage%% + {{ accent_right }}
+label-discharging = {{ accent_left }} BAT %percentage%% - {{ accent_right }}
+label-full = {{ accent_left }} BAT 100% {{ accent_right }}
+
+[module/disk-home]
+type = internal/fs
+interval = 30
+mount-0 = /home
+label-mounted = {{ accent_left }} HOME %free% {{ accent_right }}
+label-mounted-underline = ${colors.fg}
+label-mounted-padding = 0
+label-mounted-background = ${colors.bg}
+label-unmounted = {{ accent_left }}%mountpoint%{{ accent_right }} Unmounted
+label-unmounted-foreground = ${colors.bg}
+
+[module/disk-boot]
+type = internal/fs
+interval = 30
+mount-0 = /boot
+label-mounted = {{ accent_left }} BOOT %free% {{ accent_right }}
+label-mounted-underline = ${colors.fg}
+label-mounted-padding = 0
+label-mounted-background = ${colors.bg}
+label-unmounted = {{ accent_left }}%mountpoint%{{ accent_right }} Unmounted
+label-unmounted-foreground = ${colors.bg}
+
+[module/memory]
+type = internal/memory
+interval = 1
+label = {{ accent_left }} MEM %percentage_used%% {{ accent_right }}
+label-underline = ${colors.fg}
+label-foreground = ${colors.fg}
+label-background = ${colors.bg}
+
+[module/date]
+type = internal/date
+interval = 10
+date = %m/%d/%y
+time = %H:%M
+label = {{ accent_left }} %date% %time% {{ accent_right }}
+label-underline = ${colors.fg}
+label-foreground = ${colors.fg}
+label-background = ${colors.bg}
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+format = {{ accent_left }} CPU <label> {{ accent_right }}
+label = "%percentage%%"
+
+[module/volume]
+type = internal/pulseaudio
+{% if this.pulseaudio_sink is defined %}
+sink = {{ this.pulseaudio_sink }}
+{% endif %}
+format-volume = {{ accent_left }} VOL <label-volume> {{ accent_right }}
+format-muted = {{ accent_left }} VOL <label-muted> {{ accent_right }}
+label-muted = "MUTED"
+label-volume = "%percentage%%"
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = false
+index-sort = true
+enable-click = true
+enable-scroll = true
+wrapping-scroll = true
+reverse-scroll = false
+fuzzy-match = true
+format = <label-state>
+label-focused = "%{O2}{{ accent_left }} %index% {{ accent_right }} "
+label-unfocused = "%{O2}  %index%   "
+label-visible = "%{O2}{{ accent_left }} %index% {{ accent_right }} "
+label-urgent = "%{O2}  %index%!  "
+label-mode = %mode%
+
+; --------------------------------------

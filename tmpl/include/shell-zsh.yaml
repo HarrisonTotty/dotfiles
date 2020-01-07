@@ -1,0 +1,16 @@
+# Shell : zsh
+# -----------
+
+shell: 'zsh'
+
+files:
+  - dst: 'zsh/*.zsh'
+  - dst: 'zsh/zshrc.conf'
+    src: 'zsh/zshrc.template'
+    symlink: '~/.zshrc'
+
+installer:
+  packages:
+    - 'zsh'
+    - 'zsh-completions'
+  shell: '/bin/zsh'

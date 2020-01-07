@@ -1,16 +1,8 @@
 # .gitignore file
 
-# Ignore everything by default
-/*
+# tmpl binaries
+/tmpl-binary
 
-# Ironically, allow this file
-!/.gitignore
-
-# Allow README.md
-!/README.md
-
-# Allow the templates folder
-!/templates/
-
-# Allow the yaml folder
-!/yaml/
+# Ignore build constructs
+/mkdot.log
+/build
