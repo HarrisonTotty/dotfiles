@@ -12,4 +12,5 @@ installer:
     - 'fprintd'          # For the fingerprint reader.
     - 'fwupd'            # For firmware updates.
     - 'imagemagick'      # Also for the fingerprint reader.
+    - 'onboard'          # For on-screen keyboard.
     - 'xf86-input-wacom' # For stylus.

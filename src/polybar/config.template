@@ -178,6 +178,37 @@ font-1 = {{ polybar_font }}
 font-2 = {{ polybar_font }}
 font-3 = {{ polybar_font }}
 
+[bar/bar-tablet]
+monitor = {{ monitors.primary }}
+bottom = true
+fixed-center = true
+border-size = 0
+border-color = ${colors.bg}
+width = 100%
+height = ${sizes.height}
+override-redirect = false
+offset-x = 0%
+offset-y = 0%
+radius = 0.0
+enable-ipc = false
+padding-left = 1
+padding-right = 1
+module-margin-right = 0
+module-margin-left = 2
+modules-right = 
+modules-center = keyboard
+modules-left = 
+background = ${colors.bg}
+foreground = ${colors.fg}
+overline-size = 0
+overline-color = ${colors.fg}
+underline-size = 0
+underline-color = ${colors.fg}
+font-0 = {{ polybar_font }}
+font-1 = {{ polybar_font }}
+font-2 = {{ polybar_font }}
+font-3 = {{ polybar_font }}
+
 ; --------------------------------------
 
 
@@ -259,6 +290,11 @@ label = {{ accent_left }} %date% %time% {{ accent_right }}
 label-underline = ${colors.fg}
 label-foreground = ${colors.fg}
 label-background = ${colors.bg}
+
+[module/keyboard]
+type = custom/text
+content = '[ KEYBOARD ]'
+click-left = onboard --layout Small --theme LowContrast
 
 [module/cpu]
 type = internal/cpu

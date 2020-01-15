@@ -10,6 +10,9 @@ rotate_screen() {
         xsetwacom --set "$wacom_device" rotate "$2"
     done <<< "$wacom_devices"
     $HOME/.config/scripts/polybar-start.sh
+    if [ "$1" != "normal" ]; then
+        polybar bar-tablet &
+    fi
 }
 
 if xrandr -q | grep ' connected' | grep -q '{{ monitors.primary }}'; then
