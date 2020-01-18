@@ -197,7 +197,7 @@ module-margin-right = 0
 module-margin-left = 2
 modules-right = 
 modules-center = keyboard
-modules-left = 
+modules-left = quit
 background = ${colors.bg}
 foreground = ${colors.fg}
 overline-size = 0
@@ -215,8 +215,8 @@ font-3 = {{ polybar_font }}
 ; -------- Modules Configuration -------
 
 [module/brightness]
-type = internal/xbacklight
-output = {{ monitors.primary }}
+type = internal/backlight
+card = intel_backlight
 enable-scroll = true
 label = {{ accent_left }} BKLT %percentage%% {{ accent_right }}
 
@@ -293,8 +293,13 @@ label-background = ${colors.bg}
 
 [module/keyboard]
 type = custom/text
-content = '[ KEYBOARD ]'
-click-left = onboard --layout Small --theme LowContrast
+content = [ KEYBOARD ]
+click-left = onboard --layout Small --theme LowContrast &
+
+[module/quit]
+type = custom/text
+content = [ X ]
+click-left = i3-msg -q kill
 
 [module/cpu]
 type = internal/cpu

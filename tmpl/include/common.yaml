@@ -78,7 +78,6 @@ installer:
     - 'wpa_supplicant'
     - 'xclip'
     - 'xorg-server'
-    - 'xorg-xbacklight'
     - 'xorg-xinit'
     - 'xorg-xlsfonts'
     - 'xorg-xset'

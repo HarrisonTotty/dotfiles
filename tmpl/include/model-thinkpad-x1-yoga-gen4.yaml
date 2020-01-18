@@ -2,7 +2,7 @@
 # -------------------------------
 
 monitors:
-  primary: 'eDP1'
+  primary: 'eDP-1'
   left: 'DP-2'
   right: 'HDMI-1'
 
