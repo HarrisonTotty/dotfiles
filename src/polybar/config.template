@@ -11,6 +11,7 @@
 %}
 {% from 'templates/accents.template' import accent_left, accent_right with context %}
 {% set polybar_font = font.name + ':size=10;3' %}
+{% set polybar_tablet_font = font.name + ':size=14;3' %}
 
 ; -------- General Configuration -------
 
@@ -22,9 +23,6 @@ modfg = ${xrdb:color1}
 [global/wm]
 margin-bottom = 100
 margin-top = 100
-
-[sizes]
-height = 20
 
 ; --------------------------------------
 
@@ -43,12 +41,23 @@ bottom = false
 {% endif %}
 enable-ipc = false
 fixed-center = true
+{% if bar == 'tablet' %}
+font-0 = {{ polybar_tablet_font }}
+font-1 = {{ polybar_tablet_font }}
+font-2 = {{ polybar_tablet_font }}
+font-3 = {{ polybar_tablet_font }}
+{% else %}
 font-0 = {{ polybar_font }}
 font-1 = {{ polybar_font }}
 font-2 = {{ polybar_font }}
 font-3 = {{ polybar_font }}
+{% endif %}
 foreground = ${colors.fg}
-height = ${sizes.height}
+{% if bar == 'tablet' %}
+height = 30
+{% else %}
+height = 20
+{% endif %}
 module-margin-left = 2
 module-margin-right = 0
 {% if bar == 'tablet' %}
@@ -57,18 +66,20 @@ modules-center = keyboard
 modules-center = date
 {% endif %}
 {% if bar == 'tablet' %}
-modules-left = quit
+modules-left = quit float
 {% elif window_manager == 'i3' %}
 modules-left = i3
 {% else %}
 modules-left =
 {% endif %}
 {% if bar == 'left' %}
-modules-right = cpu memory temp-cpu
+modules-right = cpu memory swap temp-cpu
 {% elif bar == 'primary' %}
 modules-right = backlight volume battery
 {% elif bar == 'right' %}
 modules-right = disk-boot disk-root disk-home
+{% elif bar == 'tablet' %}
+modules-right = split stacking tabbed
 {% else %}
 modules-right =
 {% endif %}
@@ -150,6 +161,11 @@ mount-0 = /{{ disk }}
 
 {% endfor %}
 
+[module/float]
+type = custom/text
+click-left = i3-msg -q floating toggle
+content = [ FLOAT ]
+
 [module/i3]
 type = internal/i3
 enable-click = true
@@ -185,6 +201,16 @@ type = custom/text
 click-left = i3-msg -q kill
 content = [ X ]
 
+[module/split]
+type = custom/text
+click-left = $HOME/.config/scripts/switch-split.sh
+content = [ SPLIT ]
+
+[module/stacking]
+type = custom/text
+click-left = $HOME/.config/scripts/switch-stacking.sh
+content = [ STACK ]
+
 [module/swap]
 type = internal/memory
 interval = 1
@@ -192,6 +218,11 @@ label = {{ accent_left }} SWAP %percentage_swap_used%% {{ accent_right }}
 label-background = ${colors.bg}
 label-foreground = ${colors.fg}
 label-underline = ${colors.fg}
+
+[module/tabbed]
+type = custom/text
+click-left = $HOME/.config/scripts/switch-tabbed.sh
+content = [ TAB ]
 
 [module/temp-cpu]
 type = internal/temperature
