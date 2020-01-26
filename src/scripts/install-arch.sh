@@ -799,8 +799,8 @@ GRUB_GFXMODE=auto
 GRUB_GFXPAYLOAD_LINUX=keep
 GRUB_PRELOAD_MODULES="part_gpt part_msdos"
 GRUB_TERMINAL_INPUT=console
-GRUB_TIMEOUT=3
-GRUB_TIMEOUT_STYLE=menu
+GRUB_TIMEOUT=2
+GRUB_TIMEOUT_STYLE=countdown
 EOF
 if [ "$?" -ne 0 ]; then
     print_nosubsec_err "Unable to write bootloader configuration - {{ n0ec }}"
