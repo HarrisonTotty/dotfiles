@@ -11,7 +11,7 @@ rotate_screen() {
     done <<< "$wacom_devices"
     $HOME/.config/scripts/polybar-start.sh
     if [ "$1" != "normal" ]; then
-        polybar bar-tablet &
+        polybar tablet &
     fi
 }
 

@@ -14,14 +14,14 @@
 
 ; -------- General Configuration -------
 
-[global/wm]
-margin-top = 100
-margin-bottom = 100
-
 [colors]
-fg = ${xrdb:color7}
 bg = ${xrdb:color3}
+fg = ${xrdb:color7}
 modfg = ${xrdb:color1}
+
+[global/wm]
+margin-bottom = 100
+margin-top = 100
 
 [sizes]
 height = 20
@@ -31,307 +31,184 @@ height = 20
 
 ; --------- Bars Configuration ---------
 
-[bar/bar-primary]
-monitor = {{ monitors.primary }}
-bottom = false
-fixed-center = true
-border-size = 0
-border-color = ${colors.bg}
-width = 100%
-height = ${sizes.height}
-override-redirect = false
-offset-x = 0%
-offset-y = 0%
-radius = 0.0
-enable-ipc = false
-padding-left = 1
-padding-right = 1
-module-margin-right = 0
-module-margin-left = 2
-modules-right = brightness volume battery
-modules-center = date
-{% if window_manager == 'i3' %}
-modules-left = i3
-{% elif window_manager == 'herbstluftwm' %}
-modules-left =
-{% else %}
-modules-left =
-{% endif %}
+{% for bar in ['left', 'primary', 'right', 'single-monitor', 'tablet'] %}
+[bar/{{ bar }}]
 background = ${colors.bg}
-foreground = ${colors.fg}
-overline-size = 2
-overline-color = ${colors.fg}
-underline-size = 0
-underline-color = ${colors.fg}
-font-0 = {{ polybar_font }}
-font-1 = {{ polybar_font }}
-font-2 = {{ polybar_font }}
-font-3 = {{ polybar_font }}
-
-[bar/bar-left]
-monitor = {{ monitors.left }}
-bottom = false
-fixed-center = true
-border-size = 0
 border-color = ${colors.bg}
-width = 100%
-height = ${sizes.height}
-override-redirect = false
-offset-x = 0%
-offset-y = 0%
-radius = 0.0
-enable-ipc = false
-padding-left = 1
-padding-right = 1
-module-margin-right = 0
-module-margin-left = 2
-modules-right = cpu memory temp-cpu
-modules-center = date
-{% if window_manager == 'i3' %}
-modules-left = i3
-{% elif window_manager == 'herbstluftwm' %}
-modules-left =
-{% else %}
-modules-left =
-{% endif %}
-background = ${colors.bg}
-foreground = ${colors.fg}
-overline-size = 2
-overline-color = ${colors.fg}
-underline-size = 0
-underline-color = ${colors.fg}
-font-0 = {{ polybar_font }}
-font-1 = {{ polybar_font }}
-font-2 = {{ polybar_font }}
-font-3 = {{ polybar_font }}
-
-[bar/bar-single-monitor]
-monitor = {{ monitors.right }}
-bottom = false
-fixed-center = true
 border-size = 0
-border-color = ${colors.bg}
-width = 100%
-height = ${sizes.height}
-override-redirect = false
-offset-x = 0%
-offset-y = 0%
-radius = 0.0
-enable-ipc = false
-padding-left = 1
-padding-right = 1
-module-margin-right = 0
-module-margin-left = 2
-modules-right = 
-{% if window_manager == 'i3' %}
-modules-left = i3
-{% elif window_manager == 'herbstluftwm' %}
-modules-left =
-{% else %}
-modules-left =
-{% endif %}
-background = ${colors.bg}
-foreground = ${colors.fg}
-overline-size = 0
-overline-color = ${colors.fg}
-underline-size = 0
-underline-color = ${colors.fg}
-font-0 = {{ polybar_font }}
-font-1 = {{ polybar_font }}
-font-2 = {{ polybar_font }}
-font-3 = {{ polybar_font }}
-
-[bar/bar-right]
-monitor = {{ monitors.right }}
-bottom = false
-fixed-center = true
-border-size = 0
-border-color = ${colors.bg}
-width = 100%
-height = ${sizes.height}
-override-redirect = false
-offset-x = 0%
-offset-y = 0%
-radius = 0.0
-enable-ipc = false
-padding-left = 1
-padding-right = 1
-module-margin-right = 0
-module-margin-left = 2
-modules-right = disk-boot disk-root disk-home
-modules-center = date
-{% if window_manager == 'i3' %}
-modules-left = i3
-{% elif window_manager == 'herbstluftwm' %}
-modules-left =
-{% else %}
-modules-left =
-{% endif %}
-background = ${colors.bg}
-foreground = ${colors.fg}
-overline-size = 0
-overline-color = ${colors.fg}
-underline-size = 0
-underline-color = ${colors.fg}
-font-0 = {{ polybar_font }}
-font-1 = {{ polybar_font }}
-font-2 = {{ polybar_font }}
-font-3 = {{ polybar_font }}
-
-[bar/bar-tablet]
-monitor = {{ monitors.primary }}
+{% if bar == 'tablet' %}
 bottom = true
-fixed-center = true
-border-size = 0
-border-color = ${colors.bg}
-width = 100%
-height = ${sizes.height}
-override-redirect = false
-offset-x = 0%
-offset-y = 0%
-radius = 0.0
+{% else %}
+bottom = false
+{% endif %}
 enable-ipc = false
-padding-left = 1
-padding-right = 1
-module-margin-right = 0
-module-margin-left = 2
-modules-right = 
-modules-center = keyboard
-modules-left = quit
-background = ${colors.bg}
-foreground = ${colors.fg}
-overline-size = 0
-overline-color = ${colors.fg}
-underline-size = 0
-underline-color = ${colors.fg}
+fixed-center = true
 font-0 = {{ polybar_font }}
 font-1 = {{ polybar_font }}
 font-2 = {{ polybar_font }}
 font-3 = {{ polybar_font }}
+foreground = ${colors.fg}
+height = ${sizes.height}
+module-margin-left = 2
+module-margin-right = 0
+{% if bar == 'tablet' %}
+modules-center = keyboard
+{% else %}
+modules-center = date
+{% endif %}
+{% if bar == 'tablet' %}
+modules-left = quit
+{% elif window_manager = 'i3' %}
+modules-left = i3
+{% else %}
+modules-left =
+{% endif %}
+{% if bar == 'left' %}
+modules-right = cpu memory temp-cpu
+{% elif bar == 'primary' %}
+modules-right = backlight volume battery
+{% elif bar == 'right' %}
+modules-right = disk-boot disk-root disk-home
+{% else %}
+modules-right =
+{% endif %}
+{% if bar == 'left' %}
+monitor = {{ monitors.left }}
+{% elif bar == 'right' or bar == 'single-monitor' %}
+monitor = {{ monitors.right }}
+{% else %}
+monitor = {{ monitors.primary }}
+{% endif %}
+offset-x = 0%
+offset-y = 0%
+overline-color = ${colors.fg}
+overline-size = 2
+override-redirect = false
+padding-left = 1
+padding-right = 1
+radius = 0.0
+underline-color = ${colors.fg}
+underline-size = 0
+width = 100%
+
+{% endfor %}
 
 ; --------------------------------------
 
 
 ; -------- Modules Configuration -------
 
-[module/brightness]
+[module/backlight]
 type = internal/backlight
 card = intel_backlight
 enable-scroll = true
 label = {{ accent_left }} BKLT %percentage%% {{ accent_right }}
 
-[module/temp-cpu]
-type = internal/temperature
-interval = 5
-thermal-zone = 0
-warn-temperature = 80
-label = {{ accent_left }} TEMP %temperature-f% {{ accent_right }}
-label-warn = {{ accent_left }} TEMP %temperature-f% ! {{ accent_right }}
-
-[module/disk-root]
-type = internal/fs
-interval = 30
-mount-0 = /
-label-mounted = {{ accent_left }} ROOT %free% {{ accent_right }}
-label-mounted-underline = ${colors.fg}
-label-mounted-padding = 0
-label-mounted-background = ${colors.bg}
-label-unmounted = {{ accent_left }}%mountpoint%{{ accent_right }} Unmounted
-label-unmounted-foreground = ${colors.bg}
-
 [module/battery]
 type = internal/battery
-full-at = 99
-battery = BAT0
 adapter = AC
-poll-interval = 5
+battery = BAT0
 format-charging = <label-charging>
 format-discharging = <label-discharging>
+full-at = 99
 label-charging = {{ accent_left }} BAT %percentage%% + {{ accent_right }}
 label-discharging = {{ accent_left }} BAT %percentage%% - {{ accent_right }}
 label-full = {{ accent_left }} BAT 100% {{ accent_right }}
+poll-interval = 5
 
-[module/disk-home]
+[module/cpu]
+type = internal/cpu
+format = {{ accent_left }} CPU <label> {{ accent_right }}
+interval = 0.5
+label = "%percentage%%"
+
+[module/date]
+type = internal/date
+date = %m/%d/%y
+interval = 10
+label = {{ accent_left }} %date% %time% {{ accent_right }}
+label-background = ${colors.bg}
+label-foreground = ${colors.fg}
+label-underline = ${colors.fg}
+time = %H:%M
+
+{% for disk in ['boot', 'home', 'root'] %}
+[module/disk-{{ disk }}]
 type = internal/fs
 interval = 30
-mount-0 = /home
-label-mounted = {{ accent_left }} HOME %free% {{ accent_right }}
-label-mounted-underline = ${colors.fg}
-label-mounted-padding = 0
+label-mounted = {{ accent_left }} {{ disk|upper }} %free% {{ accent_right }}
 label-mounted-background = ${colors.bg}
+label-mounted-padding = 0
+label-mounted-underline = ${colors.fg}
 label-unmounted = {{ accent_left }}%mountpoint%{{ accent_right }} Unmounted
 label-unmounted-foreground = ${colors.bg}
+{% if disk == 'root' %}
+mount-0 = /
+{% else %}
+mount-0 = /{{ disk }}
+{% endif %}
 
-[module/disk-boot]
-type = internal/fs
-interval = 30
-mount-0 = /boot
-label-mounted = {{ accent_left }} BOOT %free% {{ accent_right }}
-label-mounted-underline = ${colors.fg}
-label-mounted-padding = 0
-label-mounted-background = ${colors.bg}
-label-unmounted = {{ accent_left }}%mountpoint%{{ accent_right }} Unmounted
-label-unmounted-foreground = ${colors.bg}
+{% endfor %}
+
+[module/i3]
+type = internal/i3
+enable-click = true
+enable-scroll = true
+format = <label-state>
+fuzzy-match = true
+index-sort = true
+label-focused = "%{O2}{{ accent_left }} %index% {{ accent_right }} "
+label-mode = %mode%
+label-unfocused = "%{O2}  %index%   "
+label-urgent = "%{O2}  %index%!  "
+label-visible = "%{O2}{{ accent_left }} %index% {{ accent_right }} "
+pin-workspaces = true
+reverse-scroll = false
+strip-wsnumbers = false
+wrapping-scroll = true
+
+[module/keyboard]
+type = custom/text
+click-left = $HOME/.config/scripts/keyboard.sh
+content = [ KEYBOARD ]
 
 [module/memory]
 type = internal/memory
 interval = 1
 label = {{ accent_left }} MEM %percentage_used%% {{ accent_right }}
-label-underline = ${colors.fg}
-label-foreground = ${colors.fg}
 label-background = ${colors.bg}
-
-[module/date]
-type = internal/date
-interval = 10
-date = %m/%d/%y
-time = %H:%M
-label = {{ accent_left }} %date% %time% {{ accent_right }}
-label-underline = ${colors.fg}
 label-foreground = ${colors.fg}
-label-background = ${colors.bg}
-
-[module/keyboard]
-type = custom/text
-content = [ KEYBOARD ]
-click-left = onboard --layout Small --theme LowContrast &
+label-underline = ${colors.fg}
 
 [module/quit]
 type = custom/text
-content = [ X ]
 click-left = i3-msg -q kill
+content = [ X ]
 
-[module/cpu]
-type = internal/cpu
-interval = 0.5
-format = {{ accent_left }} CPU <label> {{ accent_right }}
-label = "%percentage%%"
+[module/swap]
+type = internal/memory
+interval = 1
+label = {{ accent_left }} SWAP %percentage_swap_used%% {{ accent_right }}
+label-background = ${colors.bg}
+label-foreground = ${colors.fg}
+label-underline = ${colors.fg}
+
+[module/temp-cpu]
+type = internal/temperature
+interval = 5
+label = {{ accent_left }} TEMP %temperature-f% {{ accent_right }}
+label-warn = {{ accent_left }} TEMP %temperature-f% ! {{ accent_right }}
+thermal-zone = 0
+warn-temperature = 80
 
 [module/volume]
 type = internal/pulseaudio
+format-muted = {{ accent_left }} VOL <label-muted> {{ accent_right }}
+format-volume = {{ accent_left }} VOL <label-volume> {{ accent_right }}
+label-muted = "MUTED"
+label-volume = "%percentage%%"
 {% if this.pulseaudio_sink is defined %}
 sink = {{ this.pulseaudio_sink }}
 {% endif %}
-format-volume = {{ accent_left }} VOL <label-volume> {{ accent_right }}
-format-muted = {{ accent_left }} VOL <label-muted> {{ accent_right }}
-label-muted = "MUTED"
-label-volume = "%percentage%%"
-
-[module/i3]
-type = internal/i3
-pin-workspaces = true
-strip-wsnumbers = false
-index-sort = true
-enable-click = true
-enable-scroll = true
-wrapping-scroll = true
-reverse-scroll = false
-fuzzy-match = true
-format = <label-state>
-label-focused = "%{O2}{{ accent_left }} %index% {{ accent_right }} "
-label-unfocused = "%{O2}  %index%   "
-label-visible = "%{O2}{{ accent_left }} %index% {{ accent_right }} "
-label-urgent = "%{O2}  %index%!  "
-label-mode = %mode%
 
 ; --------------------------------------
