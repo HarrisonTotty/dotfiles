@@ -58,7 +58,7 @@ modules-center = date
 {% endif %}
 {% if bar == 'tablet' %}
 modules-left = quit
-{% elif window_manager = 'i3' %}
+{% elif window_manager == 'i3' %}
 modules-left = i3
 {% else %}
 modules-left =
