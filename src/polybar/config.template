@@ -66,7 +66,7 @@ modules-center = keyboard
 modules-center = date
 {% endif %}
 {% if bar == 'tablet' %}
-modules-left = quit float
+modules-left = quit float split stacking tabbed
 {% elif window_manager == 'i3' %}
 modules-left = i3
 {% else %}
@@ -79,7 +79,7 @@ modules-right = backlight volume battery
 {% elif bar == 'right' %}
 modules-right = disk-boot disk-root disk-home
 {% elif bar == 'tablet' %}
-modules-right = split stacking tabbed
+modules-right = python notes terminal
 {% else %}
 modules-right =
 {% endif %}
@@ -164,7 +164,7 @@ mount-0 = /{{ disk }}
 [module/float]
 type = custom/text
 click-left = i3-msg -q floating toggle
-content = [ FLOAT ]
+content = [ FLT ]
 
 [module/i3]
 type = internal/i3
@@ -196,6 +196,16 @@ label-background = ${colors.bg}
 label-foreground = ${colors.fg}
 label-underline = ${colors.fg}
 
+[module/notes]
+type = custom/text
+click-left = $HOME/.config/scripts/xournal.sh
+content = [ NOT ]
+
+[module/python]
+type = custom/text
+click-left = $HOME/.config/scripts/ipython.sh
+content = [ PY ]
+
 [module/quit]
 type = custom/text
 click-left = i3-msg -q kill
@@ -204,12 +214,12 @@ content = [ X ]
 [module/split]
 type = custom/text
 click-left = $HOME/.config/scripts/switch-split.sh
-content = [ SPLIT ]
+content = [ SPL ]
 
 [module/stacking]
 type = custom/text
 click-left = $HOME/.config/scripts/switch-stacking.sh
-content = [ STACK ]
+content = [ STA ]
 
 [module/swap]
 type = internal/memory
@@ -231,6 +241,11 @@ label = {{ accent_left }} TEMP %temperature-f% {{ accent_right }}
 label-warn = {{ accent_left }} TEMP %temperature-f% ! {{ accent_right }}
 thermal-zone = 0
 warn-temperature = 80
+
+[module/terminal]
+type = custom/text
+click-left = urxvtc +sb -title Terminal -letsp 1
+content = [ TER ]
 
 [module/volume]
 type = internal/pulseaudio

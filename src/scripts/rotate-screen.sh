@@ -21,6 +21,7 @@ if xrandr -q | grep ' connected' | grep -q '{{ monitors.primary }}'; then
     if [ "$choice" == "" ]; then
         notify-send -u low 'WM' 'Action cancelled.' &
     elif [ "$choice" == "Laptop" ]; then
+        killall -q onboard
         rotate_screen normal none
         notify-send -u low 'WM' 'Screen Mode: Laptop' &
     elif [ "$choice" == "Tablet (Portrait)" ]; then
