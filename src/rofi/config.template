@@ -5,6 +5,9 @@
 # Set the border width.
 rofi.bw: 3
 
+# Disable click-to-exit.
+rofi.click-to-exit: false
+
 # Set the font.
 rofi.font: {{ font.name }} 12
 

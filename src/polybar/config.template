@@ -79,7 +79,7 @@ modules-right = backlight volume battery
 {% elif bar == 'right' %}
 modules-right = disk-boot disk-root disk-home
 {% elif bar == 'tablet' %}
-modules-right = python notes terminal
+modules-right = python notes terminal run
 {% else %}
 modules-right =
 {% endif %}
@@ -210,6 +210,11 @@ content = [ PY ]
 type = custom/text
 click-left = i3-msg -q kill
 content = [ X ]
+
+[module/run]
+type = custom/text
+click-left = $HOME/.config/scripts/keyboard.sh; $HOME/.config/scripts/run.sh
+content = [ ~ ]
 
 [module/split]
 type = custom/text
