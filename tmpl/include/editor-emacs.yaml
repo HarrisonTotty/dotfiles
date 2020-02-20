@@ -1,6 +1,88 @@
 # GNU Emacs Configuration
 # -----------------------
 
+files:
+  - dst: 'doom/config.el'
+    src: 'emacs/config.el'
+  - dst: 'doom/init.el'
+    src: 'emacs/init.el'
+    module_groups:
+      - name: 'completion'
+        modules: ['company', 'ivy']
+      - name: 'ui'
+        modules:
+          - 'doom'
+          - 'doom-dashboard'
+          - 'doom-quit'
+          - 'hl-todo'
+          - 'modeline'
+          - 'nav-flash'
+          - 'ophints'
+          - '(popup +all +defaults)'
+          - 'pretty-code'
+          - 'vc-gutter'
+          - 'vi-tilde-fringe'
+          - 'window-select'
+          - 'workspaces'
+      - name: 'editor'
+        modules:
+          - '(evil +everywhere)'
+          - 'file-templates'
+          - 'fold'
+          - 'multiple-cursors'
+          - 'rotate-text'
+          - 'snippets'
+      - name: 'emacs'
+        modules: ['dired', 'electric', 'ibuffer', 'vc']
+      - name: 'term'
+        modules: []
+      - name: 'checkers'
+        modules: ['syntax', 'spell']
+      - name: 'tools'
+        modules:
+          - 'ansible'
+          - 'docker'
+          - '(eval +overlay)'
+          - '(lookup +docsets)'
+          - 'magit'
+          - 'pdf'
+          - 'terraform'
+      - name: 'lang'
+        modules:
+          - 'assembly'
+          - 'cc'
+          - 'data'
+          - 'emacs-lisp'
+          - 'go'
+          # - '(haskell +dante)' # Causes bycode compilation issues
+          - '(java +meghanada)'
+          # - 'javascript' # For some reason this causes an error cloning "coffee-mode"
+          - 'latex'
+          - 'markdown'
+          - '(org +dragndrop +jupyter +present)'
+          - 'perl'
+          - 'php'
+          - 'python'
+          - 'rest'
+          - 'rust'
+          - 'sh'
+          - 'web'
+      - name: 'email'
+        modules: []
+      - name: 'app'
+        modules: [] #['calendar', 'irc']
+      - name: 'config'
+        modules: ['(default +bindings +smartparens)']
+  - dst: 'doom/packages.el'
+    src: 'emacs/packages.el'
+    packages: ['ewal']
+  - dst: 'doom/themes/doom-wal.el'
+    src: 'emacs/themes/doom-wal.el'
+    translate: false
+
 installer:
   packages:
+    - 'clang'
     - 'emacs'
+    - 'fd'
+    - 'ripgrep'

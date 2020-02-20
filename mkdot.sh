@@ -40,3 +40,7 @@ if [ "$#" -gt 1 ]; then
 else
     $tmpl "$1"
 fi
+
+if which doom >/dev/null; then
+    doom clean && doom sync && doom -y compile
+fi

@@ -29,7 +29,7 @@ dunst \
 $HOME/.config/scripts/polybar-start.sh
 
 # Copy and instantiate Emacs theming.
-if [ -d $HOME/.emacs.d/themes ]; then
-  mkdir -p $HOME/.emacs.d/themes
-fi
-cp -f $HOME/.cache/wal/colors-emacs.el $HOME/.emacs.d/themes/wal.el
+#if [ ! -d $HOME/.config/doom/themes ]; then
+#  mkdir -p $HOME/.config/doom/themes
+#fi
+#cp -f $HOME/.cache/wal/colors-emacs.el $HOME/.config/doom/themes/wal.el
