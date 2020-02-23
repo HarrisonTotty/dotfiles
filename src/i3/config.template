@@ -78,7 +78,11 @@ bindsym $mod+Shift+grave exec --no-startup-id "{{ scripts_dir }}/ssh.sh"
 {% if kb.desc is defined %}
 # {{ kb.desc }}
 {% endif %}
+{% if kb.on_release is defined and kb.on_release %}
+bindsym --release {{ kb.key_binding }} {{ kb.action }}
+{% else %}
 bindsym {{ kb.key_binding }} {{ kb.action }}
+{% endif %}
 {% endfor %}
 
 # -------------------------------------------

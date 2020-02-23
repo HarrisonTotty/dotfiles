@@ -44,6 +44,7 @@ files:
         action: 'exec --no-startup-id "$HOME/.config/scripts/scrot-full.sh"'
       - desc: 'Screenshot (selection)'
         key_binding: '$mod+Shift+Print'
+        on_release: true
         action: 'exec --no-startup-id "$HOME/.config/scripts/scrot-select.sh"'
 
 installer:
