@@ -1,0 +1,9 @@
+# systemd-boot Configuration
+# --------------------------
+
+installer:
+  bootloader:
+    kind: 'systemd-boot'
+    kernel_parameters: 'verbose'
+    root_partition: 'root'
+    title: 'HARRY OS'

@@ -4,6 +4,7 @@
 include:
   - 'include/common.yaml'
   - 'include/audio-pulseaudio.yaml'
+  - 'include/bootloader-systemd-boot-root.yaml'
   - 'include/bar-polybar.yaml'
   - 'include/editor-emacs.yaml'
   - 'include/font-iosevka.yaml'
