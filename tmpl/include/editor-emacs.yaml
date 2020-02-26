@@ -4,6 +4,39 @@
 files:
   - dst: 'doom/config.el'
     src: 'emacs/config.el'
+    modeline:
+        # - 'battery'         # Current system battery status.
+        # - 'buffer-encoding' # ANSI/UTF encoding status of current buffer.
+        # - 'checker'         # Flycheck status.
+        # - 'debug'           # Current debugging status.
+        # - 'github'          # GitHub notifications status.
+        # - 'gnus'            # RSS feed status.
+        # - 'grip'            # Markdown/org preview status.
+        # - 'indent-info'     # Information on indention information.
+        # - 'input-method'    # Information on the curent input method.
+        # - 'irc'             # IRC messages status.
+        # - 'lsp'             # Language Server Protocol status.
+        # - 'media-info'      # Metadata concerning the current file.
+        # - 'minor-modes'     # Information on active minor modes.
+        # - 'misc-info'       # Miscellaneous text information (if defined).
+        # - 'modals'          # A circular icon describing the current EVIL mode.
+        # - 'objed-state'     # The current objed state.
+        # - 'parrot'          # DESC
+        # - 'persp-name'      # The current "workspace" name provided by persp-mode.
+        # - 'process'         # Information about the current process.
+        # - 'remote-host'     # Remote host information.
+        # - 'word-count'      # Number of words within the buffer.
+      left:
+        - 'bar'             # A vertical bar shown on the active window.
+        - 'workspace-name'  # The name of the current workspace.
+        - 'window-number'   # The current window number.
+        - 'major-mode'      # Current active major mode.
+        - 'buffer-info'     # The file path and modification status.
+      right:
+        - 'vcs'             # Version control (git) status.
+        - 'buffer-position' # Current position within the buffer.
+        - 'selection-info'  # Information about how many lines are selected (if applicable).
+        - 'matches'         # The number of search matches (or buffer size).
   - dst: 'doom/init.el'
     src: 'emacs/init.el'
     module_groups:
@@ -19,7 +52,7 @@ files:
           - 'nav-flash'
           - 'ophints'
           - '(popup +all +defaults)'
-          - 'pretty-code'
+          - '(pretty-code +iosevka)'
           - 'vc-gutter'
           - 'vi-tilde-fringe'
           - 'window-select'
@@ -35,7 +68,7 @@ files:
       - name: 'emacs'
         modules: ['dired', 'electric', 'ibuffer', 'vc']
       - name: 'term'
-        modules: []
+        modules: ['vterm']
       - name: 'checkers'
         modules: ['syntax', 'spell']
       - name: 'tools'
@@ -44,6 +77,7 @@ files:
           - 'docker'
           - '(eval +overlay)'
           - '(lookup +docsets)'
+          - 'lsp'
           - 'magit'
           - 'pdf'
           - 'terraform'
@@ -58,14 +92,14 @@ files:
           - '(java +meghanada)'
           # - 'javascript' # For some reason this causes an error cloning "coffee-mode"
           - 'latex'
-          - 'markdown'
-          - '(org +dragndrop +jupyter +present)'
+          - '(markdown +grip)'
+          - '(org +dragndrop +jupyter +pandoc +present)'
           - 'perl'
           - 'php'
-          - 'python'
+          - '(python +lsp)'
           - 'rest'
-          - 'rust'
-          - 'sh'
+          - '(rust +lsp)'
+          - '(sh +lsp)'
           - 'web'
       - name: 'email'
         modules: []
@@ -75,13 +109,11 @@ files:
         modules: ['(default +bindings +smartparens)']
   - dst: 'doom/packages.el'
     src: 'emacs/packages.el'
-    packages: ['ewal']
-  - dst: 'doom/themes/doom-wal.el'
-    src: 'emacs/themes/doom-wal.el'
-    translate: false
+    packages: []
 
 installer:
   packages:
+    - 'bash-language-server'
     - 'clang'
     - 'emacs'
     - 'fd'
