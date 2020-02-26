@@ -1,0 +1,29 @@
+# ext4 Setup (No LVM) (No Encryption)
+# -----------------------------------
+
+installer:
+  filesystems:
+    - name: 'efi'
+      kind: 'fat32'
+      partition: 'efi'
+    - name: 'swap'
+      kind: 'swap'
+      partition: 'swap'
+    - name: 'root'
+      kind: 'ext4'
+      partition: 'root'
+    - name: 'home'
+      kind: 'ext4'
+      partition: 'home'
+  partitions:
+    - name: 'efi'
+      size: '1G'
+      typecode: 'ef00' # EFI System
+    - name: 'swap'
+      size: '8G'
+      typecode: '8200' # Linux Swap
+    - name: 'root'
+      size: '128G'
+      typecode: '8304' # Linux x86-64 Root (/)
+    - name: 'home'
+      typecode: '8302' # Linux /home
