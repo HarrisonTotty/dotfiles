@@ -16,3 +16,6 @@
 
 {% endfor %}
 )
+
+; Set the title format.
+(setq-default frame-title-format "GNU Emacs : %b")
