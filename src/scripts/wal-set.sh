@@ -27,9 +27,3 @@ dunst \
 
 # Restart and re-theme polybar.
 $HOME/.config/scripts/polybar-start.sh
-
-# Copy and instantiate Emacs theming.
-#if [ ! -d $HOME/.config/doom/themes ]; then
-#  mkdir -p $HOME/.config/doom/themes
-#fi
-#cp -f $HOME/.cache/wal/colors-emacs.el $HOME/.config/doom/themes/wal.el
