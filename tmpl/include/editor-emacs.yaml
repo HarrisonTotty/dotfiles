@@ -104,7 +104,7 @@ files:
       - name: 'email'
         modules: []
       - name: 'app'
-        modules: [] #['calendar', 'irc']
+        modules: ['calendar', 'irc']
       - name: 'config'
         modules: ['(default +bindings +smartparens)']
   - dst: 'doom/packages.el'

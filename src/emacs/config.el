@@ -93,6 +93,15 @@
 ; ---------------------------------------
 
 
+; ------------ External Files -----------
+
+(when (file-readable-p "~/.config/doom/ext/irc.el")
+  (load-file "~/.config/doom/ext/irc.el")
+)
+
+; ---------------------------------------
+
+
 ; ------------- Key Bindings ------------
 
 
