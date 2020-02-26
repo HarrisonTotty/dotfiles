@@ -41,6 +41,6 @@ else
     $tmpl "$1"
 fi
 
-if which doom >/dev/null; then
+if which doom >/dev/null 2>&1; then
     doom clean && doom sync && doom -y compile
 fi
