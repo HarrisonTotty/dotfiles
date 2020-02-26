@@ -392,6 +392,11 @@ if ! mkfs.btrfs --force --label "{{ fs.name }}" "{{ partition_path }}" >> instal
     print_nosubsec_err "Error: Unable to create filesystem - {{ n0ec }}"
     exit $EC
 fi
+{% elif fs.kind == 'ext4' %}
+if ! mkfs.ext4 "{{ partition_path }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Error: Unable to create filesystem - {{ n0ec }}"
+    exit $EC
+fi
 {% elif fs.kind == 'fat32' %}
 if ! mkfs.vfat -F 32 -n "{{ fs.name }}" "{{ partition_path }}" >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to create filesystem - {{ n0ec }}"
@@ -457,6 +462,11 @@ if ! $mountcmd "LABEL={{ fs.name }}" "{{ sv.mountpoint }}" >> install-arch.log 2
 fi
 {% endif %}
 {% endfor %}
+{% elif fs.kind == 'ext4' %}
+if ! mount "LABEL={{ fs.name }}" "{{ fs.mountpoint }}" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Error: Unable to mount filesystem - {{ n0ec }}"
+    exit $EC
+fi
 {% elif fs.kind == 'fat32' %}
 if ! mount "LABEL={{ fs.name }}" "{{ fs.mountpoint }}" >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to mount filesystem - {{ n0ec }}"

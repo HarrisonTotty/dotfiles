@@ -27,3 +27,4 @@ installer:
       typecode: '8304' # Linux x86-64 Root (/)
     - name: 'home'
       typecode: '8302' # Linux /home
+  swap_partition: 'swap'
