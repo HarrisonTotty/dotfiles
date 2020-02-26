@@ -15,6 +15,18 @@ installer:
     - name: 'home'
       kind: 'ext4'
       partition: 'home'
+  mkinitcpio:
+    hooks:
+      - 'base'
+      - 'udev'
+      - 'autodetect'
+      - 'keyboard'
+      - 'keymap'
+      - 'consolefont'
+      - 'modconf'
+      - 'block'
+      - 'filesystems'
+      - 'fsck'
   partitions:
     - name: 'efi'
       size: '1G'
