@@ -88,7 +88,7 @@ files:
           - 'data'
           - 'emacs-lisp'
           - 'go'
-          # - '(haskell +dante)' # Causes bycode compilation issues
+          # - '(haskell +dante)' # Causes bytecode compilation issues
           - '(java +meghanada)'
           # - 'javascript' # For some reason this causes an error cloning "coffee-mode"
           - 'latex'
