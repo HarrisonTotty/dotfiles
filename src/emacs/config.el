@@ -124,6 +124,10 @@
 ; Set the org-mode directory.
 (setq org-directory "~/docs/org")
 
+; Make org-tree-slide work how it's supposed to.
+(after! org-tree-slide
+  (setq org-tree-slide-skip-outline-level 1))
+
 ; Extend and/or replace portions of the pretty symbols list.
 (setq +pretty-code-symbols
       (plist-merge +pretty-code-symbols
