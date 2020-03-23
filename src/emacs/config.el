@@ -26,6 +26,14 @@
         result)
     nil))
 
+; A function to toggle org mode emphasis markers.
+(defun toggle-org-emphasis-markers ()
+  "Toggle org-mode's emphasis markers on and off."
+  (interactive)
+  (setq org-hide-emphasis-markers (if (eq org-hide-emphasis-markers t) nil t))
+  (org-mode-restart)
+)
+
 ; ---------------------------------------
 
 
