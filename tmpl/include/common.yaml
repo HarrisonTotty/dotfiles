@@ -83,6 +83,7 @@ installer:
     - 'xorg-xset'
   user_directories:
     - ".cache/lock"
+    - "bin"
     - "desktop"
     - "docs"
     - "downloads"
