@@ -14,6 +14,8 @@ include:
   - 'include/shell-zsh.yaml'
   - 'include/wm-i3.yaml'
 
+email: 'harrisont@wolfram.com'
+
 installer:
   hostname: 'harrisontlxlap'
   username: 'harrisont'
