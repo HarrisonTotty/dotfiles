@@ -196,7 +196,7 @@
   :init
   (setq doom-modeline-icon nil)
   :config
-  (def-modeline-format! 'main
+  (doom-modeline-def-modeline 'main
     '({{ this.modeline.left|join(' ') }}) ; LEFT SIDE
     '({{ this.modeline.right|join(' ') }}) ; RIGHT SIDE
   )
