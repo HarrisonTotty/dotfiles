@@ -22,7 +22,7 @@ undo = reset --soft HEAD^
 [user]
 
 # The email address associated with this git configuration.
-email = {{ git_email | default('harrisongtotty@gmail.com') }}
+email = {{ email|default('harrisongtotty@gmail.com', true) }}
 
 # The name associated with this git configuration.
 name  = Harrison Totty
