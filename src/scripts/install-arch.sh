@@ -60,6 +60,60 @@ finish_installation() {
 {% endfor %}
 }
 
+mount_installation() {
+    EC=30
+    print_sec "Mounting existing installation..."
+
+    {% if installer.system_encrypted is defined and installer.system_encrypted %}
+    {% for p in installer.partitions %}
+    {% if p.encrypted is defined and p.encrypted %}
+    {% if not p.typecode is defined or p.typecode != '8200' %}
+    print_subsec "Decrypting \"{{ p.name }}\" partition..."
+    if ! cryptsetup open "/dev/disk/by-partlabel/{{ p.name + '-encrypted' }}" "{{ p.name }}"; then
+        print_nosubsec_err "Error: Unable to unseal encrypted partition - {{ n0ec }}"
+        exit $EC
+    fi
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    {% for fs in installer.filesystems %}
+    {% if fs.kind != 'swap' %}
+    print_subsec "[{{ fs.kind }}] Mounting \"{{ fs.name }}\" filesystem..."
+    {% if fs.kind == 'btrfs' %}
+    {% if fs.subvolumes is defined %}
+    {% for sv in fs.subvolumes %}
+    {% if sv.mountpoint is defined %}
+    if [ -d "{{ sv.mountpoint }}" ]; then
+        rm -rf "{{ sv.mountpoint }}" >> install-arch.log 2>&1
+    fi
+    if ! mkdir -p "{{ sv.mountpoint }}" >> install-arch.log 2>&1; then
+        print_nosubsec_err "Error: Unable to create filesystem subvolume mount directory - {{ n0ec }}"
+        exit $EC
+    fi
+    print_subsec "[{{ fs.kind }}] Mounting \"{{ sv.name }}\" subvolume of \"{{ fs.name }}\" filesystem..."
+    mountcmd="mount -t btrfs -o subvol={{ sv.name }}, {{ sv.mount_options|default('defaults', true) }}"
+    if ! $mountcmd "LABEL={{ fs.name }}" "{{ sv.mountpoint }}" >> install-arch.log 2>&1; then
+        print_nosubsec_err "Error: Unable to mount subvolume \"{{ sv.name }}\" - {{ n0ec }}"
+        exit $EC
+    fi
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% elif fs.kind == 'ext4' or fs.kind == 'fat32' %}
+    if ! mount "LABEL={{ fs.name }}" "{{ fs.mountpoint }}" >> install-arch.log 2>&1; then
+        print_nosubsec_err "Error: Unable to mount filesystem - {{ n0ec }}"
+        exit $EC
+    fi
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
+    print_subsec "Establishing chroot environment..."
+    arch-chroot /mnt
+}
+
 print_log() { echo "$@" >> install-arch.log; }
 
 print_sec() { echo "$(tput setaf 4)::$(tput sgr0) $@"; echo "$@" >> install-arch.log; }
@@ -75,6 +129,7 @@ show_help() {
     echo
     echo "OPTIONS:"
     echo "--finish              Unmount any partitions and close encrypted devices for reboot."
+    echo "--mount               Mount & chroot an existing filesystem instead of installing."
     echo "-b, --no-bootloader   Don't install/configure the bootloader. Implies \"-f\" and \"-P\"."
     echo "-f, --no-filesystems  Don't setup partition filesystems (or encryption). Implies \"-P\"."
     echo "-h, --help            Show help and usage information."
@@ -129,6 +184,10 @@ while true; do
         -i|--no-initramfs)
             do_initramfs=false
             shift
+            ;;
+        --mount)
+            mount_installation
+            exit 0
             ;;
         -m|--no-rankmirrors)
             do_rankmirrors=false
