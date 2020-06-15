@@ -93,7 +93,7 @@ mount_installation() {
         exit $EC
     fi
     print_subsec "[{{ fs.kind }}] Mounting \"{{ sv.name }}\" subvolume of \"{{ fs.name }}\" filesystem..."
-    mountcmd="mount -t btrfs -o subvol={{ sv.name }}, {{ sv.mount_options|default('defaults', true) }}"
+    mountcmd="mount -t btrfs -o subvol={{ sv.name }},{{ sv.mount_options|default('defaults', true) }}"
     if ! $mountcmd "LABEL={{ fs.name }}" "{{ sv.mountpoint }}" >> install-arch.log 2>&1; then
         print_nosubsec_err "Error: Unable to mount subvolume \"{{ sv.name }}\" - {{ n0ec }}"
         exit $EC
