@@ -18,7 +18,7 @@ export TMPL_VAR_END_STR='}}'
 export TMPL_VAR_START_STR='{{'
 
 # ---------- Configuration ----------
-dotfiles_url='https://github.com/HarrisonTotty/dotfiles/archive/tmpl.zip'
+dotfiles_url='https://github.com/HarrisonTotty/dotfiles/archive/master.zip'
 tmpl_url='https://raw.githubusercontent.com/HarrisonTotty/tmpl/master/tmpl.py'
 # -----------------------------------
 
