@@ -149,7 +149,7 @@ show_help() {
 EC=10
 
 short_options="b,f,h,i,m,p,P,u"
-long_options="finish,no-bootloader,no-filesystems,help,no-initramfs,no-rankmirrors,no-packages,no-partitions,no-users"
+long_options="finish,mount,no-bootloader,no-filesystems,help,no-initramfs,no-rankmirrors,no-packages,no-partitions,no-users"
 
 getopt --test > /dev/null
 if [ "$?" -ne 4 ]; then
