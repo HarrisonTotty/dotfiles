@@ -907,7 +907,7 @@ EC=10
 print_sec "Configuring dotfiles..."
 
 print_subsec "Preparing environment..."
-$chroot rm -rf dotfiles.zip dotfiles tmpl >> install-arch.lod 2>&1
+$chroot rm -rf dotfiles.zip dotfiles tmpl >> install-arch.log 2>&1
 
 print_subsec "Downloading components..."
 if ! $chroot wget -q "$tmpl_url" -O tmpl >> install-arch.log 2>&1; then
