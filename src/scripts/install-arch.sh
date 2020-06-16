@@ -906,31 +906,45 @@ if [ "$do_dotfiles" != "false" ]; then
 EC=10
 print_sec "Configuring dotfiles..."
 
+user_home='home/{{ installer.username }}'
+chuser="$chroot sudo -i -u {{ installer.username }}"
+
 print_subsec "Preparing environment..."
-$chroot rm -rf dotfiles.zip dotfiles tmpl >> install-arch.log 2>&1
+rm -rf /mnt/${user_home}/dotfiles* /mnt/${user_home}/tmpl >> install-arch.log 2>&1
 
 print_subsec "Downloading components..."
-if ! $chroot wget -q "$tmpl_url" -O tmpl >> install-arch.log 2>&1; then
+if ! $chuser wget -q "$tmpl_url" -O /${user_home}/tmpl >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to download components - unable to download \"tmpl\" binary."
     exit $EC
 fi
-$chroot chmod +x tmpl >> install-arch.log 2>&1
-if ! $chroot wget -q "$dotfiles_url" -O dotfiles.zip >> install-arch.log 2>&1; then
+chmod +x /mnt/${user_home}/tmpl >> install-arch.log 2>&1
+if ! $chuser wget -q "$dotfiles_url" -O /${user_home}/dotfiles.zip >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to download components - unable to download dotfiles archive."
     exit $EC
 fi
 
 print_subsec "Extracting components..."
-if ! $chroot unzip dotfiles.zip >> install-arch.log 2>&1; then
+if ! $chuser unzip /${user_home}/dotfiles.zip -d /${user_home} >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to extract components - {{ n0ec }}"
     exit $EC
 fi
-$chroot rm -f dotfiles.zip >> install-arch.log 2>&1
-$chroot mv dotfiles-master dotfiles >> install-arch.log 2>&1
+rm -f /mnt/${user_home}/dotfiles.zip >> install-arch.log 2>&1
+$chuser mv /${user_home}/dotfiles-master /${user_home}/dotfiles >> install-arch.log 2>&1
+
+cat > /mnt/${user_home}/mkdot.sh <<EOF
+#!/usr/bin/env bash
+export HOME=/home/{{ installer.username }}
+/home/{{ installer.username }}/tmpl $@ \
+    -b /home/{{ installer.username }}/dotfiles/src \
+    -f /home/{{ installer.username }}/mkdot.log \
+    -m overwrite \
+    --no-color \
+    -o /home/{{ installer.username }}/.config
+EOF
+chmod +x /mnt/${user_home}/mkdot.sh >> install-arch.log 2>&1
 
 print_subsec "Rendering dotfiles..."
-tmpl_args="-b dotfiles/src -f mkdot.log -m overwrite --no-color"
-if ! $chroot ./tmpl $tmpl_args "dotfiles/tmpl/${tcf}" -o "$HOME/.config" >> install-arch.log 2>&1; then
+if ! $chuser /${user_home}/mkdot.sh "dotfiles/tmpl/${tcf}" >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to render dotfiles - {{ n0ec }}"
     exit $EC
 fi
