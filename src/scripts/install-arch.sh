@@ -30,6 +30,8 @@ kernel_parameters="verbose"
 
 mirrorlist_url="https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on"
 
+tcf="$(basename {{ template_configuration_file }})"
+
 tmpl_url="{{ installer.tmpl_url|default('https://raw.githubusercontent.com/HarrisonTotty/tmpl/master/tmpl.py', true) }}"
 
 trizen_repo="https://aur.archlinux.org/trizen.git"
@@ -131,6 +133,7 @@ show_help() {
     echo "--finish              Unmount any partitions and close encrypted devices for reboot."
     echo "--mount               Mount & chroot an existing filesystem instead of installing."
     echo "-b, --no-bootloader   Don't install/configure the bootloader. Implies \"-f\" and \"-P\"."
+    echo "-d, --no-dotfiles     Don't generate dotfiles for the user using tmpl."
     echo "-f, --no-filesystems  Don't setup partition filesystems (or encryption). Implies \"-P\"."
     echo "-h, --help            Show help and usage information."
     echo "-i, --no-initramfs    Don't configure the Initial RAM Filesystem. Implies \"-f\" and \"-P\"."
@@ -148,8 +151,8 @@ show_help() {
 
 EC=10
 
-short_options="b,f,h,i,m,p,P,u"
-long_options="finish,mount,no-bootloader,no-filesystems,help,no-initramfs,no-rankmirrors,no-packages,no-partitions,no-users"
+short_options="b,d,f,h,i,m,p,P,u"
+long_options="finish,mount,no-bootloader,no-dotfiles,no-filesystems,help,no-initramfs,no-rankmirrors,no-packages,no-partitions,no-users"
 
 getopt --test > /dev/null
 if [ "$?" -ne 4 ]; then
@@ -167,6 +170,10 @@ while true; do
     case "$1" in
         -b|--no-bootloader)
             do_bootloader=false
+            shift
+            ;;
+        -d|--no-dotfiles)
+            do_dotfiles=false
             shift
             ;;
         -f|--no-filesystems)
@@ -221,6 +228,7 @@ echo -n '' > install-arch.log
 
 print_log "----- CLI Options -----"
 if [ "$do_bootloader" != "false" ]; then print_log "Configure bootloader: true"; else print_log "Configure bootloader: false"; fi
+if [ "$do_dotfiles" != "false" ]; then print_log "Configure dotfiles: true"; else print_log "Configure dotfiles: false"; fi
 if [ "$do_filesystems" != "false" ]; then print_log "Configure filesystems: true"; else print_log "Configure filesystems: false"; fi
 if [ "$do_initramfs" != "false" ]; then print_log "Configure initramfs: true"; else print_log "Configure initramfs: false"; fi
 if [ "$do_rankmirrors" != "false" ]; then print_log "Rank mirrorlist: true"; else print_log "Rank mirrorlist: false"; fi
@@ -873,17 +881,59 @@ GRUB_TIMEOUT=1
 GRUB_TIMEOUT_STYLE=countdown
 EOF
 if [ "$?" -ne 0 ]; then
-    print_nosubsec_err "Unable to write bootloader configuration - {{ n0ec }}"
+    print_nosubsec_err "Error: Unable to write bootloader configuration - {{ n0ec }}"
     exit $EC
 fi
 print_subsec "Configuring bootloader..."
 if ! $chroot grub-mkconfig -o /boot/grub/grub.cfg >> install-arch.log 2>&1; then
-    print_nosubsec_err "Unable to configure bootloader - {{ n0ec }}"
+    print_nosubsec_err "Error: Unable to configure bootloader - {{ n0ec }}"
     exit $EC
 fi
 {% else %}
 {% do raise('unknown bootloader kind specified') %}
 {% endif %}
+
+fi
+
+# ----------------------------
+
+
+
+# -- Dotfiles Configuration --
+
+if [ "$do_dotfiles" != "false" ]; then
+
+EC=10
+print_sec "Configuring dotfiles..."
+
+print_subsec "Preparing environment..."
+$chroot rm -rf dotfiles.zip dotfiles tmpl >> install-arch.lod 2>&1
+
+print_subsec "Downloading components..."
+if ! $chroot wget -q "$tmpl_url" -O tmpl >> install-arch.log 2>&1; then
+    print_nosubsec_err "Error: Unable to download components - unable to download \"tmpl\" binary."
+    exit $EC
+fi
+$chroot chmod +x tmpl >> install-arch.log 2>&1
+if ! $chroot wget -q "$dotfiles_url" -O dotfiles.zip >> install-arch.log 2>&1; then
+    print_nosubsec_err "Error: Unable to download components - unable to download dotfiles archive."
+    exit $EC
+fi
+
+print_subsec "Extracting components..."
+if ! $chroot unzip dotfiles.zip >> install-arch.log 2>&1; then
+    print_nosubsec_err "Error: Unable to extract components - {{ n0ec }}"
+    exit $EC
+fi
+$chroot rm -f dotfiles.zip >> install-arch.log 2>&1
+$chroot mv dotfiles-master dotfiles >> install-arch.log 2>&1
+
+print_subsec "Rendering dotfiles..."
+tmpl_args="-b dotfiles/src -f mkdot.log -m overwrite --no-color"
+if ! $chroot ./tmpl $tmpl_args "dotfiles/tmpl/${tcf}" -o "$HOME/.config" >> install-arch.log 2>&1; then
+    print_nosubsec_err "Error: Unable to render dotfiles - {{ n0ec }}"
+    exit $EC
+fi
 
 fi
 
