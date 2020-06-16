@@ -13,18 +13,12 @@ connected=$(xrandr -q | grep ' connected')
 if echo "$connected" | grep -q '{{ monitors.primary }}'; then
     if echo "$connected" | grep -q '{{ monitors.left }}' && echo "$connected" | grep -q '{{ monitors.right }}'; then
         xrandr \
-            --output VIRTUAL1 --off \
             --output "{{ monitors.primary }}" --primary --mode 1920x1080 --pos 1920x0 --rotate normal \
-            --output DP-1 --off \
-            --output HDMI-2 --off \
             --output "{{ monitors.right }}" --mode 1920x1080 --pos 3840x0 --rotate normal \
             --output "{{ monitors.left }}" --mode 1920x1080 --pos 0x0 --rotate normal
     else
         xrandr \
-            --output VIRTUAL1 --off \
             --output "{{ monitors.primary }}" --primary --mode 1920x1080 --pos 0x0 --rotate normal \
-            --output DP-1 --off \
-            --output HDMI-2 --off \
             --output "{{ monitors.right }}" --off \
             --output "{{ monitors.left }}" --off
     fi
