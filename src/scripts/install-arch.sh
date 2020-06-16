@@ -577,15 +577,15 @@ if ! genfstab -U /mnt >> /mnt/etc/fstab 2>>install-arch.log; then
 fi
 
 print_subsec "Configuring filesystem table..."
-#{% if installer.swap_encrypted is defined and installer.swap_encrypted %}
-#swap_fstab="/dev/mapper/swap none swap defaults 0 0"
-#{% else %}
-#swap_fstab=""
-#{% endif %}
-#if ! echo "$swap_fstab" >> /mnt/etc/fstab 2>>install-arch.log; then
-#    print_nosubsec_err "Error: Unable to configure filesystem table - unable to append swap options."
-#    exit $EC
-#fi
+{% if installer.swap_encrypted is defined and installer.swap_encrypted %}
+swap_fstab="/dev/mapper/swap none swap defaults 0 0"
+{% else %}
+swap_fstab=""
+{% endif %}
+if ! sed -i -e "s:UUID.*swap.*:${swap_fstab}:" /mnt/etc/fstab >> install-arch.log 2>&1; then
+    print_nosubsec_err "Error: Unable to configure filesystem table - unable to append swap options."
+    exit $EC
+fi
 
 {% if installer.swap_encrypted is defined and installer.swap_encrypted %}
 {% if not installer.swap_partition is defined %}
