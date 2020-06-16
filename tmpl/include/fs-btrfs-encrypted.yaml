@@ -43,6 +43,7 @@ installer:
   packages:
     - 'btrfs-progs'
     - 'cryptsetup'
+    - 'snapper'
   partitions:
     - name: 'efi'
       size: '1G'
