@@ -576,7 +576,7 @@ if ! genfstab -U /mnt >> /mnt/etc/fstab 2>>install-arch.log; then
     exit $EC
 fi
 
-#print_subsec "Configuring filesystem table..."
+print_subsec "Configuring filesystem table..."
 #{% if installer.swap_encrypted is defined and installer.swap_encrypted %}
 #swap_fstab="/dev/mapper/swap none swap defaults 0 0"
 #{% else %}
@@ -592,7 +592,8 @@ fi
 {% do raise('swap partition is not specified') %}
 {% endif %}
 print_subsec "Configuring swap encryption..."
-swap_crypttab="{{ installer.swap_partition }} /dev/disk/by-partlabel/{{ installer.swap_partition }} /dev/urandom swap,cipher=aes-xts-plain64,size=256"
+swap_device="$(readlink -f /dev/disk/by-partlabel/{{ installer.swap_partition }})"
+swap_crypttab="{{ installer.swap_partition }} ${swap_device} /dev/urandom swap,cipher=aes-xts-plain64,size=256"
 if ! echo "$swap_crypttab" >> /mnt/etc/crypttab 2>>install-arch.log; then
     print_nosubsec_err "Error: Unable to configure swap encryption - {{ n0ec }}"
     exit $EC
