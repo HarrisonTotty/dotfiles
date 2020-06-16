@@ -592,7 +592,7 @@ fi
 {% do raise('swap partition is not specified') %}
 {% endif %}
 print_subsec "Configuring swap encryption..."
-swap_device="$(readlink -f /dev/disk/by-partlabel/{{ installer.swap_partition }})"
+swap_device="$(readlink -f /dev/disk/by-partlabel/{{ installer.swap_partition + '-encrypted' }})"
 swap_crypttab="{{ installer.swap_partition }} ${swap_device} /dev/urandom swap,cipher=aes-xts-plain64,size=256"
 if ! echo "$swap_crypttab" >> /mnt/etc/crypttab 2>>install-arch.log; then
     print_nosubsec_err "Error: Unable to configure swap encryption - {{ n0ec }}"
