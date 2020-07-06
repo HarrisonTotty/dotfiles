@@ -29,7 +29,7 @@ files:
         action: 'exec --no-startup-id "$HOME/.config/scripts/mkdot.sh"'
       - desc: 'JIRA Browser'
         key_binding: '$mod+j'
-        action: 'exec --no-startup-id "$HOME/.config/scripts/rofi-jira.sh -s open_current_user"'
+        action: 'exec --no-startup-id "$HOME/bin/rofi-jira -s open_current_user"'
       - desc: 'JIRA Browser (Alternative)'
         key_binding: '$mod+Shift+j'
         action: 'exec --no-startup-id "$HOME/.config/scripts/rofi-jira.sh"'
