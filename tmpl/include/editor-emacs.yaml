@@ -94,7 +94,7 @@ files:
           - 'latex'
           - '(markdown +grip)'
           - '(org +dragndrop +jupyter +pandoc +present)'
-          - 'perl'
+          - 'raku' # (previously perl)
           - 'php'
           - '(python +lsp)'
           - 'rest'
