@@ -60,6 +60,7 @@ installer:
     - 'linux-firmware'
     - 'lxappearance'
     - 'make'
+    - 'man'
     - 'neofetch'
     - 'netctl'
     - 'openssh'
