@@ -934,7 +934,7 @@ $chuser mv /${user_home}/dotfiles-master /${user_home}/dotfiles >> install-arch.
 cat > /mnt/${user_home}/mkdot.sh <<EOF
 #!/usr/bin/env bash
 export HOME=/home/{{ installer.username }}
-/home/{{ installer.username }}/tmpl $@ \
+/home/{{ installer.username }}/tmpl \$@ \
     -b /home/{{ installer.username }}/dotfiles/src \
     -f /home/{{ installer.username }}/mkdot.log \
     -m overwrite \
@@ -944,7 +944,7 @@ EOF
 chmod +x /mnt/${user_home}/mkdot.sh >> install-arch.log 2>&1
 
 print_subsec "Rendering dotfiles..."
-if ! $chuser /${user_home}/mkdot.sh "dotfiles/tmpl/${tcf}" >> install-arch.log 2>&1; then
+if ! $chuser /${user_home}/mkdot.sh "/${user_home}/dotfiles/tmpl/${tcf}" >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to render dotfiles - {{ n0ec }}"
     exit $EC
 fi
