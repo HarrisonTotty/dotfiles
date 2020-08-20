@@ -43,9 +43,10 @@ fi
 
 if which doom >/dev/null 2>&1; then
     if [ -d "$HOME/.emacs.d" ]; then
-        pushd "$HOME/.emacs.d" >/dev/null
-        git pull
-        doom update && doom clean && doom sync && doom -y compile
-        popd >/dev/null
+        doom -y upgrade
+        doom sync
+        doom sync -u
+        doom clean
+        doom -y compile
     fi
 fi
