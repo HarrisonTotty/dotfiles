@@ -52,7 +52,7 @@ files:
           - 'nav-flash'
           - 'ophints'
           - '(popup +all +defaults)'
-          - '(pretty-code +iosevka)'
+          - '(ligatures +iosevka)'
           - 'vc-gutter'
           - 'vi-tilde-fringe'
           - 'window-select'
