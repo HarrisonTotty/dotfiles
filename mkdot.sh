@@ -47,6 +47,7 @@ if which doom >/dev/null 2>&1; then
         doom sync
         doom sync -u
         doom clean
-        doom -y compile
+        doom compile -c
+        doom compile -p
     fi
 fi
