@@ -4,7 +4,7 @@
 
 files:
   # ----- Application Launcher : rofi -----
-  - dst: 'rofi/config'
+  - dst: 'rofi/config.rasi'
     src: 'rofi/config.template'
   # ----- AUR Helper : trizen -----
   - dst: 'trizen/trizen.conf'
