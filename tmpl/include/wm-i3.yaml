@@ -7,8 +7,8 @@ files:
   - dst: 'i3/config'
     src: 'i3/config.template'
     accents:
-      left: '❰'
-      right: '❱'
+      left: '//'
+      right: ''
     key_bindings:
       # ----- Standard Programs -----
       - desc: 'File Manager'
