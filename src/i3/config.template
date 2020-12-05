@@ -49,8 +49,8 @@ set_from_resource $c15 i3wm.color15
 # Sets the colors of various window components based on the variables above.
 # CLASS                  BRDR  BCKGRD  TXT  NDCTR  CHLDBRDR
 client.focused           $c3   $c3     $fg  $c3    $c3
-client.focused_inactive  $bg   $bg     $fg  $bg    $bg
-client.unfocused         $bg   $bg     $fg  $bg    $bg
+client.focused_inactive  $bg   $bg     $fg  $bg    $c0
+client.unfocused         $bg   $bg     $fg  $bg    $c0
 client.urgent            $bg   $bg     $fg  $bg    $bg
 client.placeholder       $bg   $bg     $fg  $bg    $bg
 client.background        $bg
