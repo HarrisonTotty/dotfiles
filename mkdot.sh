@@ -40,14 +40,3 @@ if [ "$#" -gt 1 ]; then
 else
     $tmpl "$1"
 fi
-
-if which doom >/dev/null 2>&1; then
-    if [ -d "$HOME/.emacs.d" ]; then
-        doom -y upgrade
-        doom sync
-        doom sync -u
-        doom clean
-        doom compile -c
-        doom compile -p
-    fi
-fi
