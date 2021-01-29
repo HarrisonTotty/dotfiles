@@ -9,7 +9,7 @@ include:
   - 'include/editor-emacs.yaml'
   - 'include/font-iosevka.yaml'
   - 'include/fs-btrfs-encrypted.yaml'
-  - 'include/model-dell-xps-15-9560.yaml'
+  - 'include/model-dell-xps-15-9570.yaml'
   - 'include/notifications-dunst.yaml'
   - 'include/shell-zsh.yaml'
   - 'include/wm-i3.yaml'
