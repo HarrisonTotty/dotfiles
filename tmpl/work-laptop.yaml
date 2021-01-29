@@ -9,13 +9,13 @@ include:
   - 'include/editor-emacs.yaml'
   - 'include/font-iosevka.yaml'
   - 'include/fs-btrfs-encrypted.yaml'
-  - 'include/model-hp-zbook-studio-g5.yaml'
+  - 'include/model-dell-xps-15-9560.yaml'
   - 'include/notifications-dunst.yaml'
   - 'include/shell-zsh.yaml'
   - 'include/wm-i3.yaml'
 
-email: 'harrisont@wolfram.com'
+email: 'harrison.totty@centro.net'
 
 installer:
-  hostname: 'harrisontlxlap'
-  username: 'harrisont'
+  hostname: 'centro-202292'
+  username: 'harrison'
