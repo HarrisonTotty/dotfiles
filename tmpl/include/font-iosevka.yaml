@@ -3,7 +3,7 @@
 
 font:
   name: 'Iosevka SS02'
-  alt_name: 'Iosevka Type SS02'
+  alt_name: 'Iosevka Term SS02'
 
 installer:
   aur_packages:
