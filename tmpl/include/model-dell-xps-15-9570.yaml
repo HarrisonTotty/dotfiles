@@ -3,8 +3,8 @@
 
 monitors:
   primary: 'eDP-1'
-  left: 'DP-2'
-  right: 'HDMI-1'
+  left: 'DP-3'
+  right: 'DP-1'
 
 installer:
   drive: '/dev/nvme0n1'
