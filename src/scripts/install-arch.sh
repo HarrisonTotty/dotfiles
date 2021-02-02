@@ -294,7 +294,7 @@ if [ "$do_rankmirrors" != "false" ]; then
     fi
      
     print_subsec "Fetching and ranking fastest mirrors..."
-    if ! curl -s "$mirrorlist_url" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - >/etc/pacman.d/mirrorlist 2>/dev/null; then
+    if ! curl -sL "$mirrorlist_url" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - >/etc/pacman.d/mirrorlist 2>/dev/null; then
         print_nosubsec_err "Error: Unable to generate pacman mirrorlist - {{ n0ec }}"
         exit $EC
     fi
