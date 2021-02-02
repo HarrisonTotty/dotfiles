@@ -109,7 +109,7 @@ files:
         modules: ['(default +bindings +smartparens)']
   - dst: 'doom/packages.el'
     src: 'emacs/packages.el'
-    packages: ['puppet-mode']
+    packages: ['puppet-mode', 'salt-mode']
 
 installer:
   packages:
