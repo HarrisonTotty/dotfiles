@@ -102,19 +102,19 @@ files:
           # - '(haskell +dante)' # Causes bytecode compilation issues
           - '(java +meghanada)'
           # - 'javascript' # For some reason this causes an error cloning "coffee-mode"
-          - '(json +lsp)'
+          - 'json'
           - 'latex'
           - '(markdown +grip)'
           - '(org +dragndrop +jupyter +pandoc +present)'
           - 'raku' # (previously perl)
-          - '(ruby +lsp +rails)'
+          - '(ruby +rails)'
           - 'php'
           - '(python +lsp)'
           - 'rest'
           - '(rust +lsp)'
           - '(sh +lsp)'
           - 'web'
-          - '(yaml +lsp)'
+          - 'yaml'
       - name: 'email'
         modules: []
       - name: 'app'
