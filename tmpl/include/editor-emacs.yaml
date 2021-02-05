@@ -47,15 +47,18 @@ files:
           - 'doom'
           - 'doom-dashboard'
           - 'doom-quit'
+          - '(emoji +unicode)'
           - 'hl-todo'
+          - '(ligatures +extra)'
           - 'modeline'
           - 'nav-flash'
           - 'ophints'
           - '(popup +all +defaults)'
-          - '(ligatures +extra)'
+          - 'treemacs'
+          - 'unicode'
           - 'vc-gutter'
           - 'vi-tilde-fringe'
-          - 'window-select'
+          - '(window-select +numbers)'
           - 'workspaces'
       - name: 'editor'
         modules:
@@ -66,11 +69,18 @@ files:
           - 'rotate-text'
           - 'snippets'
       - name: 'emacs'
-        modules: ['dired', 'electric', 'ibuffer', 'vc']
+        modules:
+          - 'dired'
+          - 'electric'
+          - 'ibuffer'
+          - 'undo'
+          - 'vc'
       - name: 'term'
         modules: ['vterm']
       - name: 'checkers'
-        modules: ['syntax', 'spell']
+        modules:
+          - 'syntax'
+          - '(spell +flyspell +hunspell +everywhere)'
       - name: 'tools'
         modules:
           - 'ansible'
@@ -79,6 +89,7 @@ files:
           - '(lookup +docsets)'
           - 'lsp'
           - 'magit'
+          - 'make'
           - 'pdf'
           - 'terraform'
       - name: 'lang'
@@ -91,16 +102,19 @@ files:
           # - '(haskell +dante)' # Causes bytecode compilation issues
           - '(java +meghanada)'
           # - 'javascript' # For some reason this causes an error cloning "coffee-mode"
+          - '(json +lsp)'
           - 'latex'
           - '(markdown +grip)'
           - '(org +dragndrop +jupyter +pandoc +present)'
           - 'raku' # (previously perl)
+          - '(ruby +lsp +rails)'
           - 'php'
           - '(python +lsp)'
           - 'rest'
           - '(rust +lsp)'
           - '(sh +lsp)'
           - 'web'
+          - '(yaml +lsp)'
       - name: 'email'
         modules: []
       - name: 'app'
