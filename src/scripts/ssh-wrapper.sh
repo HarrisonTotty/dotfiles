@@ -4,5 +4,5 @@
 if [[ $1 = *"{"*"}"* ]]; then
     eval cssh --quiet $1
 else
-    TERM=rxvt ssh $1
+    TERM=xterm-256color ssh $1
 fi
