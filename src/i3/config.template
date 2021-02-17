@@ -65,7 +65,11 @@ client.background        $bg
 bindsym $mod+grave exec --no-startup-id "{{ scripts_dir }}/run.sh"
 
 # Start an SSH session.
+{% if email == 'harrison.totty@centro.net' %}
+bindsym $mod+Shift+grave exec --no-startup-id "rofi-ssh-aws"
+{% else %}
 bindsym $mod+Shift+grave exec --no-startup-id "{{ scripts_dir }}/ssh.sh"
+{% endif %}
 
 {% for kb in this.key_bindings %}
 {% if not kb.key_binding is defined %}
