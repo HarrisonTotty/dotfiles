@@ -3,11 +3,11 @@
 
 include:
   - 'include/common.yaml'
-  - 'include/bar-polybar.yaml'
-  - 'include/font-iosevka.yaml'
-  - 'include/notifications-dunst.yaml'
-  - 'include/shell-zsh.yaml'
-  - 'include/wm-i3.yaml'
+  - 'include/bar/polybar.yaml'
+  - 'include/font/iosevka.yaml'
+  - 'include/notifications/dunst.yaml'
+  - 'include/shell/zsh.yaml'
+  - 'include/wm/i3.yaml'
 
 installer:
   drive: '/dev/sda'
