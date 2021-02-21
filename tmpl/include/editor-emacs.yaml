@@ -98,13 +98,13 @@ files:
           - 'data'
           - 'emacs-lisp'
           - 'go'
-          # - '(haskell +dante)' # Causes bytecode compilation issues
+          - 'haskell'
           - '(java +meghanada)'
-          # - 'javascript' # For some reason this causes an error cloning "coffee-mode"
+          - 'javascript' # Requires npm + nodejs to be installed.
           - 'json'
           - 'latex'
           - '(markdown +grip)'
-          - '(org +dragndrop +jupyter +pandoc +present)'
+          - '(org +dragndrop +pandoc)'
           - 'raku' # (previously perl)
           - '(ruby +rails)'
           - 'php'
