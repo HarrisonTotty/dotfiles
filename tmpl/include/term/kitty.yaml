@@ -1,0 +1,8 @@
+# Terminal Emulator : Kitty
+# -------------------------
+
+installer:
+  packages:
+    - 'kitty'
+
+terminal_emulator: 'kitty'
