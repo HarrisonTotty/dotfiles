@@ -130,4 +130,6 @@ installer:
     - 'clang'
     - 'emacs'
     - 'fd'
+    - 'nodejs' # lang:javascript
+    - 'npm'    # lang:javascript
     - 'ripgrep'
