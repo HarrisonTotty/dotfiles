@@ -14,6 +14,7 @@ include:
   - 'include/model/dell-xps-15-9570.yaml'
   - 'include/notifications/dunst.yaml'
   - 'include/shell/zsh.yaml'
+  - 'include/term/urxvt.yaml'
   - 'include/wm/i3.yaml'
 
 email: 'harrison.totty@centro.net'

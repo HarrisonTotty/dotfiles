@@ -1,0 +1,10 @@
+# Terminal Emulator : urxvt
+# -------------------------
+
+installer:
+  aur_packages:
+    - 'urxvt-resize-font-git'
+  packages:
+    - 'rxvt-unicode'
+
+terminal_emulator: 'urxvt'

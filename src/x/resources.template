@@ -1,6 +1,6 @@
 ! Primary X Resources Configuration File
 ! --------------------------------------
-{% do require('font.name') %}
+{% do require('editor', 'font.name', 'terminal_emulator') %}
 
 ! ----- Xft settings -----
 Xft.autohint: 0
@@ -12,10 +12,13 @@ Xft.lcdfilter: lcddefault
 Xft.dpi: 75
 Xcursor.theme: Default
 
+{% if editor == 'emacs' %}
 ! ----- Emacs settings -----
 ! Set the default font
 emacs.font: {{ font.name }}:pixelsize=14:weight=normal
+{% endif %}
 
+{% if terminal_emulator == 'urxvt' %}
 ! ----- urxvt settings -----
 ! Disable the scrollbar by default
 URxvt.scrollbar: false
@@ -39,3 +42,4 @@ URxvt.font: xft:{{ font.name }}:size=14
 
 ! Disable printing in URXVT
 URxvt.print-pipe: "cat > /dev/null"
+{% endif %}

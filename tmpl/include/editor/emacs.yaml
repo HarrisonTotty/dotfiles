@@ -124,6 +124,8 @@ files:
     src: 'emacs/packages.el'
     packages: ['puppet-mode', 'salt-mode']
 
+editor: 'emacs'
+
 installer:
   packages:
     - 'bash-language-server'

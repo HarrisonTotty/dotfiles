@@ -35,7 +35,6 @@ files:
 installer:
   aur_packages:
     - 'paper-icon-theme-git'
-    - 'urxvt-resize-font-git'
   packages:
     - 'arandr'
     - 'autoconf'
@@ -65,7 +64,6 @@ installer:
     - 'python-setuptools'
     - 'python-yaml'
     - 'rsync'
-    - 'rxvt-unicode'
     - 'scrot'
     - 'sudo'
     - 'terminus-font'
