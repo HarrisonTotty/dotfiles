@@ -4,7 +4,7 @@
 include:
   - 'include/common.yaml'
   - 'include/audio/pulseaudio.yaml'
-  - 'include/aur/trizen.conf'
+  - 'include/aur/trizen.yaml'
   - 'include/bar/polybar.yaml'
   - 'include/bootloader/grub-system.yaml'
   - 'include/editor/emacs.yaml'
