@@ -6,6 +6,7 @@
     'monitors.primary',
     'monitors.left',
     'monitors.right',
+    'terminal_emulator',
     'this.key_bindings'
   )
 %}
@@ -69,6 +70,13 @@ bindsym $mod+grave exec --no-startup-id "{{ scripts_dir }}/run.sh"
 bindsym $mod+Shift+grave exec --no-startup-id "rofi-ssh-aws"
 {% else %}
 bindsym $mod+Shift+grave exec --no-startup-id "{{ scripts_dir }}/ssh.sh"
+{% endif %}
+
+# Launch a terminal.
+{% if terminal_emulator == 'urxvt' %}
+bindsym $mod+Return exec "urxvtc +sb -title Terminal -letsp 1"
+{% else %}
+bindsym $mod+Return exec "kitty"
 {% endif %}
 
 {% for kb in this.key_bindings %}
