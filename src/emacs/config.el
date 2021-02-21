@@ -95,9 +95,9 @@
 
 ; ------------ External Files -----------
 
-(when (file-readable-p "~/.config/doom/ext/irc.el")
-  (load-file "~/.config/doom/ext/irc.el")
-)
+;(when (file-readable-p "~/.config/doom/ext/irc.el")
+;  (load-file "~/.config/doom/ext/irc.el")
+;)
 
 ; ---------------------------------------
 
@@ -125,8 +125,8 @@
 (setq org-directory "~/docs/org")
 
 ; Make org-tree-slide work how it's supposed to.
-(after! org-tree-slide
-  (setq org-tree-slide-skip-outline-level 1))
+;(after! org-tree-slide
+;  (setq org-tree-slide-skip-outline-level 1))
 
 ; Extend and/or replace portions of the pretty symbols list.
 (setq +ligatures-extra-symbols

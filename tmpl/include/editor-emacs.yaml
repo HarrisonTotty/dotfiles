@@ -90,7 +90,6 @@ files:
           - 'lsp'
           - 'magit'
           - 'make'
-          - 'pdf'
           - 'terraform'
       - name: 'lang'
         modules:
