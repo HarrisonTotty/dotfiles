@@ -1,6 +1,10 @@
 # Terminal Emulator : Kitty
 # -------------------------
 
+files:
+  - dst: 'kitty/kitty.conf'
+    src: 'kitty/kitty.template'
+
 installer:
   packages:
     - 'kitty'
