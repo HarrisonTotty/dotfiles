@@ -4,11 +4,13 @@
 include:
   - 'include/common.yaml'
   - 'include/audio/pulseaudio.yaml'
+  - 'include/aur/trizen.conf'
   - 'include/bar/polybar.yaml'
   - 'include/bootloader/grub-system.yaml'
   - 'include/editor/emacs.yaml'
   - 'include/font/iosevka.yaml'
   - 'include/fs/btrfs-encrypted.yaml'
+  - 'include/launcher/rofi.yaml'
   - 'include/model/thinkpad-x1-yoga-gen4.yaml'
   - 'include/notifications/dunst.yaml'
   - 'include/shell/zsh.yaml'

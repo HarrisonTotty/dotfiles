@@ -1,0 +1,12 @@
+# AUR Helper : trizen
+# -------------------
+
+files:
+  - dst: 'trizen/trizen.conf'
+    src: 'trizen/trizen.template'
+
+aur_helper: 'trizen'
+
+installer:
+  aur_packages:
+    - 'trizen'

@@ -1,0 +1,12 @@
+# Application Launcher : rofi
+# ---------------------------
+
+files:
+  - dst: 'rofi/config.rasi'
+    src: 'rofi/config.template'
+
+launcher: 'rofi'
+
+installer:
+  packages:
+    - 'rofi'
