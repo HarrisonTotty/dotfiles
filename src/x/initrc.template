@@ -1,5 +1,6 @@
 # Primary X Window System Configuration File
 # ------------------------------------------
+{% do require('terminal_emulator') %}
 
 # Source the exported environment variables.
 source "$HOME/.config/x/exports.sh"
@@ -12,8 +13,10 @@ xset -b
 # Merge in the Xresources.
 xrdb -merge "$HOME/.config/x/resources.conf"
 
+{% if terminal_emulator == 'urxvt' %}
 # Setup the urxvt daemon.
 urxvtd -q -f &
+{% endif %}
 
 # Restore the previous colorscheme without setting the wallpaper.
 wal -R -n
