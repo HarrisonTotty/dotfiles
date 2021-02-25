@@ -1,0 +1,22 @@
+# Font : Fira Code
+# ----------------
+
+font:
+  name: 'Fira Code'
+  alt_name: 'Fira Code'
+  postscript_names:
+    - 'FiraCode-Bold'
+    - 'FiraCode-Light'
+    - 'FiraCode-Medium'
+    - 'FiraCode-Regular'
+    - 'FiraCode-Retina'
+    - 'FiraCode-SemiBold'
+  features:
+    #- '+ss02'
+    - '+ss04'
+    - '+ss07'
+    - '+zero'
+
+installer:
+  packages:
+    - 'ttf-fira-code'
