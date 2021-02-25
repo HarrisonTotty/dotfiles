@@ -76,7 +76,7 @@ bindsym $mod+Shift+grave exec --no-startup-id "{{ scripts_dir }}/ssh.sh"
 {% if terminal_emulator == 'urxvt' %}
 bindsym $mod+Return exec "urxvtc +sb -title Terminal -letsp 1"
 {% else %}
-bindsym $mod+Return exec "kitty"
+bindsym $mod+Return exec "{{ terminal_emulator }}"
 {% endif %}
 
 {% for kb in this.key_bindings %}
