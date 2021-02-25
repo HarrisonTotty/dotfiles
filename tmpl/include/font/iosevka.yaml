@@ -8,3 +8,4 @@ font:
 installer:
   aur_packages:
     - 'ttf-iosevka-ss02'
+    - 'ttf-iosevka-term-ss02'
