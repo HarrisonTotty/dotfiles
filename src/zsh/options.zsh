@@ -2,18 +2,19 @@
 # -----------
 
 # History settings
-HISTFILE="$HOME/.zsh-history.log"
+export HISTFILE="$HOME/.zsh-history.log"
 if [ ! -f $HISTFILE ]; then
     touch "$HISTFILE"
 fi
-HISTSIZE=50000
-SAVEHIST=50000
+export HISTSIZE=50000
+export SAVEHIST=50000
+export HISTTIMEFORMAT="[%F %T] "
 
 # Record timestamp in histrory file.
 setopt extended_history
 
-# Delete duplicates first from the history file.
-setopt hist_ignore_dups
+# Ignore duplicates when running CTRL+F.
+setopt hist_find_no_dups
 
 # Ignore commands that start with a space.
 setopt hist_ignore_space
