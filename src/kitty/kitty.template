@@ -1,0 +1,50 @@
+# Kitty Configuration File
+# ------------------------
+{% do require('font.alt_name') %}
+
+
+# ------------- Appearance -------------
+
+# Adjust the character column width and height.
+adjust_column_width 0
+adjust_line_height  0
+
+# Disable ligatures when the cursor is over them.
+disable_ligatures cursor
+
+# Set the terminal font.
+font_family {{ font.alt_name }}
+
+{% if font.features is defined %}
+{% do require('font.postscript_names') %}
+{% for f in font.postscript_names %}
+font_features {{ f }} {{ font.features|join(' ') }}
+{% endfor %}
+{% endif %}
+
+# Set the font size to something larger.
+font_size 16.0
+
+# Import Color Scheme.
+include ${HOME}/.cache/wal/colors-kitty.conf
+
+# --------------------------------------
+
+
+# -------------- Behavior --------------
+
+# Disable the audio bell.
+enable_audio_bell no
+
+# Set the initial window size.
+initial_window_height 400
+initial_window_width  640
+
+# Don't remember the previous window size.
+remember_window_size no
+
+# Remove spaces at the end of lines when copying to clipboard if using normal
+# selections.
+strip_trailing_spaces smart
+
+# --------------------------------------
