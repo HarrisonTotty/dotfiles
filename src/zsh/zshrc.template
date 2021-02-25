@@ -1,5 +1,6 @@
 # Primary ZSH Configuration File
 # ------------------------------
+{% do require('terminal_emulator') %}
 
 # Import the rest of the zsh configuration files
 for f in $HOME/.config/zsh/*.zsh; do
@@ -10,3 +11,10 @@ done
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
     exec startx > "$HOME/.wm-last-run.log" 2>&1
 fi
+
+{% if terminal_emulator == 'alacritty' %}
+# Source colorscheme.
+if [ -f "$HOME/.cache/wal/sequences" ]; then
+  (cat "$HOME/.cache/wal/sequences" &)
+fi
+{% endif %}
