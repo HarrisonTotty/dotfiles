@@ -1,0 +1,24 @@
+# Alacritty Configuration File
+# ----------------------------
+{% do require('font.alt_name') %}
+
+window:
+  decorations: full
+  dimensions:
+    columns: 80
+    lines: 20
+  dynamic_title: true
+  padding:
+    x: 0
+    y: 5
+  startup_mode: Windowed
+  title: 'Terminal'
+
+scrolling:
+  history: 10000
+
+font:
+  normal:
+    family: '{{ font.alt_name }}'
+    style: Regular
+  size: 16.0

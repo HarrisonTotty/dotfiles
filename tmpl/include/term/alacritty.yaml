@@ -1,0 +1,12 @@
+# Terminal Emulator: Alacritty
+# ----------------------------
+
+files:
+  - dst: 'alacritty/alacritty.yml'
+    src: 'alacritty/alacritty.template'
+
+installer:
+  aur_packages:
+    - 'alacritty-ligatures-git'
+
+terminal_emulator: 'alacritty'
