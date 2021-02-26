@@ -8,5 +8,5 @@ $HOME/.config/scripts/setup-monitors.sh
 wal -R -o "$HOME/.config/scripts/wal-set.sh"
 
 # Send a welcome message
-sleep 3
+sleep 1
 notify-send -u normal 'WM' 'Initialization complete. Hello, Harrison :)' &
