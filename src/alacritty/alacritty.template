@@ -2,6 +2,15 @@
 # ----------------------------
 {% do require('font.alt_name') %}
 
+font:
+  normal:
+    family: '{{ font.alt_name }}'
+    style: Regular
+  size: 16.0
+
+scrolling:
+  history: 10000
+
 window:
   decorations: full
   dimensions:
@@ -13,12 +22,3 @@ window:
     y: 16
   startup_mode: Windowed
   title: 'Terminal'
-
-scrolling:
-  history: 10000
-
-font:
-  normal:
-    family: '{{ font.alt_name }}'
-    style: Regular
-  size: 16.0
