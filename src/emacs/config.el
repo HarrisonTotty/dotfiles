@@ -119,7 +119,7 @@
 (setq doom-font (font-spec :family "{{ font.alt_name }}" :size 14))
 
 ; Set the DOOM theme.
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'ewal-doom-one)
 
 ; Set the org-mode directory.
 (setq org-directory "~/docs/org")
