@@ -40,24 +40,26 @@ config.TerminalInteractiveShell.prompts_class = MyPrompt
 
 # Modify the color scheme
 config.TerminalInteractiveShell.highlighting_style_overrides = {
-    Token.Comment:      'ansiwhite',
+    Token.Comment:      'ansigray', # Comments
     Token.Error:        'ansiwhite',
     Token.Escape:       'ansiwhite',
     Token.Generic:      'ansiwhite',
-    Token.Keyword:      'ansiwhite',
-    Token.Keyword.Namespace: 'ansiwhite',
-    Token.Keyword.Type:      'ansiwhite',
+    Token.Keyword:      'ansiblue',
+    Token.Keyword.Constant: 'ansired', # None
+    Token.Keyword.Type: 'ansired', # int, list, dict
     Token.Literal:      'ansiwhite',
     Token.Name:         'ansiwhite',
+    Token.Name.Builtin.Pseudo: 'ansiblue', # self
+    Token.Name.Namespace: 'ansiwhite', # import _path_
     Token.Number:       'ansiwhite',
-    Token.Operator:     'ansiwhite',
+    Token.Operator:     'ansiwhite', # +, -, =
+    Token.Operator.Word: 'ansiblue', # and, or, not
     Token.Other:        'ansiwhite',
     Token.OutPrompt:    'ansiwhite',
     Token.OutPromptNum: 'ansiblue',
     Token.Prompt:       'ansiwhite',
     Token.PromptNum:    'ansiblue',
     Token.Punctuation:  'ansiwhite',
-    Token.String:       'ansiwhite',
-    Token.Text:         'ansiwhite',
-    Token.Token:        'ansiwhite'
+    Token.String:       'ansired',
+    Token.Text:         'ansiwhite'
 }
