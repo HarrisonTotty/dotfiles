@@ -1,6 +1,16 @@
 # Common Template Configuration File
 # ----------------------------------
 
+bin_paths:
+  - '${HOME}/bin'
+  - '${HOME}/.local/bin'
+  - '${HOME}/.cargo/bin'
+  - '/usr/local/sbin'
+  - '/usr/local/bin'
+  - '/usr/bin'
+  - '/usr/bin/site_perl'
+  - '/usr/bin/vendor_perl'
+  - '/usr/bin/core_perl'
 
 files:
   # ----- Cursor Theme : Paper -----
