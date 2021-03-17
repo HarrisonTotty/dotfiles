@@ -13,10 +13,15 @@ include:
   - 'include/launcher/rofi.yaml'
   - 'include/notifications/dunst.yaml'
   - 'include/shell/zsh.yaml'
-  - 'include/term/urxvt.yaml'
+  - 'include/term/alacritty.yaml'
   - 'include/wm/i3.yaml'
 
 installer:
   drive: '/dev/sda'
   hostname: 'effect'
   username: 'quantum'
+
+monitors:
+  primary: 'HDMI-1'
+  left: 'HDMI-2'
+  right: 'HDMI-3'
