@@ -19,7 +19,7 @@ export TMPL_VAR_START_STR='{{'
 
 # ---------- Configuration ----------
 dotfiles_url='https://github.com/HarrisonTotty/dotfiles/archive/master.zip'
-tmpl_url='https://raw.githubusercontent.com/HarrisonTotty/tmpl/master/tmpl.py'
+tmpl_url='https://github.com/HarrisonTotty/tmpl/archive/master.zip'
 # -----------------------------------
 
 cd "$HOME"
@@ -30,18 +30,31 @@ if [ "$#" -ne 1 ]; then
     exit 0
 fi
 
-if [ -f /usr/local/bin/tmpl ]; then
-    rm -f /usr/local/bin/tmpl
-fi
-
-echo 'Downloading tmpl binary...'
-wget -q "$tmpl_url" -O /usr/local/bin/tmpl && chmod +x /usr/local/bin/tmpl
-
 echo 'Installing required packages...'
-pacman -Sy pacman-contrib python-jinja python-yaml unzip --noconfirm >/dev/null
+pacman -Sy pacman-contrib python-pip python-poetry unzip --noconfirm >/dev/null
 
 echo 'Cleaning package cache...'
 paccache -rk0 >/dev/null
+
+if [ ! -d "$HOME/tmpl" ]; then
+    echo 'Downloading tmpl source...'
+    wget -q "$tmpl_url" -O tmpl.zip
+
+    echo 'Extracting tmpl source...'
+    unzip tmpl.zip >/dev/null
+    rm -f tmpl.zip
+    mv tmpl-* tmpl
+
+    pushd "$HOME/tmpl" >/dev/null
+
+    echo 'Building tmpl...'
+    poetry --no-interaction build >/dev/null
+
+    echo 'Installing tmpl...'
+    pip3 --no-cache-dir --no-input install dist/*.whl >/dev/null
+
+    popd >/dev/null
+fi
 
 if [ -d "$HOME/dotfiles" ]; then
     rm -rf "$HOME/dotfiles"
