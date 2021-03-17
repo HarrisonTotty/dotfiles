@@ -22,6 +22,6 @@ installer:
   username: 'quantum'
 
 monitors:
-  primary: 'HDMI-1'
-  left: 'HDMI-2'
-  right: 'HDMI-3'
+  primary: 'HDMI-0'
+  left: 'HDMI-1'
+  right: 'HDMI-2'
