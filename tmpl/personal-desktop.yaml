@@ -1,0 +1,22 @@
+# Personal Desktop Configuration File
+# -----------------------------------
+
+include:
+  - 'include/common.yaml'
+  - 'include/audio/pulseaudio.yaml'
+  - 'include/aur/trizen.yaml'
+  - 'include/bar/polybar.yaml'
+  - 'include/bootloader/grub-system.yaml'
+  - 'include/editor/emacs.yaml'
+  - 'include/font/iosevka.yaml'
+  - 'include/fs/btrfs-encrypted.yaml'
+  - 'include/launcher/rofi.yaml'
+  - 'include/notifications/dunst.yaml'
+  - 'include/shell/zsh.yaml'
+  - 'include/term/urxvt.yaml'
+  - 'include/wm/i3.yaml'
+
+installer:
+  drive: '/dev/sda'
+  hostname: 'effect'
+  username: 'quantum'
