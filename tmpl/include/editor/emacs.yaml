@@ -102,7 +102,7 @@ files:
           - '(java +meghanada)'
           - 'javascript' # Requires npm + nodejs to be installed.
           - 'json'
-          - 'latex'
+          # - 'latex' # This seems to be broken.
           - '(markdown +grip)'
           - '(org +dragndrop +pandoc)'
           - 'raku' # (previously perl)
