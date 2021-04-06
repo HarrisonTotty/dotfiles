@@ -3,7 +3,7 @@
 
 notify-send -u low "WM" "Fetching password database..." &
 
-output=$(rofi-bw)
+output=$(rofi-bw-wrapper)
 
 if [ "$output" = "ERROR" ]; then
     notify-send -u normal "WM" "Encountered runtime error." &
