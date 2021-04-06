@@ -1,9 +1,9 @@
 #!/bin/bash
-# Simple wrapper script for rofi-lpass
+# Simple wrapper script for rofi-bw
 
 notify-send -u low "WM" "Fetching password database..." &
 
-output=$(rofi-lpass)
+output=$(rofi-bw)
 
 if [ "$output" = "ERROR" ]; then
     notify-send -u normal "WM" "Encountered runtime error." &
