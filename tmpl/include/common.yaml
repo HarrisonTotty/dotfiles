@@ -5,6 +5,7 @@ bin_paths:
   - '${HOME}/bin'
   - '${HOME}/.local/bin'
   - '${HOME}/.cargo/bin'
+  - '${HOME}/.poetry/bin'
   - '/usr/local/sbin'
   - '/usr/local/bin'
   - '/usr/bin'
