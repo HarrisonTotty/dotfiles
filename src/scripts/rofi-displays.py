@@ -152,7 +152,7 @@ sys.stderr.write(xrandr_output + '\n')
 if xrandr_exit_code:
     sys.exit(1)
 
-os.system('killall -q polybar; while pgrep -x polybar >/dev/null; do sleep 1; done')
+os.system('killall -q polybar; while pgrep -x polybar >/dev/null; do sleep 0.5; done')
 
 for i, d in enumerate(selected):
     if len(selected) < 3:
