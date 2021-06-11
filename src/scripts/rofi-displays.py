@@ -115,6 +115,7 @@ for i, p in enumerate(possible_configurations):
     rofi_input.append(str(i) + ': ' + ' | '.join(chunks))
 
 (r_out, r_ec) = rofi(rofi_input)
+if not r_out: sys.exit(0)
 selected = possible_configurations[int(r_out.split(':', 1)[0].strip())]
 vertical = ' ^ ' in r_out
 
@@ -150,6 +151,7 @@ xrandr_output = xrandr_process.communicate()[0].decode('ascii', 'ignore')
 xrandr_exit_code = xrandr_process.returncode
 
 sys.stderr.write(xrandr_output + '\n')
+
 
 if xrandr_exit_code:
     sys.exit(1)
