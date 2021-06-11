@@ -10,6 +10,8 @@ import re
 import subprocess
 import sys
 
+HANDLE_POLYBAR = True
+
 DISPLAY_REGEX = re.compile(
     r'^(?P<display>[\w\-]+)\s+(?P<state>connected|disconnected)\s*(?P<primary>primary)?\s*(?P<current>[\dx\+]+)?\s+\((?P<options>[\w\s]+)\)\s*(?P<size>\d+mm\s+x\s+\d+mm)?$'
 )
@@ -152,29 +154,29 @@ sys.stderr.write(xrandr_output + '\n')
 if xrandr_exit_code:
     sys.exit(1)
 
-os.system('killall -q polybar; while pgrep -x polybar >/dev/null; do sleep 0.5; done')
-
-for i, d in enumerate(selected):
-    if len(selected) < 3:
-        if i == 0:
-            os.environ['POLYBAR_DISPLAY_PRIMARY'] = d[0]
-            bar = 'primary'
+if HANDLE_POLYBAR:
+    os.system('killall -q polybar; while pgrep -x polybar >/dev/null; do sleep 0.5; done')
+    for i, d in enumerate(selected):
+        if len(selected) < 3:
+            if i == 0:
+                os.environ['POLYBAR_DISPLAY_PRIMARY'] = d[0]
+                bar = 'primary'
+            else:
+                os.environ['POLYBAR_DISPLAY_RIGHT'] = d[0]
+                bar = 'single-monitor'
         else:
-            os.environ['POLYBAR_DISPLAY_RIGHT'] = d[0]
-            bar = 'single-monitor'
-    else:
-        if i == 0:
-            os.environ['POLYBAR_DISPLAY_LEFT'] = d[0]
-            bar = 'left'
-        elif i == 1:
-            os.environ['POLYBAR_DISPLAY_PRIMARY'] = d[0]
-            bar = 'primary'
-        elif i == 2:
-            os.environ['POLYBAR_DISPLAY_RIGHT'] = d[0]
-            bar = 'right'
-        else:
-            bar = ''
-    if bar:
-        os.system(f'polybar {bar} &')
+            if i == 0:
+                os.environ['POLYBAR_DISPLAY_LEFT'] = d[0]
+                bar = 'left'
+            elif i == 1:
+                os.environ['POLYBAR_DISPLAY_PRIMARY'] = d[0]
+                bar = 'primary'
+            elif i == 2:
+                os.environ['POLYBAR_DISPLAY_RIGHT'] = d[0]
+                bar = 'right'
+            else:
+                bar = ''
+        if bar:
+            os.system(f'polybar {bar} &')
 
 print(json.dumps(selected))
