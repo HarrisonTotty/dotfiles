@@ -84,11 +84,11 @@ modules-right = python notes terminal run
 modules-right =
 {% endif %}
 {% if bar == 'left' %}
-monitor = ${env:POLYBAR_MONITOR_LEFT:{{ monitors.left }}}
+monitor = ${env:POLYBAR_DISPLAY_LEFT:{{ monitors.left }}}
 {% elif bar == 'right' or bar == 'single-monitor' %}
-monitor = ${env:POLYBAR_MONITOR_RIGHT:{{ monitors.right }}}
+monitor = ${env:POLYBAR_DISPLAY_RIGHT:{{ monitors.right }}}
 {% else %}
-monitor = ${env:POLYBAR_MONITOR_PRIMARY:{{ monitors.primary }}}
+monitor = ${env:POLYBAR_DISPLAY_PRIMARY:{{ monitors.primary }}}
 {% endif %}
 offset-x = 0%
 offset-y = 0%
