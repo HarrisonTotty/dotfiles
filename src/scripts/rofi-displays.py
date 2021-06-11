@@ -103,7 +103,16 @@ for c in connected:
 possible_configurations = []
 for r in range(1, len(connected) + 1):
     for p in permutations(with_res, r):
-        possible_configurations.append(list(p))
+        multi_checker = []
+        found_dup = False
+        for d in p:
+            if not d[0] in multi_checker:
+                multi_checker.append(d[0])
+            else:
+                found_dup = True
+                break
+        if not found_dup:
+            possible_configurations.append(list(p))
 
 rofi_input = []
 for i, p in enumerate(possible_configurations):
