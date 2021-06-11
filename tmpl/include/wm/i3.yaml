@@ -43,6 +43,9 @@ files:
         key_binding: '$mod+Shift+Print'
         on_release: true
         action: 'exec --no-startup-id "$HOME/.config/scripts/scrot-select.sh"'
+      - desc: 'Displays Configuration'
+        key_binding: '$mod+Shift+F8'
+        action: 'exec --no-startup-id "$HOME/.config/scripts/rofi-displays.py"'
 
 installer:
   packages:
