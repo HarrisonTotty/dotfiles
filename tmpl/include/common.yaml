@@ -37,6 +37,8 @@ files:
   # ----- Shell Scripts -----
   - dst: 'scripts/*.sh'
     chmod: '+x'
+  - dst: 'scripts/*.py'
+    chmod: '+x'
   # ----- Theme Generation : pywal -----
   - dst: 'wal/templates/*'
     translate: false
