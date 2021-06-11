@@ -161,7 +161,7 @@ for i, d in enumerate(selected):
             bar = 'primary'
         else:
             os.environ['POLYBAR_DISPLAY_RIGHT'] = d[0]
-            bar = 'right'
+            bar = 'single-monitor'
     else:
         if i == 0:
             os.environ['POLYBAR_DISPLAY_LEFT'] = d[0]
