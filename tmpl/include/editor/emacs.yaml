@@ -46,12 +46,10 @@ files:
         modules:
           - 'doom'
           - 'doom-dashboard'
-          - 'doom-quit'
           - '(emoji +unicode)'
           - 'hl-todo'
           - '(ligatures +extra)'
           - 'modeline'
-          - 'nav-flash'
           - 'ophints'
           - '(popup +all +defaults)'
           - 'treemacs'
@@ -91,6 +89,8 @@ files:
           - 'magit'
           - 'make'
           - 'terraform'
+      - name: 'os'
+        modules: ['tty']
       - name: 'lang'
         modules:
           - 'assembly'
@@ -117,7 +117,7 @@ files:
       - name: 'email'
         modules: []
       - name: 'app'
-        modules: ['calendar', 'irc']
+        modules: []
       - name: 'config'
         modules: ['(default +bindings +smartparens)']
   - dst: 'doom/packages.el'

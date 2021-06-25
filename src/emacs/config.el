@@ -33,8 +33,8 @@
 
 ; ---------------- Hooks ----------------
 
-(add-hook! 'org-mode-hook
-  (set-pretty-symbols! 'org-mode
+(after! org-mode
+  (set-ligatures! 'org-mode
     :name "#+NAME:"
     :org_result "#+RESULTS:"
     :src_block "#+BEGIN_SRC"
@@ -43,8 +43,8 @@
   )
 )
 
-(add-hook! python-mode
-  (set-pretty-symbols! 'python-mode
+(after! python-mode
+  (set-ligatures! 'python-mode
     :alpha "alpha"
     :and "and"
     :beta "beta"
@@ -93,15 +93,6 @@
 ; ---------------------------------------
 
 
-; ------------ External Files -----------
-
-;(when (file-readable-p "~/.config/doom/ext/irc.el")
-;  (load-file "~/.config/doom/ext/irc.el")
-;)
-
-; ---------------------------------------
-
-
 ; ------------- Key Bindings ------------
 
 
@@ -124,57 +115,49 @@
 ; Set the org-mode directory.
 (setq org-directory "~/docs/org")
 
-; Make org-tree-slide work how it's supposed to.
-;(after! org-tree-slide
-;  (setq org-tree-slide-skip-outline-level 1))
-
 ; Extend and/or replace portions of the pretty symbols list.
-(setq +ligatures-extra-symbols
-      (plist-merge +ligatures-extra-symbols
-                   '(
-                     :alpha "α"
-                     :beta "β"
-                     :delta "δ"
-                     :frac_1_2 "½"
-                     :frac_1_3 "⅓"
-                     :frac_1_4 "¼"
-                     :frac_2_3 "⅔"
-                     :frac_3_4 "¾"
-                     :gamma "γ"
-                     :integral "∫"
-                     :mu "μ"
-                     :not "¬"
-                     :omega "ω"
-                     :org_result "┅"
-                     :phi "φ"
-                     :pi "π"
-                     :power_0 "⁰"
-                     :power_1 "¹"
-                     :power_2 "²"
-                     :power_3 "³"
-                     :power_4 "⁴"
-                     :power_5 "⁵"
-                     :power_6 "⁶"
-                     :power_7 "⁷"
-                     :power_8 "⁸"
-                     :power_9 "⁹"
-                     :rho "ρ"
-                     :sigma "σ"
-                     :sub_0 "₀"
-                     :sub_1 "₁"
-                     :sub_2 "₂"
-                     :sub_3 "₃"
-                     :sub_4 "₄"
-                     :sub_5 "₅"
-                     :sub_6 "₆"
-                     :sub_7 "₇"
-                     :sub_8 "₈"
-                     :sub_9 "₉"
-                     :sub_x "ₓ"
-                     :theta "θ"
-                     :title "∷"
-                    )
-      )
+(plist-put! +ligatures-extra-symbols
+  :alpha "α"
+  :beta "β"
+  :delta "δ"
+  :frac_1_2 "½"
+  :frac_1_3 "⅓"
+  :frac_1_4 "¼"
+  :frac_2_3 "⅔"
+  :frac_3_4 "¾"
+  :gamma "γ"
+  :integral "∫"
+  :mu "μ"
+  :not "¬"
+  :omega "ω"
+  :org_result "┅"
+  :phi "φ"
+  :pi "π"
+  :power_0 "⁰"
+  :power_1 "¹"
+  :power_2 "²"
+  :power_3 "³"
+  :power_4 "⁴"
+  :power_5 "⁵"
+  :power_6 "⁶"
+  :power_7 "⁷"
+  :power_8 "⁸"
+  :power_9 "⁹"
+  :rho "ρ"
+  :sigma "σ"
+  :sub_0 "₀"
+  :sub_1 "₁"
+  :sub_2 "₂"
+  :sub_3 "₃"
+  :sub_4 "₄"
+  :sub_5 "₅"
+  :sub_6 "₆"
+  :sub_7 "₇"
+  :sub_8 "₈"
+  :sub_9 "₉"
+  :sub_x "ₓ"
+  :theta "θ"
+  :title "∷"
 )
 
 ; Supress an annoying python warning when running python in org-mode.
