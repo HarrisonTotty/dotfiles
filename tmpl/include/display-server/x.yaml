@@ -10,7 +10,8 @@ files:
     src: 'x/resources.template'
 
 installer:
-  - 'xorg-server'
-  - 'xorg-xinit'
-  - 'xorg-xlsfonts'
-  - 'xorg-xset'
+  packages:
+    - 'xorg-server'
+    - 'xorg-xinit'
+    - 'xorg-xlsfonts'
+    - 'xorg-xset'
