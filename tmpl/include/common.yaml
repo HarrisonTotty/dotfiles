@@ -78,10 +78,6 @@ installer:
     - 'wget'
     - 'wpa_supplicant'
     - 'xclip'
-    - 'xorg-server'
-    - 'xorg-xinit'
-    - 'xorg-xlsfonts'
-    - 'xorg-xset'
   user_directories:
     - ".cache/lock"
     - "bin"
