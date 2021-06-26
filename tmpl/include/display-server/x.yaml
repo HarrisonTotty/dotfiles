@@ -1,0 +1,16 @@
+# The X Display Server
+# --------------------
+
+files:
+  - dst: 'x/exports.sh'
+  - dst: 'x/initrc.sh'
+    src: 'x/initrc.template'
+    symlink: '~/.xinitrc'
+  - dst: 'x/resources.conf'
+    src: 'x/resources.template'
+
+installer:
+  - 'xorg-server'
+  - 'xorg-xinit'
+  - 'xorg-xlsfonts'
+  - 'xorg-xset'

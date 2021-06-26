@@ -7,6 +7,7 @@ include:
   - 'include/aur/trizen.yaml'
   - 'include/bar/polybar.yaml'
   - 'include/bootloader/grub-system.yaml'
+  - 'include/display-server/x.yaml'
   - 'include/editor/emacs.yaml'
   - 'include/font/iosevka.yaml'
   - 'include/fs/btrfs-encrypted.yaml'

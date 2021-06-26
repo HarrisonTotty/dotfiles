@@ -4,6 +4,7 @@
 include:
   - 'include/common.yaml'
   - 'include/bar/polybar.yaml'
+  - 'include/display-server/x.yaml'
   - 'include/font/iosevka.yaml'
   - 'include/notifications/dunst.yaml'
   - 'include/shell/zsh.yaml'

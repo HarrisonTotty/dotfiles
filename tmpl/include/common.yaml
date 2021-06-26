@@ -24,13 +24,6 @@ files:
   - dst: 'git/config'
     src: 'git/config.template'
     symlink: '~/.gitconfig'
-  # ----- X Window System -----
-  - dst: 'x/exports.sh'
-  - dst: 'x/initrc.sh'
-    src: 'x/initrc.template'
-    symlink: '~/.xinitrc'
-  - dst: 'x/resources.conf'
-    src: 'x/resources.template'
   # ----- XDG Directory Settings -----
   - dst: 'user-dirs.dirs'
     src: 'misc/user-dirs.dirs'
