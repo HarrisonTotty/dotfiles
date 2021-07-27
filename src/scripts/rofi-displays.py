@@ -22,7 +22,8 @@ RESOLUTION_REGEX = re.compile(
 
 RESOLUTION_FILTER = [
     '1920x1080',
-    '4096x2160'
+    '4096x2160',
+    '5120x1440'
 ]
 
 flatten = lambda t: [item for sublist in t for item in sublist]
