@@ -169,7 +169,7 @@ content = [ FLT ]
 [module/i3]
 type = internal/i3
 enable-click = true
-enable-scroll = true
+enable-scroll = false
 format = <label-state>
 fuzzy-match = true
 index-sort = true
