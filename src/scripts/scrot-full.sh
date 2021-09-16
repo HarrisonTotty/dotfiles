@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Script to take a screenshot (fullscreen)
 
 if [ ! -d "$HOME/pics/screenshots" ]; then
