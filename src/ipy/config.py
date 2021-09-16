@@ -12,13 +12,15 @@ config = get_config()
 config.InteractiveShellApp.exec_lines = [
     'import glob',
     'import itertools',
+    'import json',
     'import os',
     'import re',
     'import shutil',
     'import socket',
     'import subprocess',
     'import sys',
-    'import time'
+    'import time',
+    'import yaml'
 ]
 
 # Don't confirm on exit
