@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # A simple wrapper around rofi for exiting the window manager.
 
 options="Cancel|Logout|Restart|Shutdown"

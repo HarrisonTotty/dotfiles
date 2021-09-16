@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Simple wrapper script for rofi-bw
 
 notify-send -u low "WM" "Fetching password database..." &
