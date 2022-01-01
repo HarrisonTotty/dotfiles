@@ -642,7 +642,7 @@ if [ "$?" -ne 0 ]; then
 fi
 
 print_subsec "Setting system hostname..."
-if ! echo '{{ installer.hostname }}' > /mnt/etc/hostname && $chroot hostname '{{ installer.hostname }}' >> install-arch.log 2>&1; then
+if ! echo '{{ installer.hostname }}' > /mnt/etc/hostname && $chroot hostnamectl hostname '{{ installer.hostname }}' >> install-arch.log 2>&1; then
     print_nosubsec_err "Error: Unable to set system hostname - {{ n0ec }}"
     exit $EC
 fi
