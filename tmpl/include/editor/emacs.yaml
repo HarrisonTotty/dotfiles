@@ -135,7 +135,7 @@ installer:
   packages:
     - 'bash-language-server'
     - 'clang'
-    - 'emacs'
+    - 'emacs-nativecomp'
     - 'fd'
     - 'nodejs' # lang:javascript
     - 'npm'    # lang:javascript
