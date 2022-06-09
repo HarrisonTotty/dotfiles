@@ -1,0 +1,9 @@
+# greetd Configuration File
+# -------------------------
+{% do require('shell') %}
+
+[terminal]
+vt = 1
+
+[default_session]
+command = "tuigreet --asterisks --cmd /usr/bin/{{ shell }} --time --remember"

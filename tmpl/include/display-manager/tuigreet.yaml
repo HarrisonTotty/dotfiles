@@ -1,0 +1,13 @@
+# Display Manager : tuigreet
+# --------------------------
+
+display_manager: 'tuigreet'
+
+files:
+  # Make sure to manually symlink this.
+  - dst: 'etc/greetd/config.toml'
+
+installer:
+  aur_packages:
+    - 'greetd'
+    - 'greetd-tuigreet-bin'
