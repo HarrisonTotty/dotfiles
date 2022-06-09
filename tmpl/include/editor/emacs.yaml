@@ -108,7 +108,7 @@ files:
           - 'raku' # (previously perl)
           - '(ruby +rails)'
           - 'php'
-          - '(python +lsp)'
+          - '(python +lsp +poetry +pyright)'
           - 'rest'
           - '(rust +lsp)'
           - '(sh +lsp)'
@@ -139,4 +139,9 @@ installer:
     - 'fd'
     - 'nodejs' # lang:javascript
     - 'npm'    # lang:javascript
+    - 'pyright'       # lang:python
+    - 'python-black'  # lang:python
+    - 'python-isort'  # lang:python
+    - 'python-pyenv'  # lang:python
+    - 'python-pytest' # lang:python
     - 'ripgrep'
