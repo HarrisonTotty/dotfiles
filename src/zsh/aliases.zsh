@@ -8,5 +8,6 @@ alias ls='ls --color=auto'
 {% if terminal_emulator == 'urxvt' %}
 alias neofetch='neofetch --w3m'
 {% elif terminal_emulator == 'alacritty' %}
+alias neofetch='neofetch --w3m --loop'
 {% endif %}
 alias netstat='ss -pantu | column -t'
