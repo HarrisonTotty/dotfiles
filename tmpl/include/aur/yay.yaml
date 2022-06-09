@@ -1,0 +1,8 @@
+# AUR Helper : yay
+# ----------------
+
+aur_helper: 'yay'
+
+installer:
+  aur_packages:
+    - 'yay'
