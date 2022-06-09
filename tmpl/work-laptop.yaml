@@ -18,7 +18,7 @@ include:
   - 'include/term/alacritty.yaml'
   - 'include/wm/i3.yaml'
 
-email: 'harrison.totty@centro.net'
+email: 'harrison.totty@basis.net'
 
 installer:
   hostname: 'centro-202292'
