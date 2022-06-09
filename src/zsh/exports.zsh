@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # ZSH Export Statements
 # ---------------------
 {% do require('bin_paths') %}

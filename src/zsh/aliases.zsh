@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # ZSH Aliases
 # -----------
 {% do require('terminal_emulator') %}

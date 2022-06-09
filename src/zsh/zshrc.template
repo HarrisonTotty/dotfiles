@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # Primary ZSH Configuration File
 # ------------------------------
 {% do require('terminal_emulator') %}
