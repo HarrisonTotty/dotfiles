@@ -9,6 +9,7 @@ The following repo contains the dotfile templates for my current GNU/Linux setup
 Bar: [polybar](https://github.com/jaagr/polybar)<br/>
 Cursor Theme: [Paper](https://github.com/snwh/paper-icon-theme)<br/>
 Dialogs: [rofi](https://github.com/DaveDavenport/rofi)<br/>
+Distro: [Arch Linux](https://archlinux.org/)<br/>
 Editor: [DOOM Emacs](https://github.com/doomemacs/doomemacs)<br/>
 Font: [Iosevka](https://github.com/be5invis/Iosevka)<br/>
 Icon Theme: [Paper](https://github.com/snwh/paper-icon-theme)<br/>
