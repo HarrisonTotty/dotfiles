@@ -6,5 +6,5 @@ configuration {
   click-to-exit: false;
   font: "{{ font.name }} 12";
   hide-scrollbar: true;
-  theme: "~/.cache/wal/colors-rofi.rasi";
 }
+@import "~/.cache/wal/colors-rofi-light"

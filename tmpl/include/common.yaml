@@ -33,8 +33,6 @@ files:
   - dst: 'scripts/*.py'
     chmod: '+x'
   # ----- Theme Generation : pywal -----
-  - dst: 'wal/templates/*'
-    translate: false
   - dst: 'wal/wallpapers/*'
     translate: false
 
