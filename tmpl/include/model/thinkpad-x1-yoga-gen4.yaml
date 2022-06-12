@@ -9,8 +9,11 @@ monitors:
 installer:
   drive: '/dev/nvme0n1'
   packages:
+    - 'acpi_call'
     - 'fprintd'          # For the fingerprint reader.
     - 'fwupd'            # For firmware updates.
+    - 'iio-sensor-proxy' # For the screen orientation sensor.
     - 'imagemagick'      # Also for the fingerprint reader.
     - 'onboard'          # For on-screen keyboard.
+    - 'tlp'              # Set battery charging thresholds.
     - 'xf86-input-wacom' # For stylus.

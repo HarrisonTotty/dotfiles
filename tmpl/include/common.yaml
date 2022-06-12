@@ -45,6 +45,7 @@ installer:
     - 'base'
     - 'dhcpcd'
     - 'dialog'
+    - 'dmidecode'
     - 'fakeroot'
     - 'feh'
     - 'gcc'
