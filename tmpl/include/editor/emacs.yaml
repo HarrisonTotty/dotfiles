@@ -46,14 +46,14 @@ files:
         modules:
           - 'doom'
           - 'doom-dashboard'
-          - '(emoji +unicode)'
+        # - '(emoji +unicode)' # slows down emacs
           - 'hl-todo'
           - '(ligatures +extra)'
           - 'modeline'
           - 'ophints'
           - '(popup +all +defaults)'
           - 'treemacs'
-          - 'unicode'
+        # - 'unicode' # slows down emacs
           - 'vc-gutter'
           - 'vi-tilde-fringe'
           - '(window-select +numbers)'
