@@ -1,6 +1,8 @@
 # Dell XPS 15 9560
 # ----------------
 
+model: 'dell-xps-15-9560'
+
 monitors:
   primary: 'eDP-1'
   left: 'DP-2'

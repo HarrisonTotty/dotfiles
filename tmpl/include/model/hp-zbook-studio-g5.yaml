@@ -1,6 +1,8 @@
 # HP ZBook Studio G5
 # ------------------
 
+model: 'hp-zbook-studio-g5'
+
 monitors:
   primary: 'eDP-1'
   left: 'DP-1-4'

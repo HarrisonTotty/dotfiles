@@ -1,6 +1,8 @@
 # ThinkPad X1 Yoga (Generation 4)
 # -------------------------------
 
+model: 'thinkpad-x1-yoga-gen4'
+
 monitors:
   primary: 'eDP-1'
   left: 'DP-2'
