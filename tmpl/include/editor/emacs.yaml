@@ -15,7 +15,6 @@ files:
         # - 'indent-info'     # Information on indention information.
         # - 'input-method'    # Information on the curent input method.
         # - 'irc'             # IRC messages status.
-        # - 'lsp'             # Language Server Protocol status.
         # - 'media-info'      # Metadata concerning the current file.
         # - 'minor-modes'     # Information on active minor modes.
         # - 'misc-info'       # Miscellaneous text information (if defined).
@@ -31,17 +30,26 @@ files:
         - 'workspace-name'  # The name of the current workspace.
         - 'window-number'   # The current window number.
         - 'major-mode'      # Current active major mode.
+        - 'lsp'             # Language Server Protocol status.
         - 'buffer-info'     # The file path and modification status.
       right:
         - 'vcs'             # Version control (git) status.
         - 'buffer-position' # Current position within the buffer.
         - 'selection-info'  # Information about how many lines are selected (if applicable).
         - 'matches'         # The number of search matches (or buffer size).
+    org:
+      capture_templates_dir: ~/projects/org-capture-templates
+      dir: ~/docs/org
+      roam_dir: ~/docs/org/roam
+
   - dst: 'doom/init.el'
     src: 'emacs/init.el'
+    # NOTE: Module groups must remain in this order.
     module_groups:
+      - name: 'input'
+        modules: []
       - name: 'completion'
-        modules: ['company', 'ivy']
+        modules: ['company', 'vertico']
       - name: 'ui'
         modules:
           - 'doom'
@@ -54,7 +62,7 @@ files:
           - '(popup +all +defaults)'
           - 'treemacs'
         # - 'unicode' # slows down emacs
-          - 'vc-gutter'
+          - '(vc-gutter +pretty)'
           - 'vi-tilde-fringe'
           - '(window-select +numbers)'
           - 'workspaces'
@@ -93,7 +101,6 @@ files:
         modules: ['tty']
       - name: 'lang'
         modules:
-          - 'assembly'
           - 'cc'
           - 'data'
           - 'emacs-lisp'
@@ -104,12 +111,12 @@ files:
           - 'json'
           # - 'latex' # This seems to be broken.
           - '(markdown +grip)'
-          - '(org +dragndrop +pandoc)'
+          - '(org +dragndrop +pandoc +pomodoro +present +pretty +roam2)'
           - 'raku' # (previously perl)
           - '(ruby +rails)'
           - 'php'
           - '(python +lsp +poetry +pyright)'
-          - 'rest'
+          - '(rest +jq)'
           - '(rust +lsp)'
           - '(sh +lsp)'
           - 'web'
