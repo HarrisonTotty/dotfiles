@@ -1,7 +1,6 @@
 {% do require('this.module_groups') %}
 
-(doom! :input
-
+(doom!
 {% for group in this.module_groups %}
 {% if not group.name is defined%}
 {% do raise('one or more module groups do not specify a name') %}
