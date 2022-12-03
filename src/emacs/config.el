@@ -1,4 +1,4 @@
-{% do require('font.alt_name', 'this.modeline') %}
+{% do require('font.alt_name', 'this.modeline', 'this.org') %}
 {% if not 'left' in this.modeline %}
 {% do raise('left side of modeline is not defined') %}
 {% endif %}
@@ -112,8 +112,15 @@
 ; Set the DOOM theme.
 (setq doom-theme 'ewal-doom-one)
 
+; Where projectile should automatically find projects.
+; Invoke M+x projectile-discover-projects-in-search-path to populate.
+(setq projectile-project-search-path '("~/projects"))
+
 ; Set the org-mode directory.
-(setq org-directory "~/docs/org")
+(setq org-directory "{{ this.org.dir|default('~/docs/org', true) }}")
+
+; Set the org-roam directory.
+(setq org-roam-directory (file-truename "{{ this.org.roam_dir|default('~/docs/org/roam', true) }}"))
 
 ; Extend and/or replace portions of the pretty symbols list.
 (plist-put! +ligatures-extra-symbols
