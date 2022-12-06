@@ -54,14 +54,13 @@ files:
         modules:
           - 'doom'
           - 'doom-dashboard'
-        # - '(emoji +unicode)' # slows down emacs
+          - '(emoji +github)'
           - 'hl-todo'
           - '(ligatures +extra)'
           - 'modeline'
           - 'ophints'
           - '(popup +all +defaults)'
           - 'treemacs'
-        # - 'unicode' # slows down emacs
           - '(vc-gutter +pretty)'
           - 'vi-tilde-fringe'
           - '(window-select +numbers)'
