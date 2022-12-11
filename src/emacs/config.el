@@ -33,16 +33,6 @@
 
 ; ---------------- Hooks ----------------
 
-(after! org-mode
-  (set-ligatures! 'org-mode
-    :name "#+NAME:"
-    :org_result "#+RESULTS:"
-    :src_block "#+BEGIN_SRC"
-    :src_block_end "#+END_SRC"
-    :title "#+TITLE:"
-  )
-)
-
 (after! python-mode
   (set-ligatures! 'python-mode
     :alpha "alpha"
@@ -95,7 +85,22 @@
 
 ; ------------- Key Bindings ------------
 
-
+(map! :leader
+      (:prefix ("j" . "journal")
+        (:desc "View date" "d" #'org-roam-dailies-goto-date
+         :desc "New date" "D" #'org-roam-dailies-capture-date
+         :desc "View today" "j" #'org-roam-dailies-goto-today
+         :desc "New today" "J" #'org-roam-dailies-capture-today
+         :desc "View tomorrow" "t" #'org-roam-dailies-goto-tomorrow
+         :desc "New tomorrow" "T" #'org-roam-dailies-capture-tomorrow
+         :desc "View yesterday" "y" #'org-roam-dailies-goto-yesterday
+         :desc "New yesterday" "Y" #'org-roam-dailies-capture-yesterday
+         :desc "View next" "." #'org-roam-dailies-find-next-note
+         :desc "View previous" "," #'org-roam-dailies-find-previous-note))
+      (:prefix "n"
+        (:desc "Find topic" "f" #'org-roam-node-find
+         :desc "Find reference" "F" #'org-roam-ref-find
+         :desc "Insert topic" "i" #'org-roam-node-insert)))
 
 ; ---------------------------------------
 
@@ -117,10 +122,41 @@
 (setq projectile-project-search-path '("~/projects"))
 
 ; Set the org-mode directory.
+<<<<<<< HEAD
 (setq org-directory "{{ this.org.dir|default('~/docs/org', true) }}")
 
 ; Set the org-roam directory.
 (setq org-roam-directory (file-truename "{{ this.org.roam_dir|default('~/docs/org/roam', true) }}"))
+=======
+(setq org-directory "{{ this.org.dir }}")
+
+; Setup where to find org agenda entries.
+(after! org
+  (setq org-agenda-files (directory-files-recursively org-directory (rx ".org" eos))))
+
+; Setup org capture templates.
+{% set ctd = this.org.capture_templates_dir %}
+(after! org-roam
+  (setq org-roam-capture-templates
+        '(("d" "default" plain
+           (file "{{ ctd }}/roam/default.org")
+           :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}\n")
+           :unnarrowed t)
+          ("p" "project" plain
+           (file "{{ ctd }}/roam/project.org")
+           :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}\n")
+           :unnarrowed t)
+          ))
+  (setq org-roam-dailies-capture-templates
+        '(("d" "default" entry
+           (file "{{ ctd }}/roam/daily/entry-default.org")
+           :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+category: Journal\n#+date: %U\n#+filetags: journal\n"))
+          ;; ("t" "todo" entry
+          ;;  (file "{{ ctd }}/roam/daily/entry-todo.org")
+          ;;  :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+category: Journal\n#+date: %U\n#+filetags: journal\n"))
+          ))
+)
+>>>>>>> 3c48ab6 (Lots of work on org-roam)
 
 ; Extend and/or replace portions of the pretty symbols list.
 (plist-put! +ligatures-extra-symbols

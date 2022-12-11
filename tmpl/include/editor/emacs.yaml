@@ -40,7 +40,6 @@ files:
     org:
       capture_templates_dir: ~/projects/org-capture-templates
       dir: ~/docs/org
-      roam_dir: ~/docs/org/roam
 
   - dst: 'doom/init.el'
     src: 'emacs/init.el'
