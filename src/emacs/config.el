@@ -122,12 +122,6 @@
 (setq projectile-project-search-path '("~/projects"))
 
 ; Set the org-mode directory.
-<<<<<<< HEAD
-(setq org-directory "{{ this.org.dir|default('~/docs/org', true) }}")
-
-; Set the org-roam directory.
-(setq org-roam-directory (file-truename "{{ this.org.roam_dir|default('~/docs/org/roam', true) }}"))
-=======
 (setq org-directory "{{ this.org.dir }}")
 
 ; Setup where to find org agenda entries.
@@ -156,7 +150,6 @@
           ;;  :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+category: Journal\n#+date: %U\n#+filetags: journal\n"))
           ))
 )
->>>>>>> 3c48ab6 (Lots of work on org-roam)
 
 ; Extend and/or replace portions of the pretty symbols list.
 (plist-put! +ligatures-extra-symbols
