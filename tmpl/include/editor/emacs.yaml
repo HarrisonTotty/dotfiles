@@ -131,6 +131,7 @@ files:
       - 'ewal'
       - 'ewal-evil-cursors'
       - 'ewal-doom-themes'
+      - 'org-roam-ui'
       - 'puppet-mode'
       - 'salt-mode'
 

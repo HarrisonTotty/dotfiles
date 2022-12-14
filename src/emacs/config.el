@@ -134,22 +134,41 @@
   (setq org-roam-capture-templates
         '(("d" "default" plain
            (file "{{ ctd }}/roam/default.org")
-           :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}\n")
+           :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}")
+           :empty-lines-after 2
            :unnarrowed t)
           ("p" "project" plain
            (file "{{ ctd }}/roam/project.org")
-           :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}\n")
+           :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}")
+           :empty-lines-after 2
+           :unnarrowed t)
+          ("j" "jira ticket" plain
+           (file "{{ ctd }}/roam/jira-ticket.org")
+           :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}")
+           :empty-lines-after 2
            :unnarrowed t)
           ))
   (setq org-roam-dailies-capture-templates
         '(("d" "default" entry
            (file "{{ ctd }}/roam/daily/entry-default.org")
-           :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+category: Journal\n#+date: %U\n#+filetags: journal\n"))
+           :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+category: Journal\n#+date: %U\n#+filetags: journal")
+           :empty-lines-after 2)
           ;; ("t" "todo" entry
           ;;  (file "{{ ctd }}/roam/daily/entry-todo.org")
           ;;  :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+category: Journal\n#+date: %U\n#+filetags: journal\n"))
           ))
 )
+
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
 
 ; Extend and/or replace portions of the pretty symbols list.
 (plist-put! +ligatures-extra-symbols
