@@ -137,6 +137,11 @@
            :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}")
            :empty-lines-after 2
            :unnarrowed t)
+          ("c" "concept" plain
+           (file "{{ ctd }}/roam/concept.org")
+           :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}")
+           :empty-lines-after 2
+           :unnarrowed t)
           ("p" "project" plain
            (file "{{ ctd }}/roam/project.org")
            :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}")
