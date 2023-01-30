@@ -67,7 +67,7 @@ bindsym $mod+grave exec --no-startup-id "{{ scripts_dir }}/run.sh"
 
 # Start an SSH session.
 {% if email == 'harrison.totty@basis.net' %}
-bindsym $mod+Shift+grave exec --no-startup-id "rofi-ssh-aws"
+bindsym $mod+Shift+grave exec --no-startup-id "rofi-ssh-aws ssh"
 {% else %}
 bindsym $mod+Shift+grave exec --no-startup-id "{{ scripts_dir }}/ssh.sh"
 {% endif %}
