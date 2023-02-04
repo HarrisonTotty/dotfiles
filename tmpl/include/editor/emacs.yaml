@@ -1,6 +1,9 @@
 # GNU Emacs Configuration
 # -----------------------
 
+# NOTE: Be sure to run `systemctl enable/start --user emacs` to enable the
+# daemon.
+
 files:
   - dst: 'doom/config.el'
     src: 'emacs/config.el'
