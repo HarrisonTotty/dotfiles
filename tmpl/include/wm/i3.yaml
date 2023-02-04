@@ -19,7 +19,7 @@ files:
         action: 'exec "$HOME/.config/scripts/ipython.sh"'
       - desc: 'Text Editor'
         key_binding: '$mod+e'
-        action: 'exec emacs'
+        action: 'exec emacsclient -nc'
       # ----- Utilities -----
       - desc: 'Dotfiles Management'
         key_binding: '$mod+period'
