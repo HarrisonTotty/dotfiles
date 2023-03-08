@@ -134,6 +134,8 @@ files:
       - 'ewal'
       - 'ewal-evil-cursors'
       - 'ewal-doom-themes'
+      - 'graphql-mode'
+      - 'graphviz-dot-mode'
       - 'org-roam-ui'
       - 'puppet-mode'
       - 'salt-mode'
