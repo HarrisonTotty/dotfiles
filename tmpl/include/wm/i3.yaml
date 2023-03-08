@@ -46,6 +46,9 @@ files:
       - desc: 'Displays Configuration'
         key_binding: '$mod+Shift+F8'
         action: 'exec --no-startup-id "$HOME/.config/scripts/rofi-displays.py"'
+      - desc: 'Task Management'
+        key_binding: '$mod+t'
+        action: 'exec --no-startup-id "$HOME/.emacs.d/bin/org-capture"'
 
 installer:
   packages:

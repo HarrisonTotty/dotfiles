@@ -125,44 +125,78 @@
 (setq org-directory "{{ this.org.dir }}")
 
 ; Setup where to find org agenda entries.
+{% set ctd = this.org.capture_templates_dir %}
+{% set ptasks = path_join(this.org.dir, 'roam/personal/tasks') %}
+{% set stasks = path_join(this.org.dir, 'roam/shared/tasks') %}
+{% set wtasks = path_join(this.org.dir, 'roam/work/tasks') %}
 (after! org
-  (setq org-agenda-files (directory-files-recursively org-directory (rx ".org" eos))))
+  (setq org-agenda-files
+        '("{{ ptasks }}"
+          "{{ stasks }}"
+          "{{ wtasks }}")
+        org-capture-templates
+       '(("P" "Personal Inbox" entry
+          (file "{{ ptasks }}/personal-inbox.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("S" "Shared Inbox" entry
+          (file "{{ stasks }}/shared-inbox.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("W" "Work Inbox" entry
+          (file "{{ wtasks }}/work-inbox.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("p" "Personal")
+         ("pi" "Inbox" entry
+          (file "{{ ptasks }}/personal-inbox.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("pr" "Recurring" entry
+          (file "{{ ptasks }}/personal-recurring.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("ps" "Someday" entry
+          (file "{{ ptasks }}/personal-someday.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("pt" "Todo" entry
+          (file "{{ ptasks }}/personal-todo.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("s" "Shared")
+         ("si" "Inbox" entry
+          (file "{{ stasks }}/shared-inbox.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("sr" "Recurring" entry
+          (file "{{ stasks }}/shared-recurring.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("ss" "Someday" entry
+          (file "{{ stasks }}/shared-someday.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("st" "Todo" entry
+          (file "{{ stasks }}/shared-todo.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("w" "Work")
+         ("wi" "Inbox" entry
+          (file "{{ wtasks }}/work-inbox.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("wr" "Recurring" entry
+          (file "{{ wtasks }}/work-recurring.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("ws" "Someday" entry
+          (file "{{ wtasks }}/work-someday.org")
+          (file "{{ ctd }}/task-entry.org"))
+         ("wt" "Todo" entry
+          (file "{{ wtasks }}/work-todo.org")
+          (file "{{ ctd }}/task-entry.org")))))
 
 ; Setup org capture templates.
-{% set ctd = this.org.capture_templates_dir %}
 (after! org-roam
   (setq org-roam-capture-templates
         '(("d" "default" plain
            (file "{{ ctd }}/roam/default.org")
            :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}")
            :empty-lines-after 2
-           :unnarrowed t)
-          ("c" "concept" plain
-           (file "{{ ctd }}/roam/concept.org")
-           :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}")
-           :empty-lines-after 2
-           :unnarrowed t)
-          ("p" "project" plain
-           (file "{{ ctd }}/roam/project.org")
-           :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}")
-           :empty-lines-after 2
-           :unnarrowed t)
-          ("j" "jira ticket" plain
-           (file "{{ ctd }}/roam/jira-ticket.org")
-           :target (file+head "${slug}.org" "#+title: ${title}\n#+category: ${title}")
-           :empty-lines-after 2
-           :unnarrowed t)
-          ))
-  (setq org-roam-dailies-capture-templates
+           :unnarrowed t))
+        org-roam-dailies-capture-templates
         '(("d" "default" entry
            (file "{{ ctd }}/roam/daily/entry-default.org")
            :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+category: Journal\n#+date: %U\n#+filetags: journal")
-           :empty-lines-after 2)
-          ;; ("t" "todo" entry
-          ;;  (file "{{ ctd }}/roam/daily/entry-todo.org")
-          ;;  :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+category: Journal\n#+date: %U\n#+filetags: journal\n"))
-          ))
-)
+           :empty-lines-after 2))))
 
 (use-package! websocket
     :after org-roam)
